@@ -17,6 +17,5 @@ public class UserController {
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public void profile(Model model) {
-		
 	}
 }

@@ -55,6 +55,12 @@ public class PressureAnalysisController {
 		model.addAttribute("blockList", blockSmallService.getList());
 	}
 
+	/**
+	 * 수압분석 정보 생성
+	 * 
+	 * @param param
+	 * @return
+	 */
 	@RequestMapping(value = "/analysis", method = RequestMethod.POST)
 	@ResponseBody
 	public PressureAnalysisInfo analysis(@RequestBody PressureAnalysisSearchParam param) {

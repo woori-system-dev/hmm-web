@@ -28,20 +28,25 @@ import com.funsoft.hmm.web.service.info.HistoryInfoService;
 @Controller
 @RequestMapping("/alarm")
 public class AlarmHistoryController {
-	
+
 	@Autowired
 	private BlockSmallService blockSmallService;
-	
+
 	@Autowired
 	private HistoryInfoService historyInfoService;
 
 	@Autowired
 	private DummyTestService dummyTestService;
 
+	/**
+	 * 알람 이력 화면
+	 * 
+	 * @param model
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void list(Model model) {
 	}
-	
+
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public String listWithPost(Model model, BlockInfo blockInfo) {
 		model.addAttribute("blockInfo", blockInfo);
@@ -66,7 +71,7 @@ public class AlarmHistoryController {
 	public List<AlarmHistoryTable> searchResult() {
 		return dummyTestService.createAlarmHistoryInfoList();
 	}
-	
+
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
 	@ResponseBody
 	public AlarmHistoryDetail detail(@RequestBody AlarmSearchParam param) {

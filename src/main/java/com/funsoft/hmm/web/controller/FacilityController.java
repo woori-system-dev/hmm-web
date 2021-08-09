@@ -27,28 +27,28 @@ public class FacilityController {
 
 	@Autowired
 	private HanamBaseShpService hanamBaseShpService;
-	
+
 	@Autowired
 	private BlockSmallService blockSmallService;
-	
+
 	@RequestMapping(value = "/map", method = RequestMethod.GET)
 	public void list(Model model) {
-		model.addAttribute("blockList",blockSmallService.getList());
+		model.addAttribute("blockList", blockSmallService.getList());
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/layer", method = RequestMethod.GET)
 	public Object layer(Model model, String layer) {
-		
-		List <HanamBaseShp> hanamBaseShpList = hanamBaseShpService.getList();
+
+		List<HanamBaseShp> hanamBaseShpList = hanamBaseShpService.getList();
 		return hanamBaseShpList;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/blockInsert", method = RequestMethod.POST)
 	public boolean blockInsert(@RequestBody BlockSmall blockSmall) {
-		if(blockSmallService.isNew(blockSmall)){
-			System.err.println("blockRegist : "+blockSmallService.regist(blockSmall));
+		if (blockSmallService.isNew(blockSmall)) {
+			System.err.println("blockRegist : " + blockSmallService.regist(blockSmall));
 		} else {
 			return false;
 		}

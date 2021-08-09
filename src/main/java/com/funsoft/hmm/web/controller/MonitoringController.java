@@ -21,10 +21,10 @@ import com.funsoft.hmm.web.service.BlockSmallService;
 @Controller
 @RequestMapping("/monitoring")
 public class MonitoringController {
-	
+
 	@Autowired
 	private BlockSmallService blockSmallService;
-	
+
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public void produceInfo(Model model) {
 		model.addAttribute("blockList", blockSmallService.getList());

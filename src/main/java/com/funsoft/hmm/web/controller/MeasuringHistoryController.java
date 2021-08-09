@@ -36,18 +36,18 @@ public class MeasuringHistoryController {
 
 	@Autowired
 	private HistoryInfoService historyInfoService;
-	
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void list(Model model) {
 		model.addAttribute("currentTime", dateFormat.format(new Date()));
 	}
-	
+
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public String listWithPost(Model model, BlockInfo blockInfo) {
 		model.addAttribute("blockInfo", blockInfo);
 		model.addAttribute("blockList", blockSmallService.getList());
 		model.addAttribute("currentTime", dateFormat.format(new Date()));
-		
+
 		return "measurement/detail";
 	}
 
@@ -62,9 +62,10 @@ public class MeasuringHistoryController {
 	public BlockInfo getBlockInfo(@RequestBody MeasuringHistory history) {
 		return historyInfoService.getBlockInfo(history);
 	}
-	
+
 	/**
 	 * 계측 이력 상세 정보 화면
+	 * 
 	 * @param model
 	 * @param blockInfo
 	 */
@@ -77,6 +78,7 @@ public class MeasuringHistoryController {
 
 	/**
 	 * 계측 이력 정보 검색
+	 * 
 	 * @param param
 	 * @return
 	 */
@@ -85,9 +87,10 @@ public class MeasuringHistoryController {
 	public MeasuringHistoryDetail detail(@RequestBody MeasurementSearchParam param) {
 		return historyInfoService.createMeasuringHistoryDetail(param);
 	}
-	
+
 	/**
 	 * 계측 이력 검색 결과 리스트
+	 * 
 	 * @param param
 	 * @return
 	 */

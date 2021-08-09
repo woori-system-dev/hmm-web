@@ -61,9 +61,9 @@ public class SummaryController {
 		System.err.println(realTimeMeasurementList);
 
 		/* 유압계 서비스 */
-		model.addAttribute("flowDevice", flowDeviceService.get((long)blockSmall.getFmtIdn()));
+		model.addAttribute("flowDevice", flowDeviceService.get((long) blockSmall.getFmtIdn()));
 		/* 수압계 서비스 */
-		model.addAttribute("pressureDevice", pressureDeviceService.get((long)blockSmall.getPmtIdn()));
+		model.addAttribute("pressureDevice", pressureDeviceService.get((long) blockSmall.getPmtIdn()));
 		/* 날씨 서비스 */
 		model.addAttribute("weather", weatherService.getLastWeather());
 		/* 블록 정보 */

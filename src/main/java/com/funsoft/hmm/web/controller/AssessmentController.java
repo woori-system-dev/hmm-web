@@ -25,17 +25,17 @@ public class AssessmentController {
 
 	@Autowired
 	private AssessmentInfoService assessmentInfoService;
-	
+
 	@RequestMapping(value = "/block", method = RequestMethod.GET)
 	public void analysis(Model model) {
 	}
-	
+
 	@RequestMapping(value = "/block/getList", method = RequestMethod.GET)
 	@ResponseBody
 	public List<BlockAssessment> getList() {
 		return assessmentInfoService.getBlockAssessmentList();
 	}
-	
+
 	@RequestMapping(value = "/block/detail", method = RequestMethod.POST)
 	@ResponseBody
 	public BlockAssessmentInfo blockDetail(long blockId) {

@@ -24,7 +24,7 @@ public class FluxController {
 
 	@Autowired
 	private BlockSmallService blockSmallService;
-	
+
 	@RequestMapping(value = "/colligation", method = RequestMethod.GET)
 	public void colligation(Model model) {
 		model.addAttribute("blockList", blockSmallService.getList());

@@ -32,6 +32,7 @@ public class LeakageAnalysisController {
 
 	/**
 	 * 누수 분석 화면
+	 * 
 	 * @param model
 	 */
 	@RequestMapping(value = "/analysis", method = RequestMethod.GET)
@@ -41,15 +42,17 @@ public class LeakageAnalysisController {
 
 	/**
 	 * 야간최소유량분석 화면
+	 * 
 	 * @param model
 	 */
 	@RequestMapping(value = "/minFlow", method = RequestMethod.GET)
 	public void flowAnalysis(Model model) {
 		model.addAttribute("blockList", blockSmallService.getList());
 	}
-	
+
 	/**
 	 * 누수분석에서 분석 버튼 클릭 시
+	 * 
 	 * @param param
 	 * @return
 	 */
@@ -58,9 +61,10 @@ public class LeakageAnalysisController {
 	public LeakageAnalysisInfo getLeakageAnalysisInfo(@RequestBody LeakageAnalysisSearchParam param) {
 		return leakageAnalysisInfoService.createLeakageAnalysisInfo(param);
 	}
-	
+
 	/**
 	 * 야간최소 유량분석에서 분석 버튼 클릭 시
+	 * 
 	 * @param param
 	 * @return
 	 */

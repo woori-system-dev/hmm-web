@@ -72,6 +72,9 @@ public class HighChartService {
 	
 	/**
 	 * 누수분석 차트 생성
+	 * @param date
+	 * @param RealTimeAnalysisMap
+	 * @return
 	 */
 	public HighChartSeries createLeakageAnalysisChartInfo(String date, Map<String, RealTimeAnalysis> RealTimeAnalysisMap) {
 		HighChartSeries series = new HighChartSeries(date);
