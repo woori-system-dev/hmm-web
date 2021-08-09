@@ -47,6 +47,13 @@ public class AlarmHistoryController {
 	public void list(Model model) {
 	}
 
+	/**
+	 * 알람 이력 조회
+	 * 
+	 * @param model
+	 * @param blockInfo
+	 * @return
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public String listWithPost(Model model, BlockInfo blockInfo) {
 		model.addAttribute("blockInfo", blockInfo);

@@ -41,6 +41,10 @@ public class SummaryController {
 	@Autowired
 	private PressureDeviceService pressureDeviceService;
 
+	/**
+	 * 종합 요약 화면
+	 * @param model
+	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public void list(Model model) {
 		model.addAttribute("weather", weatherService.getLastWeather());
@@ -49,15 +53,16 @@ public class SummaryController {
 		model.addAttribute("blockList", blockSmallService.getList());
 	}
 
+	/**
+	 * 블록 선택 시 화면
+	 * @param model
+	 * @param block
+	 */
 	@RequestMapping(value = "/block", method = RequestMethod.GET)
 	public void list(Model model, String block) {
 
-		System.err.println(blockSmallService.getList());
-
 		BlockSmall blockSmall = blockSmallService.getBkNM(block);
-		System.err.println(blockSmall);
-		List<RealTimeMeasurement> realTimeMeasurementList = realTimeMeasurementService.getList(101004001,
-				"2018-06-07 00:00:00", "2018-06-07 15:00:00");
+		List<RealTimeMeasurement> realTimeMeasurementList = realTimeMeasurementService.getList(101004001, "2018-06-07 00:00:00", "2018-06-07 15:00:00");
 		System.err.println(realTimeMeasurementList);
 
 		/* 유압계 서비스 */

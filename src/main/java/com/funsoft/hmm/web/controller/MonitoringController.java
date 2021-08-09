@@ -15,7 +15,7 @@ import com.funsoft.hmm.web.service.BlockSmallService;
 /**
  * 실시간 모니터링 컨트롤 구현 클래스
  * 
- * @author hoywon
+ * @author hgko
  *
  */
 @Controller
@@ -25,19 +25,24 @@ public class MonitoringController {
 	@Autowired
 	private BlockSmallService blockSmallService;
 
+	/**
+	 * 실시간 모니터링 화면
+	 * 
+	 * @param model
+	 */
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public void produceInfo(Model model) {
 		model.addAttribute("blockList", blockSmallService.getList());
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public void controlMonitoring(Model model) {
-
-	}
-
+	/**
+	 * 블럭 리스트 조회
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/getBlockList", method = RequestMethod.GET)
 	@ResponseBody
-	public List<BlockSmall> getBlockList(Model model) {
+	public List<BlockSmall> getBlockList() {
 		return blockSmallService.getList();
 	}
 }

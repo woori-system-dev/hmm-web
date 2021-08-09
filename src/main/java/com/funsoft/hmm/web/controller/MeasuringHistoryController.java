@@ -37,11 +37,23 @@ public class MeasuringHistoryController {
 	@Autowired
 	private HistoryInfoService historyInfoService;
 
+	/**
+	 * 계측 이력 화면
+	 * 
+	 * @param model
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void list(Model model) {
 		model.addAttribute("currentTime", dateFormat.format(new Date()));
 	}
 
+	/**
+	 * 계측 이력 조회
+	 * 
+	 * @param model
+	 * @param blockInfo
+	 * @return
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.POST)
 	public String listWithPost(Model model, BlockInfo blockInfo) {
 		model.addAttribute("blockInfo", blockInfo);

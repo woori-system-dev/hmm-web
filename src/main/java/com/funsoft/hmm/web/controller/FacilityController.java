@@ -39,7 +39,6 @@ public class FacilityController {
 	@ResponseBody
 	@RequestMapping(value = "/layer", method = RequestMethod.GET)
 	public Object layer(Model model, String layer) {
-
 		List<HanamBaseShp> hanamBaseShpList = hanamBaseShpService.getList();
 		return hanamBaseShpList;
 	}
@@ -48,10 +47,9 @@ public class FacilityController {
 	@RequestMapping(value = "/blockInsert", method = RequestMethod.POST)
 	public boolean blockInsert(@RequestBody BlockSmall blockSmall) {
 		if (blockSmallService.isNew(blockSmall)) {
-			System.err.println("blockRegist : " + blockSmallService.regist(blockSmall));
-		} else {
-			return false;
+			return blockSmallService.regist(blockSmall);
 		}
-		return true;
+		
+		return false;
 	}
 }

@@ -70,13 +70,14 @@ public class HistoryInfoService {
 	 */
 	public List<MeasuringHistory> createMeasuringHistory(String dateTime) {
 		List<MeasuringHistory> histories = new ArrayList<>();
-		
+
 		for (BlockSmall blockInfo : blockSmallService.getList()) {
-			RealTimeMeasurement measurement = realTimeMeasurementService.getRecentData(blockInfo.getFlctcFm(), dateTime);
-			if (measurement != null) 
+			RealTimeMeasurement measurement = realTimeMeasurementService.getRecentData(blockInfo.getFlctcFm(),
+					dateTime);
+			if (measurement != null)
 				histories.add(new MeasuringHistory(blockInfo.getBkNm(), measurement));
 		}
-		
+
 		return histories;
 	}
 	
