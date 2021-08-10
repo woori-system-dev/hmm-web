@@ -144,10 +144,10 @@
 					<div class="m-portlet__body">
 						<div id="m_datatable"></div>
 						<div class="row m--margin-top-20">
-							<div class="col-md-7 padding-0">
+							<div class="col-md-7 p-0">
 								<div id="ganttChartdiv" class="chart-container"></div>
 							</div>
-							<div class="col-md-5 padding-0">
+							<div class="col-md-5 p-0">
 								<div id="pieChartdiv" class="chart-container"></div>
 							</div>
 						</div>
@@ -225,7 +225,7 @@
 						<label class="col-form-label">최대지속알람</label>
 						<div class="text-right">
 							<label class="col-lg-5 text-left">알람종류</label>
-							<label class="col-lg-6 statistics-text padding-0" id="alarmType"></label> 
+							<label class="col-lg-6 statistics-text p-0" id="alarmType"></label> 
 						</div> 
 						<div class="text-right">
 							<label class="col-lg-5 text-left">지속시간</label>

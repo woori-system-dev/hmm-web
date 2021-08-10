@@ -29,18 +29,18 @@
 					</div>
 					<div class="m-portlet__body" style="font-weight:900">
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding:0">
+							<label for="example-text-input" class="col-4 col-form-label p-0">
 								관리번호(수용가)
 							</label>
-							<div class="col-8" style="padding:0">
+							<div class="col-8 p-0">
 								<input class="form-control m-input" type="text" id="example-text-input">
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding-left:0;padding-right:0">
+							<label for="example-text-input" class="col-4 col-form-label px-0">
 								상수업종
 							</label>
-							<div class="col-8" style="padding:0">
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="exampleSelect1">
 									<option>전체</option>
 									<option>1</option>
@@ -49,17 +49,17 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding-left:0;padding-right:0">
+							<label for="example-text-input" class="col-4 col-form-label px-0">
 								계기번호
 							</label>
-							<div class="col-8" style="padding:0">
+							<div class="col-8 p-0">
 								<input class="form-control m-input" type="text" id="example-text-input">
 							</div>
 						</div>
 						<div class="row">
-							<div class='input-group'>
-								<div style="padding:6px 15px 0 0;font-weight:900">시작일</div> 
-								<input type='text' class="form-control m-input" name="date" placeholder="날짜" id='startDatePicker'/>
+							<div class="input-group">
+								<div style="padding:6px 15px 0 0;">시작일</div> 
+								<input type="text" class="form-control m-input" name="date" placeholder="날짜" id="startDatePicker"/>
 								<div class="input-group-append">
 									<span class="input-group-text">
 										<i class="la la-calendar-check-o"></i>
@@ -67,10 +67,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" style="margin-top:20px">
-							<div class='input-group'>
-								<div style="padding:6px 15px 0 0;font-weight:900">종료일</div> 
-								<input type='text' class="form-control m-input" name="date" placeholder="날짜" id='endDatePicker'/>
+						<div class="row mt-20">
+							<div class="input-group">
+								<div style="padding:6px 15px 0 0;">종료일</div> 
+								<input type="text" class="form-control m-input" name="date" placeholder="날짜" id="endDatePicker"/>
 								<div class="input-group-append">
 									<span class="input-group-text">
 										<i class="la la-calendar-check-o"></i>
@@ -78,10 +78,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" style="margin:30px 0 0 35px;">
+						<div class="mt-30 text-center">
 							<button type="button" class="btn btn-success m-btn--wide">
-								<i class="fa fa-search"></i>
-									검 색
+								<i class="fa fa-search"></i> 검 색
 							</button>
 						</div>
 					</div>
@@ -152,147 +151,92 @@
 					<div class="col-8" style="padding:0px;border:1px solid;width:99%;height:400px;overflow-y:scroll;">
 						<table class="table table-bordered m-table" style="line-height:0.4rem;">
 							<colgroup>
-									<col style="width:50%;">
-									<col style="width:50%;">
+								<col style="width:50%;">
+								<col style="width:50%;">
 							</colgroup>
-								<tr>
-									<td style="background-color:#358097;color:#FFFFFF;">
-										검침데이터 항목
-									</td>
-									<td style="background-color:#358097;color:#FFFFFF;">
-										엑셀파일 항목
-									</td>
-								</tr>
-								<tr>
-									<td>
-										(*)관리번호
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										(*)납기
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										(*)주소
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										상수업종
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										구경															</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										계기번호
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										세대수
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										(*)검침일자
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										(*)상수지침
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										연장(m)
-									</td>
-									<td>
-										337.91
-									</td>
-								</tr>
-								<tr>
-									<td>
-										접합종류
-									</td>
-									<td>
-										KP메카니칼
-									</td>
-								</tr>
-								<tr>
-									<td>
-										최저깊이(m)
-									</td>
-									<td>
-										1.2
-									</td>
-								</tr>
-								<tr>
-									<td>
-										최고깊이(m)
-									</td>
-									<td>
-										1.2
-									</td>
-								</tr>
-								<tr>
-									<td>
-										공사번호
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										개통상태
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										탐사여부
-									</td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										대장초기화여부
-									</td>
-									<td>
-										대장 초기화
-									</td>
-								</tr>
+							<tr>
+								<td style="background-color:#358097;color:#FFFFFF;">
+									검침데이터 항목
+								</td>
+								<td style="background-color:#358097;color:#FFFFFF;">
+									엑셀파일 항목
+								</td>
+							</tr>
+							<tr>
+								<td>(*)관리번호</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>(*)납기
+								</td><td></td>
+							</tr>
+							<tr>
+								<td>(*)주소</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>상수업종</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>구경</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>계기번호</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>세대수</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>(*)검침일자</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>(*)상수지침</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>연장(m)</td>
+								<td>337.91</td>
+							</tr>
+							<tr>
+								<td>접합종류</td>
+								<td>KP메카니칼</td>
+							</tr>
+							<tr>
+								<td>최저깊이(m)</td>
+								<td>1.2</td>
+							</tr>
+							<tr>
+								<td>최고깊이(m)</td>
+								<td>1.2</td>
+							</tr>
+							<tr>
+								<td>공사번호</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>개통상태</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>탐사여부</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>대장초기화여부</td>
+								<td>대장 초기화</td>
+							</tr>
 						</table>
 					</div>
 				</div>
 				
-				<div class="form-group" style="margin-bottom:0">
+				<div class="form-group mb-0">
 					<div class="m-radio-inline">
-						<label for="example-text-input" class="col-4 col-form-label" style="padding:0">
+						<label for="example-text-input" class="col-4 col-form-label p-0">
 								중복처리
 						</label>
 						<label class="m-radio m-radio--success">
@@ -395,4 +339,3 @@ var e = JSON.parse('[{ "RecordID": "07312100005000","OrderID": "201402","ShipCou
     }]
 });
 </script>
-

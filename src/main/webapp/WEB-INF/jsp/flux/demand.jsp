@@ -5,7 +5,7 @@
 	<div class="m-subheader">
 		<div class="d-flex align-items-center">
 			<div class="mr-auto">
-				<h3 class="m-subheader__title ">
+				<h3 class="m-subheader__title">
 					유량분석  <i class="la la-angle-right arrow-icon"></i> <small>수요패턴분석</small> 
 				</h3>
 			</div>
@@ -13,8 +13,8 @@
 	</div>
 	<div class="m-content">
 		<div class="row">
-			<div class = "col-md-2">
-				<div class="m-portlet">
+			<div class="col-md-2">
+				<div class="m-portlet pb-10">
 					<div class="row">
 						<img src="../images/weather/weather_cloud_sun.png" style="width:100px;margin:auto;">
 					</div>
@@ -73,6 +73,7 @@
 										</div>
 									</div> -->
 				</div>
+				
 				<div class="m-portlet">
 					<div class="m-portlet__head">
 						<div class="m-portlet__head-caption">
@@ -83,12 +84,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="m-portlet__body" style="font-weight:900;padding-bottom:10px">
+					<div class="m-portlet__body pb-20 font-black">
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding-left:0;padding-right:0">
+							<label for="example-text-input" class="col-4 col-form-label px-0">
 								블록명
 							</label>
-							<div class="col-8" style="padding:0">
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="exampleSelect1">
 									<c:forEach var="list" items="${blockList}" varStatus="domain">
 										<option>${list.bkNm}</option>
@@ -97,10 +98,10 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding-left:0;padding-right:0">
+							<label for="example-text-input" class="col-4 col-form-label px-0">
 								공휴일
 							</label>
-							<div class="col-8" style="padding:0">
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="exampleSelect1">
 									<option>평일</option>
 									<option>주말</option>
@@ -108,7 +109,7 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding-left:0;padding-right:0">
+							<label for="example-text-input" class="col-4 col-form-label px-0">
 								하늘상태
 							</label>
 							<div class="col-8" style="padding:0">
@@ -119,7 +120,7 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding-left:0;padding-right:0">
+							<label for="example-text-input" class="col-4 col-form-label px-0">
 								강수여부
 							</label>
 							<div class="col-8" style="padding:0">
@@ -130,7 +131,7 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding-left:0;padding-right:0">
+							<label for="example-text-input" class="col-4 col-form-label px-0">
 								최저기온
 							</label>
 							<div class="col-8" style="padding:0">
@@ -142,7 +143,7 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding-left:0;padding-right:0">
+							<label for="example-text-input" class="col-4 col-form-label px-0">
 								최고기온
 							</label>
 							<div class="col-8" style="padding:0">
@@ -154,35 +155,35 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="example-text-input" class="col-4 col-form-label" style="padding-left:0;padding-right:0">
+							<label for="example-text-input" class="col-4 col-form-label px-0">
 								습도
 							</label>
-							<div class="col-8" style="padding:0">
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="exampleSelect1">
 									<option>60~89</option>
 									<option>90~100</option>
 								</select>
 							</div>
 						</div>
-						<div class="row" style="margin-top:30px;">
+						<div class="row mt-30">
 							<button type="button" class="btn btn-info btn-block">
-									오늘 날씨 세팅
+								오늘 날씨 세팅
 							</button>
 							<button type="button" class="btn btn-success btn-block">
-									페턴 검색
+								페턴 검색
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-8">
-				<div class="m-portlet" style="height:800px">
+				<div class="m-portlet">
 					<div class="m-portlet__body">
 						<div class="row">
-							<div id="chartdiv" style="width: 100%; height: 460px;"></div>
+							<div id="chartdiv" style="width: 100%; height: 420px;"></div>
 						</div>
-						<div class="row">
-							<div class="col-md-4"style="padding:70px 50px 50px 70px">
+						<div class="row mt-20">
+							<div class="col-md-4" style="padding:50px 50px 50px 50px">
 								<label style="font-size:20px;font-weight:500;">기준일(2015-04-14)</label><br>
 								<table style="font-size:19px;width:100%">
 									<tr>
@@ -341,7 +342,6 @@ var e = JSON.parse('[{ "RecordID": "00:00:00","OrderID": "33.10","ShipCountry": 
         type: "local",
         source:e,
         pageSize: 10,
-       
     },
     layout: {
         scroll: !0,  // 스크롤  y축 

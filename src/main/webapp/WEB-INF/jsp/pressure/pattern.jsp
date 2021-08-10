@@ -113,8 +113,8 @@
 					</div>
 					<div class="m-portlet__body m--font-boldest">
 						<div class="form-group m-form__group row">
-							<label for="blockSelect" class="col-4 col-form-label padding-left-right-0">블록명</label>
-							<div class="col-8 padding-0">
+							<label for="blockSelect" class="col-4 col-form-label px-0">블록명</label>
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="blockSelect">
 									<c:forEach var="block" items="${blockList}" varStatus="status">
 		           						<option value="${block.flctcFm}">${block.bkNm}</option>
@@ -123,8 +123,8 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="holidaySelect" class="col-4 col-form-label padding-left-right-0">공휴일</label>
-							<div class="col-8 padding-0">
+							<label for="holidaySelect" class="col-4 col-form-label px-0">공휴일</label>
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="holidaySelect">
 									<option value="평일">평일</option>
 									<option value="휴일">휴일</option>
@@ -132,8 +132,8 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="skySelect" class="col-4 col-form-label padding-left-right-0">하늘상태</label>
-							<div class="col-8 padding-0">
+							<label for="skySelect" class="col-4 col-form-label px-0">하늘상태</label>
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="skySelect">
 									<c:forEach var="sky" items="${skys}" varStatus="status">
 		           						<option value="${sky}">${sky}</option>
@@ -142,8 +142,8 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="rainfallSelect" class="col-4 col-form-label padding-left-right-0">강수여부</label>
-							<div class="col-8 padding-0">
+							<label for="rainfallSelect" class="col-4 col-form-label px-0">강수여부</label>
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="rainfallSelect">
 									<c:forEach var="rainfall" items="${rainfalls}" varStatus="status">
 		           						<option value="${rainfall}">${rainfall.name}</option>
@@ -152,9 +152,9 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="lowestTempSelect" class="col-4 col-form-label padding-left-right-0">최저기온</label>
-							<div class="col-8 padding-0">
-								<select class="form-control m-input m-input--square" id="lowestTempSelect">
+							<label for="lowestTempSelect" class="col-4 col-form-label px-0">최저기온</label>
+							<div class="col-8 p-0">
+								<select class="p-0 m-input m-input--square" id="lowestTempSelect">
 									<c:forEach var="lowestTemp" items="${lowestTemps}" varStatus="status">
 		           						<option value="${lowestTemp}">${lowestTemp.name}</option>
 		           					</c:forEach>
@@ -162,8 +162,8 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="highestTempSelect" class="col-4 col-form-label padding-left-right-0">최고기온</label>
-							<div class="col-8 padding-0">
+							<label for="highestTempSelect" class="col-4 col-form-label px-0">최고기온</label>
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="highestTempSelect">
 									<c:forEach var="highestTemp" items="${highestTemps}" varStatus="status">
 		           						<option value="${highestTemp}">${highestTemp.name}</option>
@@ -172,8 +172,8 @@
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
-							<label for="humiditySelect" class="col-4 col-form-label padding-left-right-0">습도</label>
-							<div class="col-8 padding-0">
+							<label for="humiditySelect" class="col-4 col-form-label px-0">습도</label>
+							<div class="col-8 p-0">
 								<select class="form-control m-input m-input--square" id="humiditySelect">
 									<c:forEach var="humidity" items="${humiditys}" varStatus="status">
 		           						<option value="${humidity}">${humidity.name}</option>
@@ -181,7 +181,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="row m--margin-top-30">
+						<div class="row mt-30">
 							<button id="currentWeatherSetting" type="button" class="btn btn-info btn-block">
 								오늘 날씨 세팅
 							</button>

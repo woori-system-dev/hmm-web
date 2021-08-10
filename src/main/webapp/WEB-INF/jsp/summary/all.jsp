@@ -6,7 +6,7 @@
 	height: 95%;
 }
 
-.m-section {
+.m-section, .m-section .m-section__content {
 	margin: 0;
 }
 
@@ -15,15 +15,17 @@
 }
 
 .m-portlet .m-portlet__head {
-	height: 3rem;
+	height: 3.6rem;
+	padding: 0 1.6rem;
 }
 
 .m-portlet .m-portlet__body {
 	padding: 0;
 }
 
-.m-section .m-section__content {
-	margin: 0;
+.m-portlet__body .row {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .table {
@@ -32,6 +34,12 @@
 
 .table td, .table th {
 	padding: 0.3rem;
+}
+
+.table-text {
+	text-align: right;
+	font-weight: 600;
+	color: #ec7959
 }
 </style>
 
@@ -67,16 +75,16 @@
 					</c:forEach>
 				</div>
 			</div>
-			<div class = "col-md-11">
-				<div class = "row">
-					<div class = "col-md-4">
+			<div class="col-md-11">
+				<div class="row">
+					<div class="col-md-4">
 						<div class="m-portlet m-portlet--full-height ">
 							<div class="m-portlet__head">
 								<div class="m-portlet__head-caption">
 									<div class="m-portlet__head-title">
-										 <span class="m-portlet__head-icon">
+								 		<span class="m-portlet__head-icon">
 											<i class="flaticon-add"></i>
-										 </span>
+									 	</span>
 										<h3 class="m-portlet__head-text">
 											일반현황
 										</h3>
@@ -85,7 +93,7 @@
 							</div>
 							<div class="m-portlet__body">
 								<div class="row">
-									<div class = "col-md-12" style="padding:20px 0px 0px 40px;">
+									<div class = "col-md-12" style="padding:20px 0px 0px 25px;">
 										<table style="font-size:16px;">
 											<colgroup>
 												<col style="width:25%;">
@@ -94,115 +102,39 @@
 												<col style="width:20%;">
 											</colgroup>
 											<tr>
-												<td>
-													급수전수
-												</td>
-												<td style="text-align:right;font-weight:600;color:#ec7959">
-													1012 전
-												</td>
-												<td style="text-align:right">
-													소블록갯수
-												</td>
-												<td style="text-align:right;font-weight:600;color:#ec7959">
-													15 개
-												</td>
+												<td>급수전수</td>
+												<td class="table-text">1012 전</td>
+												<td style="text-align:right">소블록갯수</td>
+												<td class="table-text">15 개</td>
 											</tr>
 											<tr>
-												<td >
-													관로연장
-												</td>
-												<td style="text-align:right;font-weight:600;color:#ec7959">
-													km
-												</td>
-												<td style="text-align:right">
-													관리블록갯수
-												</td>
-												<td style="text-align:right;font-weight:600;color:#ec7959">
-													2 개
-												</td>
+												<td>관로연장</td>
+												<td class="table-text">km</td>
+												<td style="text-align:right">관리블록갯수</td>
+												<td class="table-text">2 개</td>
 											</tr>
 											<tr>
-												<td>
-													1시간적산유량
-												</td>
-												<td style="text-align:right;font-weight:600;color:#ec7959">
-													2706 m²
-												</td>
+												<td>1시간적산유량</td>
+												<td class="table-text">2706 m²</td>
 											</tr>
 											<tr>
-												<td>
-													금일적산유량
-												</td>
-												<td style="text-align:right;font-weight:600;color:#ec7959">
-													38177 m²
-												</td>
+												<td>금일적산유량</td>
+												<td class="table-text">38177 m²</td>
 											</tr>
 										</table>
-										<!-- <table class="table table-bordered m-table" style="margin-top: 15px">
-											<colgroup>
-												<col style="width:25%;">
-												<col style="width:25%;">
-												<col style="width:25%;">
-												<col style="width:25%;">
-											</colgroup>
-											<tr>
-												<td style="background-color:#358097;color:#FFFFFF">
-													급수전수
-												</td>
-												<td style="text-align:right;">
-													1012 전
-												</td>
-												<td style="background-color:#358097;color:#FFFFFF">
-													소블록갯수
-												</td>
-												<td style="text-align:right;">
-													15 개
-												</td>
-											</tr>
-											<tr>
-												<td style="background-color:#358097;color:#FFFFFF">
-													관로연장
-												</td>
-												<td style="text-align:right;">
-													km
-												</td>
-												<td style="background-color:#358097;color:#FFFFFF">
-													관리블록갯수
-												</td>
-												<td style="text-align:right;">
-													2 개
-												</td>
-											</tr>
-											<tr>
-												<td style="background-color:#358097;color:#FFFFFF">
-													1시간적산유량
-												</td>
-												<td style="text-align:right;">
-													2706 m²
-												</td>
-											</tr>
-											<tr>
-												<td style="background-color:#358097;color:#FFFFFF">
-													금일적산유량
-												</td>
-												<td style="text-align:right;">
-													38177 m²
-												</td>
-											</tr>
-										</table> -->
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class = "col-md-4">
+					<div class="col-md-4">
 						<div class="m-portlet m-portlet--full-height ">
 							<div class="m-portlet__head">
 								<div class="m-portlet__head-caption">
 									<div class="m-portlet__head-title">
 										<span class="m-portlet__head-icon">
 											<i class="flaticon-add"></i>
-										 </span>
+									 	</span>
 										<h3 class="m-portlet__head-text">
 											유수율
 										</h3>
@@ -211,39 +143,36 @@
 							</div>
 							<div class="m-portlet__body">
 								<div class="row">
-									<div class = "col-md-4" style="padding:0;">
+									<div class="col-md-4" style="padding:0;">
 										<span class="m--font-boldest" style="position:absolute;top: 8%;left: 42%;">
 											전체
 										</span>
-										<div id="gaugeChart" style="height:120px;margin-top:20px">
-										</div>
+										<div id="gaugeChart" style="height:120px;margin-top:20px"></div>
 									</div>
 									<div class = "col-md-4" style="padding:0;text-align:center;">
 										<span class="m--font-boldest" style="position:absolute;top: 8%;left: 20%;">
 											최상(소블록O)
 										</span>
-										<div id="gaugeChart2" style="height:120px;margin-top:20px">
-										</div>
+										<div id="gaugeChart2" style="height:120px;margin-top:20px"></div>
 									</div>
 									<div class = "col-md-4" style="padding:0;text-align:center;">
 										<span class="m--font-boldest" style="position:absolute;top: 8%;left: 20%;">
 											최하(소블록A)
 										</span>
-										<div id="gaugeChart3" style="height:120px;margin-top:20px">
-										</div>
+										<div id="gaugeChart3" style="height:120px;margin-top:20px"></div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class = "col-md-4">
-						<div class="m-portlet m-portlet--full-height ">
+					<div class="col-md-4">
+						<div class="m-portlet m-portlet--full-height">
 							<div class="m-portlet__head">
 								<div class="m-portlet__head-caption">
 									<div class="m-portlet__head-title">
 										<span class="m-portlet__head-icon">
 											<i class="flaticon-add"></i>
-										 </span>
+									 	</span>
 										<h3 class="m-portlet__head-text">
 											날씨/시간
 										</h3>
@@ -252,56 +181,56 @@
 							</div>
 							<div class="m-portlet__body">
 								<div class="row">
-									<div class="col-md-4" style="padding-left:15px;text-align:center;font-weight:700;">
-										<img src="../images/weather/weather_cloud_sun.png" style="width: 120px">
+									<div class="col-md-3" style="padding-left:15px;text-align:center;font-weight:700;">
+										<img src="../images/weather/weather_cloud_sun.png" style="width: 100px">
 										&nbsp&nbsp날씨 좋음
 									</div>
-									<div class="col-md-4" style="text-align:right;">
-										<div class="row" style="margin-top:13px">
-											<div class="col-md-5" style="padding:0px">
-												<img src="../images/weather/temperature.png"> &nbsp기온
+									<div class="col-md-5" style="text-align: center;">
+										<div class="row" style="margin-top:14px">
+											<div class="col-md-6" style="padding:0px">
+												<img src="../images/weather/temperature.png">&nbsp기온
 											</div>
-											<div class="col-md-7">
+											<div class="col-md-6">
 												 ${weather.temperature} ℃
 											</div>
 										</div>
-										<div class="row" style="margin-top:13px">
-											<div class="col-md-5" style="padding:0px">
+										<div class="row" style="margin-top:14px">
+											<div class="col-md-6" style="padding:0px">
 												<img src="../images/weather/humidity.png"> &nbsp습도
 											</div>
-											<div class="col-md-7">
+											<div class="col-md-6">
 												${weather.humidity} %
 											</div>
 										</div>
-										<div class="row" style="margin-top:13px">
-											<div class="col-md-5" style="padding:0px">
+										<div class="row" style="margin-top:14px">
+											<div class="col-md-6" style="padding:0px">
 												<img src="../images/weather/wind.png" > &nbsp풍속
 											</div>
-											<div class="col-md-7">
+											<div class="col-md-6">
 												${weather.windspeed} m/s
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4" style="padding-left:0px;text-align:center;">
-										<div style="margin-top:5px;font-weight:700;" id ="time_year"></div>
-										<div style="color:#716aca;font-weight:800;" id ="time_day"></div>
-										<div style="color:#716aca;font-size:40px; font-weight:900;" id ="time_date"></div>
-										<div style="font-weight:700;font-size:25px;" id ="time_hours"></div>
+									<div class="col-md-4" style="text-align:center;">
+										<div style="margin-top:5px;font-weight:700;" id="time_year"></div>
+										<div style="color:#716aca;font-weight:800;" id="time_day"></div>
+										<div style="color:#716aca;font-size:32px; font-weight:900;" id="time_date"></div>
+										<div style="font-weight:700;font-size:24px;" id="time_hours"></div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class = "row">
-					<div class = "col-md-6">
+				<div class="row">
+					<div class="col-md-6">
 						<div class="m-portlet m-portlet--full-height ">
 							<div class="m-portlet__head">
 								<div class="m-portlet__head-caption">
 									<div class="m-portlet__head-title">
 										<span class="m-portlet__head-icon">
 											<i class="flaticon-add"></i>
-										 </span>
+									 	</span>
 										<h3 class="m-portlet__head-text">
 											계측이력
 										</h3>
@@ -316,34 +245,22 @@
 									<div class="col-4" style="padding:30px 30px 20px 20px"> 
 										<table style="font-size:16px;font-weight:600; width:100%">
 											<tr>
-												<td style="font-size:18px;">
-													총예상수요량
-												</td>
+												<td style="font-size:18px;">총예상수요량</td>
 											</tr>
 											<tr>
-												<td style="text-align:right;color:#ec7959">
-													99236 m²
-												</td>
+												<td style="text-align:right;color:#ec7959">99236 m²</td>
 											</tr>
 											<tr>
-												<td style="font-size:18px;">
-													현재수요량
-												</td>
+												<td style="font-size:18px;">현재수요량</td>
 											</tr>
 											<tr>
-												<td style="text-align:right;color:#ec7959">
-													38177 m²
-												</td>
+												<td style="text-align:right;color:#ec7959">38177 m²</td>
 											</tr>
 											<tr>
-												<td style="font-size:18px;">
-													남은수요량
-												</td>
+												<td style="font-size:18px;">남은수요량</td>
 											</tr>
 											<tr>
-												<td style="text-align:right;color:#ec7959">
-													61059 m²
-												</td>
+												<td style="text-align:right;color:#ec7959">61059 m²</td>
 											</tr>
 									</table>
 									</div>
@@ -351,7 +268,7 @@
 							</div>
 						</div>
 					</div>
-					<div class = "col-md-6">
+					<div class="col-md-6">
 						<div class="m-portlet m-portlet--full-height ">
 							<div class="m-portlet__head">
 								<div class="m-portlet__head-caption">
@@ -372,9 +289,8 @@
 											<div class="col-md-7" style="text-align:right;">
 												<h3 style="margin-top:30px;font-weight:700;">수압이상</h3>
 											</div>
-											<div class = "col-md-5" style="padding:0;">
-												<div id="gaugeChart4" style="height:90px;">
-												</div>
+											<div class="col-md-5" style="padding:0;">
+												<div id="gaugeChart4" style="height:90px;"></div>
 											</div>
 										</div>
 									</div>
@@ -383,7 +299,7 @@
 											<div class="col-md-7" style="text-align:right;">
 												<h3 style="margin-top:30px;font-weight:700;">기기이상</h3>
 											</div>
-											<div class = "col-md-5" style="padding:0;">
+											<div class="col-md-5" style="padding:0;">
 												<div id="gaugeChart5" style="height:90px;">
 												</div>
 											</div>
@@ -402,13 +318,13 @@
 									</div>
 								</div>
 								<div class="row" style="margin:0px;height:150px">
-									<div class = "col-md-4" style="padding:0;text-align:center;border-right:1px solid #000000;color:#db1a48">
+									<div class="col-md-4" style="padding:0;text-align:center;border-right:1px solid #000000;color:#db1a48">
 										소블럭A &nbsp&nbsp소블럭B
 									</div>
-									<div class = "col-md-4" style="padding:0;text-align:center;border-right:1px solid #000000;color:#0085bf">
+									<div class="col-md-4" style="padding:0;text-align:center;border-right:1px solid #000000;color:#0085bf">
 										소블럭C
 									</div>
-									<div class = "col-md-4" style="padding:0;text-align:center;color:#eef430">
+									<div class="col-md-4" style="padding:0;text-align:center;color:#eef430">
 										소블럭D &nbsp&nbsp소블럭E
 									</div>
 								</div>
@@ -416,8 +332,8 @@
 						</div>
 					</div>
 				</div>
-				<div class = "row">
-					<div class = "col-md-6">
+				<div class="row">
+					<div class="col-md-6">
 						<div class="m-portlet m-portlet--full-height ">
 							<div class="m-portlet__head">
 								<div class="m-portlet__head-caption">
@@ -432,15 +348,11 @@
 								</div>
 							</div>
 							<div class="m-portlet__body">
-								<div class="row">
-									<div class="col-12" style="padding-right:0px;">
-										<div id="chartdiv2" style="width:100%; height:250px;"></div>
-									</div>
-								</div>
+								<div id="chartdiv2" style="width:100%; height:250px; margin-top: 10px;"></div>
 							</div>
 						</div>
 					</div>
-					<div class = "col-md-6">
+					<div class="col-md-6">
 						<div class="m-portlet m-portlet--full-height ">
 							<div class="m-portlet__head">
 								<div class="m-portlet__head-caption">
@@ -464,6 +376,7 @@
 		</div>
 	</div>
 </div>
+
 <script>
 var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
 var time = new Date();

@@ -6,7 +6,7 @@
 	height: 95%;
 }
 
-.m-section {
+.m-section, .m-section .m-section__content {
 	margin: 0;
 }
 
@@ -15,15 +15,12 @@
 }
 
 .m-portlet .m-portlet__head {
-	height: 3rem;
+	height: 3.6rem;
+	padding: 0 1.6rem;
 }
 
 .m-portlet .m-portlet__body {
 	padding: 0;
-}
-
-.m-section .m-section__content {
-	margin: 0;
 }
 
 .table {

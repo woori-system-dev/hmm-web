@@ -2,11 +2,20 @@
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
 <style>
-.margin_bottom_0{
-	margin-bottom:0px;
+.margin_bottom_0 {
+	margin-bottom: 0px;
 }
-.font_weight700{
-	font-weight:800;
+
+.font_weight700 {
+	font-weight: 700;
+}
+
+.table-header {
+	height: 40px;
+	background-color: #076db4;
+	color: #ffffff;
+	font-weight: 800;
+	font-size: 22px;
 }
 </style>
 
@@ -22,7 +31,7 @@
 	</div>
 	<div class="m-content">
 		<div class="row">
-			<div class = "col-md-2">
+			<div class="col-md-2">
 				<div class="m-portlet">
 					<div class="m-portlet__head">
 						<div class="m-portlet__head-caption">
@@ -38,9 +47,9 @@
 					</div>
 					<div class="m-portlet__body">
 						<div class="row">
-							<div class='input-group'>
+							<div class="input-group">
 								<div style="padding:6px 15px 0 0;font-weight:900">시작</div> 
-								<input type='text' class="form-control m-input" name="date" placeholder="months" id='startDatePicker'/>
+								<input type='text' class="form-control m-input" name="date" placeholder="months" id="startDatePicker"/>
 								<div class="input-group-append">
 									<span class="input-group-text">
 										<i class="la la-calendar-check-o"></i>
@@ -48,10 +57,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" style="margin-top:20px">
-							<div class='input-group'>
+						<div class="row mt-20">
+							<div class="input-group">
 								<div style="padding:6px 15px 0 0;font-weight:900">종료</div> 
-								<input type='text' class="form-control m-input" name="date" placeholder="months" id='endDatePicker'/>
+								<input type="text" class="form-control m-input" name="date" placeholder="months" id="endDatePicker"/>
 								<div class="input-group-append">
 									<span class="input-group-text">
 										<i class="la la-calendar-check-o"></i>
@@ -59,29 +68,26 @@
 								</div>
 							</div>
 						</div>
-						<div class="row" style="margin-top:30px">
+						<div class="row mt-20">
 							<div style="padding:0px 15px 0 0;font-weight:900">블록선택</div> 
 							<label class="m-checkbox m-checkbox--check-bold">
 								<input type="checkbox" id="checkBoxAll" checked="checked" onclick="checkBox()">
-									전체 선택
-								<span></span>
+									전체 선택<span></span>
 							</label>
 						</div>
-						<div class="row" style="margin-left:25px;">
-							<div style="border:1px solid;width:130px;height:200px;overflow-y:scroll;padding-left:10px">
+						<div class="row ml-20">
+							<div style="border: 1px solid; width: 130px; height: 200px; overflow-y: scroll; padding: 10px 0 0 10px;">
 								<c:forEach var="list" items="${blockList}" varStatus="domain">
-									<label class="m-checkbox m-checkbox--check-bold">
-										<input type="checkbox" name ="checkbox" checked="checked" value="${list.bkNm}">
-											${list.bkNm}
-										<span></span>
+									<label class="m-checkbox m-checkbox--check-bold"> 
+										<input type="checkbox" name="checkbox" checked="checked" value="${list.bkNm}"> 
+											${list.bkNm}<span></span>
 									</label>
 								</c:forEach>
 							</div>
 						</div>
-						<div class="row" style="margin:30px 0 0 35px;">
+						<div class="text-center mt-30">
 							<button type="button" class="btn btn-success m-btn--wide" onclick="search()">
-								<i class="fa fa-search"></i>
-									검 색
+								<i class="fa fa-search"></i> 검 색
 							</button>
 						</div>
 					</div>
@@ -94,11 +100,11 @@
 					</div>
 				</div>
 			</div>
-			<div class = "col-md-10">
+			<div class="col-md-10">
 				<div class="m-portlet">
 					<div class="m-portlet__body">
 						<div id="m_datatable"></div>
-						<div class="row">
+						<div class="row mt-20">
 							<div class="col-md-8" style="text-align:center">
 								<div class="row" >
 					                <div class="col-md-4">
@@ -252,17 +258,16 @@
 				                	</div>
 				                </div> 
 				                
-								<div class="row">
-									<div class = "col-md-4" style="padding:0;border:1px solid #f4f5f8;">
-										<div style="height:40px;background-color:#076db4;color:#ffffff;font-weight:800;font-size:22px;text-align:center;">누수량(톤)</div>
+								<div class="row mt-20">
+									<div class="col-md-4" style="padding:0;border:1px solid #f4f5f8;">
+										<div class="d-flex justify-content-center align-items-center table-header">누수량(톤)</div>
+									</div>
+									<div class="col-md-4" style="padding:0;border:1px solid #f4f5f8;">
+										<div class="d-flex justify-content-center align-items-center table-header">누수율</div>
+										<div id="gaugeChart2" style="height:120px;"></div>
 									</div>
 									<div class = "col-md-4" style="padding:0;border:1px solid #f4f5f8;">
-										<div style="height:40px;background-color:#076db4;color:#ffffff;font-weight:800;font-size:22px;text-align:center;">누수율</div>
-										<div id="gaugeChart2" style="height:120px;">
-										</div>
-									</div>
-									<div class = "col-md-4" style="padding:0;border:1px solid #f4f5f8;">
-										<div style="height:40px;background-color:#076db4;color:#ffffff;font-weight:800;font-size:22px;text-align:center;">유수율</div>
+										<div class="d-flex justify-content-center align-items-center table-header">유수율</div>
 										<div id="gaugeChart3" style="height:120px;">
 										</div>
 									</div>
@@ -271,16 +276,12 @@
 							<div class="col-md-4">
 								<table class="table table-bordered m-table" style="line-height:0.7rem;font-size:16px;font-weight:800">
 									<colgroup>
-											<col style="width:50%;">
-											<col style="width:50%;">
+										<col style="width:50%;">
+										<col style="width:50%;">
 									</colgroup>
 									<tr style="text-align:center;">
-										<td style="background-color:#358097;color:#FFFFFF;">
-											항목
-										</td>
-										<td style="background-color:#358097;color:#FFFFFF;">
-											수량
-										</td>
+										<td style="background-color:#358097;color:#FFFFFF;">항목</td>
+										<td style="background-color:#358097;color:#FFFFFF;">수량</td>
 									</tr>
 									<tr>
 										<td style="background-color:#4cbeff;color:#FFFFFF;">

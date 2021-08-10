@@ -7,7 +7,12 @@
 }
 
 .m-portlet .m-portlet__body {
-	padding: 1rem 1.8rem;
+	padding: 1rem 1rem;
+}
+
+.m-portlet .row {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 .btn {
