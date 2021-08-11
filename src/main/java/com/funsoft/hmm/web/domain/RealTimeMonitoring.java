@@ -26,8 +26,12 @@ public class RealTimeMonitoring {
 
 	public RealTimeMonitoring(String blockName, RealTimeMeasurement measurement) {
 		this.blockName = blockName;
-		this.dateTime = DateUtil.toDateTimeString(measurement.getDatetime());
-		this.pressure = measurement.getPressure();
-		this.flow = measurement.getFlow();
+		
+		if (measurement != null) {
+			this.pressure = measurement.getPressure();
+			this.flow = measurement.getFlow();
+			this.dateTime = DateUtil.toDateTimeString(measurement.getDatetime());
+		}
+			
 	}
 }

@@ -109,7 +109,7 @@
 							</div>
 							<div id="recent_time" class="recent-time"></div>
 						</form>
-						<table class="table table-striped- table-bordered table-hover" id="dataTable">
+						<table class="table table-striped- table-bordered table-hover" id="measurementTable">
 							<thead class="text-center">
 								<tr>
 									<th></th>
@@ -179,128 +179,128 @@
 
 <script>
 moment.locale("ko");
-$("#datetimepicker").datetimepicker({
-	todayHighlight: true,
-	autoclose: true,
-	format: "yyyy-mm-dd hh:00:00",
-	minView : 1,
-	language: "ko"
-});
 
-var table = $("#dataTable").DataTable({
-	select: {
-        style: "single"
-    },
-	language: {
-		emptyTable: "데이터가 없습니다.",
-		infoEmpty: ""
-	},
-    columns: [{
-        data: "dateTime"
-    }, {
-        data: "blockId"
-    }, {
-        data: "blockName"
-    }, {
-        data: "pressure",
-        width: "24%"
-    }, {
-        data: "flow",
-        width: "24%"
-    }, {
-        data: "sumFlowString",
-        width: "24%"
-    }, {
-        width: "12%",
-        render: function(data, type, row, meta) {
-            /* return '<a href="' + contextPath + '/measurement/detail?flctcFm=' + row.blockId + '&dateTime=' + row.dateTime + '"' +
-				'class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-edit"></i></a>'; */
-			return '<form action="' + contextPath + '/measurement/list" method="post">' +
-				'<input type="hidden" name="flctcFm" value="' + row.blockId + '">' + 
-				'<input type="hidden" name="dateTime" value="' + row.dateTime + '">' + 
-				'<button type="submit" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-edit"></i></button>' + 
-				'</form>';
-        }
-    }],
-    columnDefs: [{
-    	targets : [0, 1],
-		visible : false
-    }],
-    responsive: true,
-    searching: false,
-	lengthChange: false,
-    ordering: false,
-    paging: false,
-    info: false,
-    //pageLength: 10
-});
+const MeasurementManager = function() {
+	var DataTable = {
+		ele: "#measurementTable",
+		table: null,
+		title: "수강 대기 명단",
+		option: {
+			columns: [{
+		        data: "dateTime"
+		    }, {
+		        data: "blockId"
+		    }, {
+		        data: "blockName"
+		    }, {
+		        data: "pressure",
+		        width: "24%"
+		    }, {
+		        data: "flow",
+		        width: "24%"
+		    }, {
+		        data: "sumFlowString",
+		        width: "24%"
+		    }, {
+		        width: "12%",
+		        render: function(data, type, row, meta) {
+		            return '<a href="' + contextPath + '/measurement/detail?flctcFm=' + row.blockId + '&dateTime=' + row.dateTime + '"' +
+						'class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-edit"></i></a>';
+					/* return '<form action="' + contextPath + '/measurement/list" method="post">' +
+						'<input type="hidden" name="flctcFm" value="' + row.blockId + '">' + 
+						'<input type="hidden" name="dateTime" value="' + row.dateTime + '">' + 
+						'<button type="submit" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-edit"></i></button>' + 
+						'</form>'; */
+		        }
+		    }],
+		},
+		init: function() {
+			this.table = Datatables.select(this.ele, this.option);
+			this.search();
+		},
+		search: function() {
+			var param = new Object();
+			param.dateTime = $("#datetimepicker").val();
+			Datatables.rowsAdd(this.table, contextPath + "/measurement/history", param);
+		}
+	}
 
-var map = makeMap("map");
-var vectorLayers = [];
-
-$.ajax({
-	url: contextPath + "/monitoring/getBlockList",
-	type: "get",
-	dataType: "json",
-	success: function(response) {
-		$.each(response, function(idx, value) {
-			var vectorLayer = makeVectorLayer(value);
-			map.addLayer(vectorLayer);
-			vectorLayers.push({block: value, vectorLayer: vectorLayer});
+	var searchControl = function() {
+		$("#search_button").click(function() {
+			$("#recent_time").text("");
+			DataTable.search();
 		});
-   	}
-});
+	}
 
-function setHistoryList() {
-	table.clear().draw();
-	
+	return {
+		init: function() {
+			DataTable.init();
+			searchControl();
+		},
+		table: function() {
+			return DataTable.table;
+		}
+	}
+}();
+
+$(document).ready(function () {
+	$("#datetimepicker").datetimepicker({
+		todayHighlight: true,
+		autoclose: true,
+		format: "yyyy-mm-dd hh:00:00",
+		minView : 1,
+		language: "ko"
+	});
+
+	var map = makeMap("map");
+	var vectorLayers = [];
+
 	$.ajax({
-		url: contextPath + "/measurement/history",
-		data: {"dateTime" : $("#datetimepicker").val()}, 
-		type: "post",
+		url: contextPath + "/monitoring/getBlockList",
+		type: "get",
 		dataType: "json",
 		success: function(response) {
-			table.rows.add(response).draw();
-		}
+			$.each(response, function(idx, value) {
+				var vectorLayer = makeVectorLayer(value);
+				map.addLayer(vectorLayer);
+				vectorLayers.push({block: value, vectorLayer: vectorLayer});
+			});
+	   	}
 	});
-}
 
-setHistoryList();
+	MeasurementManager.init();
+	var table = MeasurementManager.table();
 
-$("#search_button").click(function() {
-	$("#recent_time").text("");
-	setHistoryList();
-});
-
-table.on('select', function (e, dt, type, indexes) {
-	if (type === 'row') {
-		var data = table.rows(indexes).data()[0];
-		
-		$.ajax({
-			url: contextPath + "/measurement/getBlockInfo",
-    		type: "post",
-    		contentType: "application/json",
-    		data: JSON.stringify(data),
-    		success: function(blockInfo) {
-    			$("#recent_time").text(data.dateTime);
-    			$("#fmtIdn").text(blockInfo.fmtIdn);
-    			$("#pmtIdn").text(blockInfo.pmtIdn);
-    			$("#fmtDate").text(blockInfo.flowDate);
-    			$("#pmtDate").text(blockInfo.pressureDate);
-    			$("#fmtType").text("배수유량계");
-    			$("#pmtType").text("설치식");
-    			$("#fmtForm").text("전자유량계");
-    			$("#pmtForm").text("익차형");
-    			
-    			$.each(vectorLayers, function(idx, val) {
-    				var fillColor = "#ffffff00";
-    				if (blockInfo.flctcFm == val.block.flctcFm) {
-    					fillColor = "rgba(0, 0, 255, 0.1)";
-    				}
-    				val.vectorLayer.setStyle([makeStyle(fillColor), makeLabelStyle(val.block.bkNm)]);
-    			});
-    		}
-    	});
-    }
+	table.on('select', function (e, dt, type, indexes) {
+		if (type === 'row') {
+			var data = table.rows(indexes).data()[0];
+			
+			$.ajax({
+				url: contextPath + "/measurement/getBlockInfo",
+	    		type: "post",
+	    		contentType: "application/json",
+	    		data: JSON.stringify(data),
+	    		success: function(blockInfo) {
+	    			$("#recent_time").text(data.dateTime);
+	    			$("#fmtIdn").text(blockInfo.fmtIdn);
+	    			$("#pmtIdn").text(blockInfo.pmtIdn);
+	    			$("#fmtDate").text(blockInfo.flowDate);
+	    			$("#pmtDate").text(blockInfo.pressureDate);
+	    			$("#fmtType").text("배수유량계");
+	    			$("#pmtType").text("설치식");
+	    			$("#fmtForm").text("전자유량계");
+	    			$("#pmtForm").text("익차형");
+	    			
+	    			$.each(vectorLayers, function(idx, val) {
+	    				var fillColor = "#ffffff00";
+	    				if (blockInfo.flctcFm == val.block.flctcFm) {
+	    					fillColor = "rgba(0, 0, 255, 0.1)";
+	    				}
+	    				val.vectorLayer.setStyle([makeStyle(fillColor), makeLabelStyle(val.block.bkNm)]);
+	    			});
+	    		}
+	    	});
+	    }
+	});
 });
 </script>

@@ -16,6 +16,7 @@ import com.funsoft.hmm.web.domain.BlockInfo;
 import com.funsoft.hmm.web.domain.MeasuringHistory;
 import com.funsoft.hmm.web.domain.MeasuringHistoryDetail;
 import com.funsoft.hmm.web.domain.param.MeasurementSearchParam;
+import com.funsoft.hmm.web.domain.param.SearchParam;
 import com.funsoft.hmm.web.service.BlockSmallService;
 import com.funsoft.hmm.web.service.info.HistoryInfoService;
 
@@ -65,8 +66,8 @@ public class MeasuringHistoryController {
 
 	@RequestMapping(value = "/history", method = RequestMethod.POST)
 	@ResponseBody
-	public List<MeasuringHistory> history(String dateTime) {
-		return historyInfoService.createMeasuringHistory(dateTime);
+	public List<MeasuringHistory> history(@RequestBody SearchParam param) {
+		return historyInfoService.createMeasuringHistory(param.getDateTime());
 	}
 
 	@RequestMapping(value = "/getBlockInfo", method = RequestMethod.POST)

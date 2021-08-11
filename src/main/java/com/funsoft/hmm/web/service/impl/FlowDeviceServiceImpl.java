@@ -1,6 +1,7 @@
 package com.funsoft.hmm.web.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class FlowDeviceServiceImpl implements FlowDeviceService {
 
 	@Override
 	public FlowDevice get(Long id) {
-		return flowDeviceRepository.findById(id).get();
+		Optional<FlowDevice> flowDevices = flowDeviceRepository.findById(id);
+		return flowDevices.isPresent() ? flowDevices.get() : null;
 	}
 	
 	@Override

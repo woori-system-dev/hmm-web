@@ -67,6 +67,7 @@
 	
 	<!-- Custom Charts Resources -->
 	<script src="${contextName}/js/common/map.js" type="text/javascript"></script>
+	<script src="${contextName}/js/common/table.js" type="text/javascript"></script>
 	
 	<!-- moment Resources -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
