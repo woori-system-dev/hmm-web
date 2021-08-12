@@ -42,45 +42,16 @@
 							1 m/s
 						</div>
 					</div>		
-					<!-- <div class="col-md-4" style="padding-left:15px;text-align:center;font-weight:700;">
-										<img src="../images/weather/sun.png" style="width: 120px">
-										&nbsp&nbsp날씨 좋음
-									</div>
-									<div class="col-md-4" style="text-align:right;">
-										<div class="row" style="margin-top:13px">
-											<div class="col-md-5" style="padding:0px">
-												<img src="../images/weather/temperature.png"> &nbsp기온
-											</div>
-											<div class="col-md-7">
-												9 ℃
-											</div>
-										</div>
-										<div class="row" style="margin-top:13px">
-											<div class="col-md-5" style="padding:0px">
-												<img src="../images/weather/humidity.png"> &nbsp습도
-											</div>
-											<div class="col-md-7">
-												88 %
-											</div>
-										</div>
-										<div class="row" style="margin-top:13px">
-											<div class="col-md-5" style="padding:0px">
-												<img src="../images/weather/wind.png" > &nbsp풍속
-											</div>
-											<div class="col-md-7">
-												1 m/s
-											</div>
-										</div>
-									</div> -->
 				</div>
 				
-				<div class="m-portlet">
+				<div class="m-portlet m-portlet--head-sm">
 					<div class="m-portlet__head">
 						<div class="m-portlet__head-caption">
 							<div class="m-portlet__head-title">
-								<h3 class="m-portlet__head-text">
-									패턴 조건 설정
-								</h3>
+								<span class="m-portlet__head-icon">
+									<i class="flaticon-search-1"></i>
+								</span> 
+								<h3 class="m-portlet__head-text">패턴 조건 설정</h3>
 							</div>
 						</div>
 					</div>

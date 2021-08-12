@@ -199,7 +199,8 @@ public class WeatherServiceImpl implements WeatherService {
 		String image = "";
 		if (weather != null) {
 			if (weather.getPercipitationform().equals("없음")) {
-				image = WeatherType.value(weather.getSky()).getImage();
+				if (weather.getSky() != null)
+					image = WeatherType.value(weather.getSky()).getImage();
 			} else {
 				image = WeatherType.value(weather.getPercipitationform()).getImage();
 			}

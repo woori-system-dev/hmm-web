@@ -2,10 +2,6 @@
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
 <style>
-.m-portlet {
-	margin-bottom: 2rem;
-}
-
 .weather-body {
 	padding: 0 0 1.6rem !important;
 }
@@ -154,7 +150,7 @@
 						<div class="form-group m-form__group row">
 							<label for="lowestTempSelect" class="col-4 col-form-label px-0">최저기온</label>
 							<div class="col-8 p-0">
-								<select class="p-0 m-input m-input--square" id="lowestTempSelect">
+								<select class="form-control m-input m-input--square" id="lowestTempSelect">
 									<c:forEach var="lowestTemp" items="${lowestTemps}" varStatus="status">
 		           						<option value="${lowestTemp}">${lowestTemp.name}</option>
 		           					</c:forEach>
@@ -233,7 +229,7 @@
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div class="m-portlet">
+						<div class="m-portlet mb-0">
 							<div class="m-portlet__body">
 								<div class="row">
 									<div class="col-md-4 standard-date-box">
@@ -324,8 +320,6 @@ $("#patternSearch").click(function () {
 	param.highestTemp = $("#highestTempSelect option:selected").val();
 	param.humidity = $("#humiditySelect option:selected").val();
 	
-	console.log(param);
-	
 	$.ajax({
 		url: contextPath + "/pressure/pattern",
 		type: "post",
@@ -342,5 +336,4 @@ $("#patternSearch").click(function () {
 	    }
 	});
 });
-
 </script>

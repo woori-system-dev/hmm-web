@@ -14,7 +14,7 @@
 	<div class="m-content">
 		<div class="row">
 			<div class="col-md-2">
-				<div class="m-portlet">
+				<div class="m-portlet m-portlet--head-sm">
 					<div class="m-portlet__head">
 						<div class="m-portlet__head-caption">
 							<div class="m-portlet__head-title">

@@ -193,7 +193,8 @@ public class LeakageAnalysisInfoService {
 		NightMinFlowAnalysisInfo info = new NightMinFlowAnalysisInfo();
 		info.setNightMinFlowAnalysisList(analysisList);
 		info.setHighChartInfo(highChartService.createMinFlowAnalysisChartInfo(analysisList));
-		info.setAllowFlow(analysisList.get(0).getAllowFlow());
+		if (analysisList.size() > 0)
+			info.setAllowFlow(analysisList.get(0).getAllowFlow());
 		
 		return info;
 	}

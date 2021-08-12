@@ -77,6 +77,12 @@ public class PressureAnalysisController {
 		model.addAttribute("blockList", blockSmallService.getList());
 	}
 
+	/**
+	 * 수압분포분석 기능
+	 * 
+	 * @param param
+	 * @return
+	 */
 	@RequestMapping(value = "/distribution", method = RequestMethod.POST)
 	@ResponseBody
 	public DistributionAnalysisInfo distribution(@RequestBody PressureAnalysisSearchParam param) {
@@ -104,12 +110,23 @@ public class PressureAnalysisController {
 		model.addAttribute("humiditys", Humidity.values());
 	}
 
+	/**
+	 * 오늘 날씨 세팅
+	 * 
+	 * @return
+	 */
 	@RequestMapping(value = "/weather/setting", method = RequestMethod.POST)
 	@ResponseBody
 	public PatternSearchParam currentWeatherSetting() {
 		return pressureAnalysisInfoService.currentWeatherSetting();
 	}
 
+	/**
+	 * 패턴 검색
+	 * 
+	 * @param param
+	 * @return
+	 */
 	@RequestMapping(value = "/pattern", method = RequestMethod.POST)
 	@ResponseBody
 	public PressurePatternAnalysisInfo pattern(@RequestBody PatternSearchParam param) {

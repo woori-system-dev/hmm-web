@@ -132,8 +132,8 @@
 								</div>
 							</div> -->
 							<div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-								<div class="m-portlet">
-									<div class="m-portlet__head" style="height:40px">
+								<div class="m-portlet m-portlet--head-sm mb-10">
+									<div class="m-portlet__head">
 										<div class="m-portlet__head-caption">
 											<div class="m-portlet__head-title">
 												<span class="m-portlet__head-icon">
@@ -191,22 +191,19 @@
 											</div>
 										</div>
 										
-										<div class="row" style="text-align: right;">
-											<div class="col-12">
-												<button type="button" class="btn btn-info m-btn--wide">
-														초기화
-												</button>
-												<button type="button" class="btn btn-success m-btn--wide">
-													<i class="fa fa-search"></i>
-														검 색
-												</button>
-											</div>
+										<div class="text-right mt-20">
+											<button type="button" class="btn btn-info m-btn--wide">
+												초기화
+											</button>
+											<button type="button" class="btn btn-success m-btn--wide">
+												<i class="fa fa-search"></i> 검 색
+											</button>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
-								<div class="m-portlet" style="padding-left:30px">
+								<div class="m-portlet mb-10 px-20">
 									<br>
 									<label class="m-checkbox m-checkbox--check-bold">
 										<input type="checkbox" name ="checkbox" value="${list}">
@@ -246,14 +243,14 @@
 								</div>
 							</div>
 							<div class="tab-pane" id="m_tabs_1_4" role="tabpanel">
-								<div class="m-portlet">
-									<div class="m-portlet__head" style="height:60px;font-weight:900">
+								<div class="m-portlet m-portlet--head-sm">
+									<div class="m-portlet__head font-black">
 										<div class="m-portlet__head-caption">
 											<div class="form-group m-form__group row">
 												<label for="example-text-input" class="col-4 col-form-label">
 													시설물종류
 												</label>
-												<div class="col-7" style="padding:0">
+												<div class="col-7">
 													<select class="form-control m-input m-input--square" id="exampleSelect1">
 														<option>상수관로</option>
 														<option>1</option>
@@ -268,165 +265,95 @@
 											<div style="border:1px solid;width:99%;height:400px;overflow-y:scroll;">
 												<table class="table table-bordered m-table" style="line-height:0.4rem;">
 													<colgroup>
-															<col style="width:50%;">
-															<col style="width:50%;">
+														<col style="width:50%;">
+														<col style="width:50%;">
 													</colgroup>
-														<tr>
-															<td style="background-color:#358097;color:#FFFFFF;">
-																필드명
-															</td>
-															<td style="background-color:#358097;color:#FFFFFF;">
-																값
-															</td>
-														</tr>
-														<tr>
-															<td>
-																지형지물부호
-															</td>
-															<td>
-																상수관로
-															</td>
-														</tr>
-														<tr>
-															<td>
-																관리번호
-															</td>
-															<td>
-																703
-															</td>
-														</tr>
-														<tr>
-															<td>
-																행정읍면동
-															</td>
-															<td>
-																한남시
-															</td>
-														</tr>
-														<tr>
-															<td>
-																도엽번호
-															</td>
-															<td>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																관리기관
-															</td>
-															<td>
-																시청
-															</td>
-														</tr>
-														<tr>
-															<td>
-																설치일자
-															</td>
-															<td>
-																20140201
-															</td>
-														</tr>
-														<tr>
-															<td>
-																상수관용도
-															</td>
-															<td>
-																배수관
-															</td>
-														</tr>
-														<tr>
-															<td>
-																관재질
-															</td>
-															<td>
-																닥타일주철관
-															</td>
-														</tr>
-														<tr>
-															<td>
-																구경(mm)
-															</td>
-															<td>
-																200
-															</td>
-														</tr>
-														<tr>
-															<td>
-																연장(m)
-															</td>
-															<td>
-																337.91
-															</td>
-														</tr>
-														<tr>
-															<td>
-																접합종류
-															</td>
-															<td>
-																KP메카니칼
-															</td>
-														</tr>
-														<tr>
-															<td>
-																최저깊이(m)
-															</td>
-															<td>
-																1.2
-															</td>
-														</tr>
-														<tr>
-															<td>
-																최고깊이(m)
-															</td>
-															<td>
-																1.2
-															</td>
-														</tr>
-														<tr>
-															<td>
-																공사번호
-															</td>
-															<td>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																개통상태
-															</td>
-															<td>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																탐사여부
-															</td>
-															<td>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																대장초기화여부
-															</td>
-															<td>
-																대장 초기화
-															</td>
-														</tr>
+													<tr>
+														<td style="background-color:#358097;color:#FFFFFF;">필드명</td>
+														<td style="background-color:#358097;color:#FFFFFF;">값</td>
+													</tr>
+													<tr>
+														<td>지형지물부호</td>
+														<td>상수관로</td>
+													</tr>
+													<tr>
+														<td>관리번호</td>
+														<td>703</td>
+													</tr>
+													<tr>
+														<td>행정읍면동</td>
+														<td>한남시</td>
+													</tr>
+													<tr>
+														<td>도엽번호</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>관리기관</td>
+														<td>시청</td>
+													</tr>
+													<tr>
+														<td>설치일자</td>
+														<td>20140201</td>
+													</tr>
+													<tr>
+														<td>상수관용도</td>
+														<td>배수관</td>
+													</tr>
+													<tr>
+														<td>관재질</td>
+														<td>닥타일주철관</td>
+													</tr>
+													<tr>
+														<td>구경(mm)</td>
+														<td>200</td>
+													</tr>
+													<tr>
+														<td>연장(m)</td>
+														<td>337.91</td>
+													</tr>
+													<tr>
+														<td>접합종류</td>
+														<td>KP메카니칼</td>
+													</tr>
+													<tr>
+														<td>최저깊이(m)</td>
+														<td>1.2</td>
+													</tr>
+													<tr>
+														<td>최고깊이(m)</td>
+														<td>1.2</td>
+													</tr>
+													<tr>
+														<td>공사번호</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>개통상태</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>탐사여부</td>
+														<td></td>
+													</tr>
+													<tr>
+														<td>대장초기화여부</td>
+														<td>대장 초기화</td>
+													</tr>
 												</table>
 											</div>
 										</div>
-										<div class="row" style="text-align:right;margin-top:10px;">
-											<div class="col-12">
-												<button type="button" class="btn btn-success m-btn--wide">
-													위치확인
-												</button>
-											</div>
+										<div class="text-right mt-20">
+											<button type="button" class="btn btn-success m-btn--wide">
+												위치확인
+											</button>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="tab-pane active" id="m_tabs_1_5" role="tabpanel">
-								<div class="m-portlet">
-									<div class="m-portlet__head" style="height:40px">
+								<div class="m-portlet m-portlet--head-sm">
+									<div class="m-portlet__head">
 										<div class="m-portlet__head-caption">
 											<div class="m-portlet__head-title">
 												<span class="m-portlet__head-icon">
@@ -438,12 +365,12 @@
 											</div>
 										</div>
 									</div>
-									<div class="m-portlet__body" style="font-weight:900">
+									<div class="m-portlet__body font-black">
 										<div class="form-group m-form__group row">
 											<label for="example-text-input" class="col-4 col-form-label">
 												시설물번호
 											</label>
-											<div class="col-7" style="padding:0">
+											<div class="col-7 p-0">
 												<input class="form-control m-input" type="number" id="flctcFm">
 											</div>
 										</div>
@@ -451,7 +378,7 @@
 											<label for="example-text-input" class="col-4 col-form-label">
 												블록명칭
 											</label>
-											<div class="col-7" style="padding:0">
+											<div class="col-7 p-0">
 												<input class="form-control m-input" type="text" id="bkNm">
 											</div>
 										</div>
@@ -459,7 +386,7 @@
 											<label for="example-text-input" class="col-4 col-form-label">
 												유량계 번호
 											</label>
-											<div class="col-7" style="padding:0">
+											<div class="col-7 p-0">
 												<input class="form-control m-input" type="number" id="fmtIdn">
 											</div>
 										</div>
@@ -467,15 +394,15 @@
 											<label for="example-text-input" class="col-4 col-form-label">
 												수압계 번호
 											</label>
-											<div class="col-7" style="padding:0">
+											<div class="col-7 p-0">
 												<input class="form-control m-input" type="number" id="pmtIdn">
 											</div>
 										</div>
-										<div class="form-group m-form__group row">
+										<div class="form-group m-form__group row mt-10">
 											<label for="example-text-input" class="col-4 col-form-label">
 												영역 선택
 											</label>
-											<div class="col-8" style="padding:0">
+											<div class="col-8 p-0">
 												<button type="button" class="btn btn-info m-btn--wide" id="location">
 													그리기
 												</button>
@@ -484,12 +411,10 @@
 												</button>
 											</div>
 										</div>
-										<div class="row" style="text-align:right;margin-top:10px;">
-											<div class="col-12">
-												<button type="button" class="btn btn-success m-btn--wide" id="blockInsert">
-													블록 추가
-												</button>
-											</div>
+										<div class="text-right mt-20">
+											<button type="button" class="btn btn-success m-btn--wide" id="blockInsert">
+												블록 추가
+											</button>
 										</div>
 									</div>
 								</div>
@@ -503,12 +428,13 @@
 </div>
 
 <script>
-
 var shpVectorLayer = [];
+
 $("input:checkbox").on('click', function() {
-	if(shpVectorLayer.length==0){
-		if ( $(this).prop('checked') ) {
+	if (shpVectorLayer.length == 0) {
+		if ($(this).prop('checked')) {
 		}
+		
 		var layer = "layersgo";
 		var data = {"layer":layer};
 		$.ajax({
@@ -541,20 +467,21 @@ $("input:checkbox").on('click', function() {
 });
 
 var styles = {       
-        'Polygon': new ol.style.Style({
-          stroke: new ol.style.Stroke({
-            color: 'blue',
-            /* lineDash: [4], */
-            width: 2
-          }),
-          fill: new ol.style.Fill({
-            color: 'rgba(0, 0, 255, 0.1)'
-          })
-        })
-      };
+  'Polygon': new ol.style.Style({
+    stroke: new ol.style.Stroke({
+      color: 'blue',
+      /* lineDash: [4], */
+      width: 2
+    }),
+    fill: new ol.style.Fill({
+      color: 'rgba(0, 0, 255, 0.1)'
+    })
+  })
+};
+
 var styleFunction = function(feature) {
-    return styles[feature.getGeometry().getType()];
-  };
+	return styles[feature.getGeometry().getType()];
+};
 /* var geojsonObject = {
 		'type': 'FeatureCollection',
         'features':[{ 
@@ -584,6 +511,7 @@ var vectorSource = new ol.source.Vector({
         }]
 })
 });*/
+
 var source = new ol.source.Vector({ wrapX: false });
 
 var vector = new ol.layer.Vector({
@@ -615,7 +543,9 @@ var vetorJson= [];
 <c:forEach items="${blockList}" var="item" varStatus="listldx">
 	vetorJson.push(JSON.parse("${item.coords}"));
 </c:forEach>
+
 var vectorLayer = [];
+
 for(var i=0; i<vetorJson.length; i++){
 	vectorLayer[i] = new ol.layer.Vector({
 	    style: styleFunction,
@@ -638,9 +568,6 @@ for(var i=0; i<vetorJson.length; i++){
 	});
 	map.addLayer(vectorLayer[i]);
 }
-
- 
-
 
 /* 
 var e = JSON.parse('[{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"},{ "address": "경기도 하남시 미사동 미사대교","OrderID": "53150-422","ShipCountry": "AF","ShipCity": "Qaram Q\u014dl","ShipName": "Welch Group","ShipAddress": "45 Nova Road","CompanyEmail": "jbutner0@de.vu","CompanyAgent": "John Butner","CompanyName": "Bosco-Turner","Currency": "AFN","Notes": "platea dictumst morbi vestibulum velit id pretium iaculis diam erat fermentum justo nec condimentum neque sapien","Department": "Baby","Website": "dropbox.com","Latitude": 36.533332999999999,"Longitude": 69.016666999999998,"ShipDate": "5\/20\/2017","PaymentDate": "2017-03-17 07:39:53","TimeZone": "Asia\/Kabul","Status": 4,"Type": 3,"TotalPayment": "80,238.30 AFN"}]');

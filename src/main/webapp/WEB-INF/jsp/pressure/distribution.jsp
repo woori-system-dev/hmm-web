@@ -2,12 +2,12 @@
 <%@ include file="/WEB-INF/jsp/common/tagLib.jsp"%>
 
 <style>
-.m-portlet {
-	margin-bottom: 2rem;
-}
-
 .m-checkbox {
 	margin-bottom: 5px;
+}
+
+.m-checkbox, .m-radio {
+	display: block;
 }
 
 .checkbox-list {
@@ -62,7 +62,7 @@
 }
 
 .pie-chart {
-	height: 260px;
+	height: 250px;
 }
 </style>
 
@@ -154,119 +154,12 @@
 				<div class="m-portlet">
 					<div class="m-portlet__body">
 						<div id="distributionLineChart" class="chart-content"></div>
+						
 						<div id="tableWrapper" class="table-wrapper m--margin-top-10 display-none">
 							<div class="table-scroller">
 								<table id="dataTable" class="table table-bordered result-table text-center"></table>
 							</div>
 						</div>
-							
-							<!-- <table class="table m-table" style="text-align:center;">
-								<thead>
-									<tr>
-										<th style="background-color:#358097;color:#ffffff;width:220px;">
-											블록명
-										</th>
-										<th style="background-color:#4bc6ff;color:#ffffff;width:220px;">
-											관리블록A
-										</th>
-										<th style="background-color:#e64b6a;color:#ffffff;width:220px;">
-											관리블록B
-										</th>
-										<th style="background-color:#4bc6ff;color:#ffffff;width:220px;">
-											소블록A
-										</th>
-										<th style="background-color:#e64b6a;color:#ffffff;width:220px;">
-											소블록B
-										</th>
-										<th style="background-color:#4bc6ff;color:#ffffff;width:220px;">
-											소블록C
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th style="background-color:#358097;color:#ffffff">
-											급수전수
-										</th>
-										<td>
-											0
-										</td>
-										<td>
-											0
-										</td>
-										<td>
-											0
-										</td>
-										<td>
-											0
-										</td>
-										<td>
-											213
-										</td>
-									</tr>
-									<tr>
-										<th style="background-color:#358097;color:#ffffff">
-											관로연장(m)
-										</th>
-										<td>
-											0
-										</td>
-										<td>
-											0
-										</td>
-										<td>
-											0
-										</td>
-										<td>
-											0
-										</td>
-										<td>
-											0
-										</td>
-									</tr>
-									<tr>
-										<th style="background-color:#358097;color:#ffffff;padding:0px">
-											기간내<br>
-											적산유량(m)
-										</th>
-										<td>
-											31124
-										</td>
-										<td>
-											17138
-										</td>
-										<td>
-											142103
-										</td>
-										<td>
-											1681903397
-										</td>
-										<td>
-											119428
-										</td>
-									</tr>
-									<tr>
-										<th style="background-color:#358097;color:#ffffff;padding-top:100px">
-											수압분포
-										</th>
-										<td>
-											<div id="chartdiv1" style="height: 260px;"></div>
-										</td>
-										<td>
-											<div id="chartdiv2" style="height: 260px;"></div>
-										</td>
-										<td>
-											<div id="chartdiv3" style="height: 260px;"></div>
-										</td>
-										<td>
-											<div id="chartdiv4" style="height: 260px;"></div>
-										</td>
-										<td>
-											<div id="chartdiv5" style="height: 260px;"></div>
-										</td>
-									</tr>
-								</tbody>
-							</table> -->
 					</div>
 				</div>
 			</div>
@@ -380,7 +273,7 @@ function makeDistributionTable(results) {
 		td.innerText = array;
         td.setAttribute("class", "sticky-col");
         if (array == "수압분포") {
-        	td.setAttribute("style", "height:260px;padding-top:100px;");
+        	td.setAttribute("style", "height:265px; padding-top:110px;");
         }
         
         tr.appendChild(td);

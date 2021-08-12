@@ -25,6 +25,10 @@ public class FluxController {
 	@Autowired
 	private BlockSmallService blockSmallService;
 
+	/**
+	 * 총괄수량수지분석 화면
+	 * @param model
+	 */
 	@RequestMapping(value = "/colligation", method = RequestMethod.GET)
 	public void colligation(Model model) {
 		model.addAttribute("blockList", blockSmallService.getList());
@@ -32,19 +36,23 @@ public class FluxController {
 
 	@ResponseBody
 	@RequestMapping(value = "/colligation/search", method = RequestMethod.GET)
-	public String colligationSearch(Model model, String startDate, String endDate,
+	public String colligationSearch(String startDate, String endDate,
 			@RequestParam(value = "checkList[]") ArrayList<String> checkList) {
-		System.err.println(startDate);
-		System.err.println(endDate);
-		System.err.println(checkList);
-		/* model.addAttribute("blockList" , blockList()); */
 		return null;
 	}
 
+	/**
+	 * 검침데이터 관리 화면
+	 * @param model
+	 */
 	@RequestMapping(value = "/administration", method = RequestMethod.GET)
 	public void administration(Model model) {
 	}
 
+	/**
+	 * 수요패턴 분석 화면
+	 * @param model
+	 */
 	@RequestMapping(value = "/demand", method = RequestMethod.GET)
 	public void demand(Model model) {
 		model.addAttribute("blockList", blockSmallService.getList());
