@@ -7,9 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.funsoft.hmm.web.domain.BlockInfo;
@@ -43,19 +44,19 @@ public class MeasuringHistoryController {
 	 * 
 	 * @param model
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@GetMapping(value = "/list")
 	public void list(Model model) {
 		model.addAttribute("currentTime", dateFormat.format(new Date()));
 	}
 
 	/**
-	 * 계측 이력 조회
+	 * 계측 이력 조회 화면
 	 * 
 	 * @param model
 	 * @param blockInfo
 	 * @return
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	@PostMapping(value = "/list")
 	public String listWithPost(Model model, BlockInfo blockInfo) {
 		model.addAttribute("blockInfo", blockInfo);
 		model.addAttribute("blockList", blockSmallService.getList());
@@ -64,13 +65,24 @@ public class MeasuringHistoryController {
 		return "measurement/detail";
 	}
 
-	@RequestMapping(value = "/history", method = RequestMethod.POST)
+	/**
+	 * 계측 이력 조회
+	 * @param param
+	 * @return
+	 */
+	@PostMapping(value = "/history")
 	@ResponseBody
 	public List<MeasuringHistory> history(@RequestBody SearchParam param) {
 		return historyInfoService.createMeasuringHistory(param.getDateTime());
 	}
 
-	@RequestMapping(value = "/getBlockInfo", method = RequestMethod.POST)
+	/**
+	 * 블럭정보 조회
+	 * 
+	 * @param history
+	 * @return
+	 */
+	@PostMapping(value = "/getBlockInfo")
 	@ResponseBody
 	public BlockInfo getBlockInfo(@RequestBody MeasuringHistory history) {
 		return historyInfoService.getBlockInfo(history);
@@ -82,7 +94,7 @@ public class MeasuringHistoryController {
 	 * @param model
 	 * @param blockInfo
 	 */
-	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	@GetMapping(value = "/detail")
 	public void detail(Model model, BlockInfo blockInfo) {
 		model.addAttribute("blockInfo", blockInfo);
 		model.addAttribute("blockList", blockSmallService.getList());
@@ -95,7 +107,7 @@ public class MeasuringHistoryController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/detail", method = RequestMethod.POST)
+	@PostMapping(value = "/detail")
 	@ResponseBody
 	public MeasuringHistoryDetail detail(@RequestBody MeasurementSearchParam param) {
 		return historyInfoService.createMeasuringHistoryDetail(param);
@@ -107,7 +119,7 @@ public class MeasuringHistoryController {
 	 * @param param
 	 * @return
 	 */
-	@RequestMapping(value = "/searchResult", method = RequestMethod.POST)
+	@PostMapping(value = "/searchResult")
 	@ResponseBody
 	public List<MeasuringHistory> searchResult(MeasurementSearchParam param) {
 		return historyInfoService.getMeasuringHistoryList(param);
