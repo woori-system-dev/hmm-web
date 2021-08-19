@@ -5,9 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.funsoft.hmm.web.domain.AlarmHistory;
@@ -43,43 +44,58 @@ public class AlarmHistoryController {
 	 * 
 	 * @param model
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@GetMapping(value = "/list")
 	public void list(Model model) {
 	}
 
 	/**
-	 * 알람 이력 조회
+	 * 알람 이력 조회 화면
 	 * 
 	 * @param model
 	 * @param blockInfo
 	 * @return
 	 */
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	@PostMapping(value = "/list")
 	public String listWithPost(Model model, BlockInfo blockInfo) {
 		model.addAttribute("blockInfo", blockInfo);
 		model.addAttribute("blockList", blockSmallService.getList());
 		return "alarm/detail";
 	}
 
-	@RequestMapping(value = "/history", method = RequestMethod.POST)
+	/**
+	 * 알람 이력 조회
+	 * 
+	 * @param date
+	 * @return
+	 */
+	@PostMapping(value = "/history")
 	@ResponseBody
 	public List<AlarmHistory> history(String date) {
 		return historyInfoService.createAlarmHistory(date);
 	}
 
-	@RequestMapping(value = "/getBlockInfo", method = RequestMethod.POST)
+	/**
+	 * 블럭 정보 조회
+	 * 
+	 * @param history
+	 * @return
+	 */
+	@PostMapping(value = "/getBlockInfo")
 	@ResponseBody
 	public BlockInfo getBlockInfo(@RequestBody AlarmHistory history) {
 		return historyInfoService.getBlockInfo(history);
 	}
 
-	@RequestMapping(value = "/searchResult", method = RequestMethod.POST)
+	@PostMapping(value = "/searchResult")
 	@ResponseBody
 	public List<AlarmHistoryTable> searchResult() {
 		return dummyTestService.createAlarmHistoryInfoList();
 	}
 
-	@RequestMapping(value = "/detail", method = RequestMethod.POST)
+	/**
+	 * 알람 이력 상세 조회
+	 */
+	@PostMapping(value = "/detail")
 	@ResponseBody
 	public AlarmHistoryDetail detail(@RequestBody AlarmSearchParam param) {
 		return historyInfoService.createAlarmHistoryDetail(param);
