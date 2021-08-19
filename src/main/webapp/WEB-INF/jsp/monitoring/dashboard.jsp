@@ -62,12 +62,12 @@
 										<tbody>
 											<tr class="text-right">
 												<td colspan="3">
-													<span class="m--font-boldest">6.48</span>&nbsp;&nbsp;kg/cm²
+													<span id="pressure_${list.bkNm}" class="m--font-boldest"></span>&nbsp;&nbsp;kg/cm²
 												</td>
 											</tr>
 											<tr class="text-right">
 												<td colspan="3">
-													<span class="m--font-boldest">195.90</span>&nbsp;&nbsp;m²/hr
+													<span id="flow_${list.bkNm}" class="m--font-boldest"></span>&nbsp;&nbsp;m²/hr
 												</td>
 											</tr>
 											<tr>
@@ -100,25 +100,42 @@
 </div>
 
 <script>
-var map = makeMap("map");
+$(document).ready(function () {
+	var map = makeMap("map");
 
-$.ajax({
-	url: contextPath + "/monitoring/getBlockList",
-	type: "get",
-	dataType: "json",
-	success: function(response) {
-		$.each(response, function(idx, value) {
-			var vectorLayer = makeVectorLayer(value);
-			map.addLayer(vectorLayer);
+	var blockList = [];
+
+	$.ajax({
+		url: contextPath + "/monitoring/getBlockList",
+		type: "get",
+		dataType: "json",
+		success: function(response) {
+			blockList = response;
+			$.each(response, function(idx, value) {
+				var vectorLayer = makeVectorLayer(value);
+				map.addLayer(vectorLayer);
+			});
+
+			refreshDiv();
+
+			//웹페이지 갱신
+			window.setInterval(getRealTimeMeasurement, 1000 * 10);
+	   	}
+	});
+
+	function getRealTimeMeasurement() {
+		$.each(blockList, function(idx, blockSmall) {
+			$.ajax({
+				url: contextPath + "/monitoring/getRealTimeMeasurement",
+				type: "get",
+				data: {"blockId": blockSmall.flctcFm}
+				dataType: "json",
+				success: function(response) {
+					$("pressure_" + blockSmall.flctcFm).text(response.pressure);
+					$("flow_" + blockSmall.flctcFm).text(response.flow);
+			   	}
+			});
 		});
-   	}
+	}
 });
-
-//웹페이지 갱신 5초
-/* var counter = 0;
-window.setInterval("refreshDiv()", 5000);
-function refreshDiv(){
-	counter = counter + 1;
-	console.log(counter);
-} */
 </script>

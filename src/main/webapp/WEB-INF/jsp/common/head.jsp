@@ -71,7 +71,7 @@
 	
 	<!-- moment Resources -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment-with-locales.min.js"></script>
+	<script src="//cdn.jsdelivr.net/momentjs/latest/moment-with-locales.min.js" type="text/javascript"></script>
 	
 	<!-- openlayers -->
 	<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">

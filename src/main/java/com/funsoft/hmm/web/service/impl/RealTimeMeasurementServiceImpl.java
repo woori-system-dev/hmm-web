@@ -23,6 +23,12 @@ import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.core.types.dsl.StringTemplate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
+/**
+ * 실시간 측정 서비스
+ * 
+ * @author hgko
+ *
+ */
 @Service
 public class RealTimeMeasurementServiceImpl implements RealTimeMeasurementService {
 	
@@ -91,8 +97,8 @@ public class RealTimeMeasurementServiceImpl implements RealTimeMeasurementServic
 	}
 
 	@Override
-	public RealTimeMeasurement get(long bkFlctcFm, Date date) {
-		return realTimeMeasurementRepository.findByBkFlctcFmAndDatetime(bkFlctcFm, date);
+	public RealTimeMeasurement get(long blockId, Date date) {
+		return realTimeMeasurementRepository.findByBkFlctcFmAndDatetime(blockId, date);
 	}
 
 	@Override
