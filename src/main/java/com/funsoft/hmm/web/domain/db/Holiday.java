@@ -20,17 +20,22 @@ import lombok.Data;
 @Data
 public class Holiday implements Domain {
 
+	/** 순서 */
 	@Id
 	private int idx;
 	
+	/** 년 */
 	@Column(length = 4)
 	private String year;
 	
+	/** 월 */
 	@Column(length = 2)
 	private String month;
 	
+	/** 일 */
 	@Column(length = 2)
 	private String day;
 	
+	/** 공휴일 여부(평일(0), 공휴일(1)) */
 	private boolean holiday;
 }

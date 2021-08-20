@@ -1,6 +1,7 @@
 package com.funsoft.hmm.web.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 블록 도메인 클래스
@@ -9,6 +10,7 @@ import lombok.Data;
  *
  */
 @Data
+@NoArgsConstructor
 public class BlockInfo implements Domain {
 	
 	private String dateTime;
@@ -33,15 +35,7 @@ public class BlockInfo implements Domain {
 	
 	private String pressureDate;
 	
-	public BlockInfo() {
-	}
-	
 	public BlockInfo(String bkNm) {
-		this.bkNm = bkNm;
-	}
-	
-	public BlockInfo(long flctcFm, String bkNm) {
-		this.flctcFm = flctcFm;
 		this.bkNm = bkNm;
 	}
 	

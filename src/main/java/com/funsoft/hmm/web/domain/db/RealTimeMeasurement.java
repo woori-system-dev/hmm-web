@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * 실시간 계측
+ * - 실시간 계측된 순시유량, 적산유량, 수압 데이터 테이블
  * 
  * @author hgko
  *
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RealTimeMeasurement implements Domain {
 
-	/** 측정시간 */
+	/** 측정시간 - 실시간 수집된 데이터의 측정시간(00초로 끝나도록 보정된 시간) */
 	@Id
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datetime;
@@ -37,7 +38,7 @@ public class RealTimeMeasurement implements Domain {
 	@Id
 	private long bkFlctcFm;
 	
-	/** 입력시간 */
+	/** 입력시간 - 실시간 수집된 데이터의 입력시간(실제 데이터를 받아 입력하는 시간) */
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date inDatetime;
@@ -46,13 +47,13 @@ public class RealTimeMeasurement implements Domain {
 	@Column
 	private String bkFlctcCde;
 	
-	/** 수압 */
+	/** 수압 데이터(kg/cm2) */
 	private float pressure;
 	
-	/** 순시유량 */
+	/** 순시유량 데이터(m3/s) */
 	private float flow;
 	
-	/** 적산유량 */
+	/** 적산유량 데이터(m3/s) */
 	private float sumFlow;
 	
 	/** 공휴일 유무 */

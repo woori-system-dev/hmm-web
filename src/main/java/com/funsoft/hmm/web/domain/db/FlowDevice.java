@@ -10,7 +10,7 @@ import com.funsoft.hmm.web.domain.Domain;
 import lombok.Data;
 
 /**
- * 소블록 정보 - 유량장비
+ * 소블록 정보 - 유량계
  * 
  * @author hgko
  *

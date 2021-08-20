@@ -16,6 +16,7 @@ import lombok.Getter;
 
 /**
  * 날씨 정보
+ * - 1시간 단위의 날씨 실황 데이터를 갖는 테이블
  * 
  * @author hgko
  *
@@ -36,14 +37,14 @@ public class Weather implements Domain {
 	/** 1시간강수량 */
 	private float rain;
 	
-	/** 하늘상태 */
+	/** 하늘상태(맑음, 구름조금, 구름많음, 흐림, 오류) */
 	@Column(length = 20)
 	private String sky;
 	
 	/** 습도 */
 	private float humidity;
 	
-	/** 강수형태 */
+	/** 강수형태(없음, 비, 비/눈, 눈, 오류) */
 	@Column(length = 20)
 	private String percipitationform;
 	

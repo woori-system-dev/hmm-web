@@ -19,6 +19,7 @@ import lombok.Getter;
 
 /**
  * 수압이상 알람
+ * - 수압이상 알람정보
  * 
  * @author hgko
  *
@@ -42,7 +43,7 @@ public class AlarmPressure implements Domain {
 	@Id
 	private long bkFlctcFm;
 	
-	/** 수압이상알람 */
+	/** 수압이상알람(1:상한1차이상, 2:상한2차이상, 3:하한1차이상, 4:하한2차이상) */
 	@Enumerated(EnumType.ORDINAL)
 	@Column(nullable = false)
 	private AlarmPreesureType prsAbnm;

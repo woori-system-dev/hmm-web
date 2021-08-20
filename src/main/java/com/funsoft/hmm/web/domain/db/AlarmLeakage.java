@@ -16,6 +16,7 @@ import lombok.Data;
 
 /**
  * 누수판단 알람
+ * - 누수판단 알람정보
  * 
  * @author hgko
  *
@@ -31,29 +32,29 @@ public class AlarmLeakage implements Domain {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date datetime;
 	
-	/** 지형지물부호 */
-	@Column(nullable = false, length = 5)
-	private String bkFlctcCde;
-	
 	/** 블록시설물번호 */
 	@Id
 	private long bkFlctcFm;
 	
-	/** 누수판단알람 */
+	/** 지형지물부호 */
+	@Column(nullable = false, length = 5)
+	private String bkFlctcCde;
+	
+	/** 누수판단알람(0:정상, 1:누수) */
 	private boolean leakPrdt;
 	
-	/** 설정허용유량 */
+	/** 설정된 허용유량 데이터(m3/s) */
 	private float allowFlowSet;
 	
-	/** 계측된최저유량 */
+	/** 계측된 최저유량 데이터(m3/s) */
 	private float flow;
 	
-	/** 허용유량차 */
+	/** 허용유량차(계측된 최저유량 - 설정된 허용유량 차) */
 	private float flowGap;
 	
-	/** 수압 */
+	/** 수압 - 최저유량 시 수압 데이터(m3/s) */
 	private float pressure;
 	
-	/** 지속시간 */
+	/** 지속시간 - 허용유량을 넘어서 지속된 기간(날짜) */
 	private int lastPeriod;
 }

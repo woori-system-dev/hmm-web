@@ -39,9 +39,9 @@ public class AlarmDevice implements Domain {
 	@Id
 	private long bkFlctcFm;
 	
-	/** 문열림알람 */
+	/** 문열림알람(0:닫힘, 1:열림) */
 	private boolean opnDr;
 	
-	/** 기기연결불가알람 */
+	/** 기기연결불가알람(0:정상, 1:비정상) */
 	private boolean deviceErr;
 }

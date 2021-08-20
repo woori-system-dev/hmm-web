@@ -40,7 +40,7 @@ public class BlockSmall implements Domain {
 	@Column(length = 200)
 	private String addressArDc;
 	
-	/** 대블록번호 */
+	/** 중블록번호 - 상위블록(중블록)의 시설물 번호 */
 	private long usFlctcFm;
 	
 	/** 도입시기 */
@@ -70,12 +70,12 @@ public class BlockSmall implements Domain {
 	/** 수질계측기 번호 */
 	private int cmtIdn;
 	
-	/** 유입지점 개수 */
+	/** 유입지점 개수 - 해당 블록으로 들어오는 유입지점의 개수(단위:개) */
 	private int inpNum;
 	
-	/** 유입관로 번호 */
+	/** 유입관로 번호 - 해당 블록으로 들어오는 유입관로의 관리번호 */
 	private int ipiIdn;
 	
-	/** 좌표값 */
+	/** 좌표값 - WKT 타입의 좌표값 */
 	private String coords;
 }

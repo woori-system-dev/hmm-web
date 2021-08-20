@@ -67,7 +67,7 @@
 											</tr>
 											<tr class="text-right">
 												<td colspan="3">
-													<span id="flow_${list.bkNm}" class="m--font-boldest"></span>&nbsp;&nbsp;m²/hr
+													<span id="flow_${list.bkNm}" class="m--font-boldest"></span>&nbsp;&nbsp;㎥/h
 												</td>
 											</tr>
 											<tr>
