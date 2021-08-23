@@ -62,12 +62,12 @@
 										<tbody>
 											<tr class="text-right">
 												<td colspan="3">
-													<span id="pressure_${list.bkNm}" class="m--font-boldest"></span>&nbsp;&nbsp;kg/cm²
+													<span id="pressure_${list.flctcFm}" class="m--font-boldest"></span>&nbsp;&nbsp;kg/cm²
 												</td>
 											</tr>
 											<tr class="text-right">
 												<td colspan="3">
-													<span id="flow_${list.bkNm}" class="m--font-boldest"></span>&nbsp;&nbsp;㎥/h
+													<span id="flow_${list.flctcFm}" class="m--font-boldest"></span>&nbsp;&nbsp;㎥/h
 												</td>
 											</tr>
 											<tr>
@@ -100,7 +100,7 @@
 </div>
 
 <script>
-$(document).ready(function () {
+$(document).ready(function() {
 	var map = makeMap("map");
 
 	var blockList = [];
@@ -116,23 +116,24 @@ $(document).ready(function () {
 				map.addLayer(vectorLayer);
 			});
 
-			refreshDiv();
+			getRealTimeMeasurement();
 
 			//웹페이지 갱신
 			window.setInterval(getRealTimeMeasurement, 1000 * 10);
 	   	}
 	});
 
-	function getRealTimeMeasurement() {
+ 	function getRealTimeMeasurement() {
 		$.each(blockList, function(idx, blockSmall) {
 			$.ajax({
 				url: contextPath + "/monitoring/getRealTimeMeasurement",
 				type: "get",
-				data: {"blockId": blockSmall.flctcFm}
+				data: {"blockId": blockSmall.flctcFm},
 				dataType: "json",
 				success: function(response) {
-					$("pressure_" + blockSmall.flctcFm).text(response.pressure);
-					$("flow_" + blockSmall.flctcFm).text(response.flow);
+					console.log(response);
+					$("#pressure_" + blockSmall.flctcFm).text(response.pressure);
+					$("#flow_" + blockSmall.flctcFm).text(response.flow);
 			   	}
 			});
 		});

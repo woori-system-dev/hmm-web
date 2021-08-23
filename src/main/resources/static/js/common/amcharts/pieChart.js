@@ -19,7 +19,7 @@ function makePieChart(divId) {
 		}
 	});
 
-	return chart
+	return chart;
 }
 
 

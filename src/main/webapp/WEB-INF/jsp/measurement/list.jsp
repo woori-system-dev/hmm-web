@@ -184,7 +184,6 @@ const MeasurementManager = function() {
 	var DataTable = {
 		ele: "#measurementTable",
 		table: null,
-		title: "수강 대기 명단",
 		option: {
 			columns: [{
 		        data: "dateTime"
@@ -206,11 +205,6 @@ const MeasurementManager = function() {
 		        render: function(data, type, row, meta) {
 		            return '<a href="' + contextPath + '/measurement/detail?flctcFm=' + row.blockId + '&dateTime=' + row.dateTime + '"' +
 						'class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-edit"></i></a>';
-					/* return '<form action="' + contextPath + '/measurement/list" method="post">' +
-						'<input type="hidden" name="flctcFm" value="' + row.blockId + '">' + 
-						'<input type="hidden" name="dateTime" value="' + row.dateTime + '">' + 
-						'<button type="submit" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-edit"></i></button>' + 
-						'</form>'; */
 		        }
 		    }],
 		},
@@ -221,7 +215,7 @@ const MeasurementManager = function() {
 		search: function() {
 			var param = new Object();
 			param.dateTime = $("#datetimepicker").val();
-			Datatables.rowsAdd(this.table, contextPath + "/measurement/history", param);
+			Datatables.rowsAdd(this.table, contextPath + "/measurement/search", param);
 		}
 	}
 
@@ -249,7 +243,6 @@ $(document).ready(function () {
 		autoclose: true,
 		format: "yyyy-mm-dd hh:00:00",
 		minView : 1,
-		language: "ko"
 	});
 
 	var map = makeMap("map");

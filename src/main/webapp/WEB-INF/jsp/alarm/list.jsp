@@ -185,122 +185,121 @@
 </div>
 
 <script>
-$("#datePicker").daterangepicker({
-	startDate: moment(),
-	singleDatePicker: true,
-	showDropdowns: true,
-	locale: {
-		format: 'YYYY-MM-DD',
-		daysOfWeek: [
-			"일","월","화","수","목","금","토"
-      	]
-	}
-}); 
+$(function() {
+	$("#datePicker").daterangepicker({
+		startDate: moment(),
+		singleDatePicker: true,
+		showDropdowns: true,
+		locale: {
+			format: 'YYYY-MM-DD',
+			daysOfWeek: [
+				"일","월","화","수","목","금","토"
+	      	]
+		}
+	}); 
 
-var table = $("#dataTable").DataTable({
-	select: {
-        style: "single"
-    },
-	language: {
-		emptyTable: "데이터가 없습니다"
-	},
-    columns: [{
-        data: "blockId"
-    }, {
-        data: "blockName"
-    }, {
-        data: "highPressure"
-    }, {
-        data: "lowPressure"
-    }, {
-        data: "doorOpen"
-    }, {
-        data: "deviceError"
-    }, {
-        width: "12%",
-        render: function(data, type, row, meta) {
-            return '<form action="' + contextPath + '/alarm/list" method="post">' +
-				'<input type="hidden" name="flctcFm" value="' + row.blockId + '">' + 
-				'<input type="hidden" name="dateTime" value="' + $("#datePicker").val() + '">' + 
-				'<button type="submit" class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-edit"></i></button>' + 
-				'</form>';
-        }
-    }],
-    columnDefs: [{
-    	targets : 0,
-		visible : false
-    }],
-    responsive: true,
-    searching: false,
-	lengthChange: false,
-    ordering: false,
-    paging: false,
-    info: false
-});
+	var table = $("#dataTable").DataTable({
+		select: {
+	        style: "single"
+	    },
+		language: {
+			emptyTable: "데이터가 없습니다"
+		},
+	    columns: [{
+	        data: "blockId"
+	    }, {
+	        data: "blockName"
+	    }, {
+	        data: "highPressure"
+	    }, {
+	        data: "lowPressure"
+	    }, {
+	        data: "doorOpen"
+	    }, {
+	        data: "deviceError"
+	    }, {
+	        width: "12%",
+	        render: function(data, type, row, meta) {
+	        	return '<a href="' + contextPath + '/alarm/detail?flctcFm=' + row.blockId + '&dateTime=' + $("#datePicker").val() + '"' +
+				'class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill"><i class="la la-edit"></i></a>';
+	        }
+	    }],
+	    columnDefs: [{
+	    	targets : 0,
+			visible : false
+	    }],
+	    responsive: true,
+	    searching: false,
+		lengthChange: false,
+	    ordering: false,
+	    paging: false,
+	    info: false
+	});
 
-var map = makeMap("map");
-var vectorLayers = [];
+	var map = makeMap("map");
+	var vectorLayers = [];
 
-$.ajax({
-	url: contextPath + "/monitoring/getBlockList",
-	type: "get",
-	dataType: "json",
-	success: function(response) {
-		$.each(response, function(idx, value) {
-			var vectorLayer = makeVectorLayer(value);
-			map.addLayer(vectorLayer);
-			vectorLayers.push({block: value, vectorLayer: vectorLayer});
-		});
-   	}
-});
-
-function setAlarmHistoryList() {
-	table.clear().draw();
-	
 	$.ajax({
-		url: contextPath + "/alarm/history",
-		data: {"date" : $("#datePicker").val()}, 
-		type: "post",
+		url: contextPath + "/monitoring/getBlockList",
+		type: "get",
 		dataType: "json",
 		success: function(response) {
-			table.rows.add(response).draw();
-		},
-		beforeSend:function(){
-	        $('.loading-container').removeClass('display-none');
-	    },
-	    complete:function(){
-	        $('.loading-container').addClass('display-none');
-	    }
+			$.each(response, function(idx, value) {
+				var vectorLayer = makeVectorLayer(value);
+				map.addLayer(vectorLayer);
+				vectorLayers.push({block: value, vectorLayer: vectorLayer});
+			});
+	   	}
 	});
-}
 
-$(function() {
-	setAlarmHistoryList();
-});
-
-$("#search_button").click(function() {
-	setAlarmHistoryList();
-});
-
-table.on('select', function (e, dt, type, indexes) {
-	if (type === 'row') {
-		var data = table.rows(indexes).data()[0];
+	function setAlarmHistoryList() {
+		table.clear().draw();
 		
 		$.ajax({
-			url: contextPath + "/alarm/getBlockInfo",
-    		type: "post",
-    		contentType: "application/json",
-    		data: JSON.stringify(data),
-    		success: function(blockInfo) {
-    			$.each(vectorLayers, function(idx, val) {
-    				var fillColor = "#ffffff00";
-    				if (blockInfo.flctcFm == val.block.flctcFm) {
-    					fillColor = "rgba(0, 0, 255, 0.1)";
-    				}
-    				val.vectorLayer.setStyle([makeStyle(fillColor), makeLabelStyle(val.block.bkNm)]);
-    			});
-    		}
-    	});
-    }
+			url: contextPath + "/alarm/search",
+			data: {"date" : $("#datePicker").val()}, 
+			type: "post",
+			dataType: "json",
+			success: function(response) {
+				table.rows.add(response).draw();
+			},
+			beforeSend:function(){
+		        $('.loading-container').removeClass('display-none');
+		    },
+		    complete:function(){
+		        $('.loading-container').addClass('display-none');
+		    }
+		});
+	}
+	
+	setAlarmHistoryList();
+
+	$("#search_button").click(function() {
+		setAlarmHistoryList();
+	});
+
+	table.on('select', function (e, dt, type, indexes) {
+		if (type === 'row') {
+			var data = table.rows(indexes).data()[0];
+			
+			$.ajax({
+				url: contextPath + "/alarm/getBlockInfo",
+	    		type: "post",
+	    		contentType: "application/json",
+	    		data: JSON.stringify(data),
+	    		success: function(blockInfo) {
+	    			$.each(vectorLayers, function(idx, val) {
+	    				var fillColor = "#ffffff00";
+	    				if (blockInfo.flctcFm == val.block.flctcFm) {
+	    					fillColor = "rgba(0, 0, 255, 0.1)";
+	    				}
+	    				val.vectorLayer.setStyle([makeStyle(fillColor), makeLabelStyle(val.block.bkNm)]);
+	    			});
+	    		}
+	    	});
+	    }
+	});
 });
+
+
 </script>

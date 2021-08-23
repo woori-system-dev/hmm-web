@@ -65,10 +65,6 @@
 	<script src="${contextName}/js/common/highcharts/lineChart.js" type="text/javascript"></script>
 	<script src="${contextName}/js/common/highcharts/pieChart.js" type="text/javascript"></script>
 	
-	<!-- Custom Charts Resources -->
-	<script src="${contextName}/js/common/map.js" type="text/javascript"></script>
-	<script src="${contextName}/js/common/table.js" type="text/javascript"></script>
-	
 	<!-- moment Resources -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 	<script src="//cdn.jsdelivr.net/momentjs/latest/moment-with-locales.min.js" type="text/javascript"></script>
@@ -77,4 +73,9 @@
 	<link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
 	<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
 	<script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
+	
+	<!-- Custom Charts Resources -->
+	<script src="${contextName}/js/common/map.js" type="text/javascript"></script>
+	<script src="${contextName}/js/common/table.js" type="text/javascript"></script>
+	<script src="${contextName}/js/common/ko.js" type="text/javascript"></script>
 </head>

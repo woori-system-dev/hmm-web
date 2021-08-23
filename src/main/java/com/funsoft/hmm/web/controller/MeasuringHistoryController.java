@@ -50,29 +50,13 @@ public class MeasuringHistoryController {
 	}
 
 	/**
-	 * 계측 이력 조회 화면
-	 * 
-	 * @param model
-	 * @param blockInfo
-	 * @return
-	 */
-	@PostMapping(value = "/list")
-	public String listWithPost(Model model, BlockInfo blockInfo) {
-		model.addAttribute("blockInfo", blockInfo);
-		model.addAttribute("blockList", blockSmallService.getList());
-		model.addAttribute("currentTime", dateFormat.format(new Date()));
-
-		return "measurement/detail";
-	}
-
-	/**
 	 * 계측 이력 조회
 	 * @param param
 	 * @return
 	 */
-	@PostMapping(value = "/history")
+	@PostMapping(value = "/search")
 	@ResponseBody
-	public List<MeasuringHistory> history(@RequestBody SearchParam param) {
+	public List<MeasuringHistory> search(@RequestBody SearchParam param) {
 		return historyInfoService.createMeasuringHistory(param.getDateTime());
 	}
 

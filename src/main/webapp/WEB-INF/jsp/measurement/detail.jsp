@@ -272,121 +272,124 @@
 </div>
 
 <script>
-$("#startDatePicker").datetimepicker({
-	todayHighlight: true,
-	autoclose: true,
-	format: "yyyy-mm-dd hh:ii:00",
-});
-
-$("#endDatePicker").datetimepicker({
-	todayHighlight: true,
-	autoclose: true,
-	format: "yyyy-mm-dd hh:ii:00",
-});
-
-var table = {
-	data: {
-		type: "remote",
-		source: {
-			read: {
-				url: contextPath + "/measurement/searchResult"
-			}
-		}
-	},
-	layout: {
-		theme: "default",
-		scroll: true,
-		height: 400,
-		footer: false
-	},
-	sortable: false,
-	pagination: false,
-	columns: [{
-		field: "dateTime",
-		title: "시간",
-		width: 150,
-		textAlign: "center",
-		template: function(data) {
-			return '<span>' + data.dateTime + '</span>';
-		}
-	},{
-		field: "pressure",
-		title: "수압",
-		width: 60,
-		textAlign: "center"
-	},{
-		field: "flow",
-		title: "순시유량",
-		textAlign: "center"
-	},{
-		field: "sumFlowString",
-		title: "적산유량",
-		textAlign: "center"
-	},{
-		field: "",
-		title: "수압알람",
-		textAlign: "center"
-	},{
-		field: "",
-		title: "기기이상",
-		textAlign: "center"
-	},{
-		field: "",
-		title: "누수추정",
-		textAlign: "center"
-	}]
-}
-
-function setHistoryInfo(blockId, startDate, endDate) {
-	$("#m_datatable").mDatatable("destroy");
-	
-	var param = new Object();
-	param.blockId = blockId;
-	param.startDate = startDate;
-	param.endDate = endDate;
-	
-	table.data.source.read.params = {"blockId": blockId, "startDate": startDate, "endDate": endDate}
-	$("#m_datatable").mDatatable(table); 
-	
-	$.ajax({
-		url: contextPath + "/measurement/detail",
-		type: "post",
-		data: JSON.stringify(param),
-		contentType: "application/json",
-		success: function(detail) {
-			$("#select_block").text(detail.blockInfo.bkNm);
-			$("#realtime_block").text(detail.blockInfo.bkNm);
-			
-			$("#realtime_datetime").text(detail.realTimeMonitoring.dateTime);
-			$("#realtime_pressure").text(detail.realTimeMonitoring.pressure);
-			$("#realtime_flow").text(detail.realTimeMonitoring.flow);
-			
-			$("#sum_flow").text(detail.sumFlow);
-			
-			$("#min_pressure").text(detail.minPressure);
-			$("#max_pressure").text(detail.maxPressure);
-			$("#avg_pressure").text(detail.avgPressure);
-			
-			$("#min_flow").text(detail.minFlow);
-			$("#max_flow").text(detail.maxFlow);
-			$("#avg_flow").text(detail.avgFlow);
-			
-			var highChart = makeMeasurementDualHighChart("dualChartdiv", detail.highChartInfo);
-			if (detail.highChartInfo.categories.length == 0) {
-				highChart.destroy();
-			}
-			
-			makeMeasurementDualAmChart("detailChartdiv", detail.amChartInfo);
-		}
-	});
-} 
+moment.locale("ko");
 
 $(function() {
-	setHistoryInfo("${blockInfo.flctcFm}", "${blockInfo.dateTime}");
-});
+	$("#startDatePicker").datetimepicker({
+		todayHighlight: true,
+		autoclose: true,
+		format: "yyyy-mm-dd hh:ii:00",
+		locale: moment.locale("ko")
+	});
 
-$("#measurementSearch").click(function() {
-	var blockId= $("#blockSelect option:selected").val();
-	setHistoryInfo(blockId, $("#startDatePicker").val(), $("#endDatePicker").val());
+	$("#endDatePicker").datetimepicker({
+		todayHighlight: true,
+		autoclose: true,
+		format: "yyyy-mm-dd hh:ii:00",
+	});
+
+	var table = {
+		data: {
+			type: "remote",
+			source: {
+				read: {
+					url: contextPath + "/measurement/searchResult"
+				}
+			}
+		},
+		layout: {
+			theme: "default",
+			scroll: true,
+			height: 400,
+			footer: false
+		},
+		sortable: false,
+		pagination: false,
+		columns: [{
+			field: "dateTime",
+			title: "시간",
+			width: 150,
+			textAlign: "center",
+			template: function(data) {
+				return '<span>' + data.dateTime + '</span>';
+			}
+		},{
+			field: "pressure",
+			title: "수압",
+			width: 60,
+			textAlign: "center"
+		},{
+			field: "flow",
+			title: "순시유량",
+			textAlign: "center"
+		},{
+			field: "sumFlowString",
+			title: "적산유량",
+			textAlign: "center"
+		},{
+			field: "",
+			title: "수압알람",
+			textAlign: "center"
+		},{
+			field: "",
+			title: "기기이상",
+			textAlign: "center"
+		},{
+			field: "",
+			title: "누수추정",
+			textAlign: "center"
+		}]
+	}
+
+	function setHistoryInfo(blockId, startDate, endDate) {
+		$("#m_datatable").mDatatable("destroy");
+		
+		var param = new Object();
+		param.blockId = blockId;
+		param.startDate = startDate;
+		param.endDate = endDate;
+		
+		table.data.source.read.params = {"blockId": blockId, "startDate": startDate, "endDate": endDate}
+		$("#m_datatable").mDatatable(table); 
+		
+		$.ajax({
+			url: contextPath + "/measurement/detail",
+			type: "post",
+			data: JSON.stringify(param),
+			contentType: "application/json",
+			success: function(detail) {
+				$("#select_block").text(detail.blockInfo.bkNm);
+				$("#realtime_block").text(detail.blockInfo.bkNm);
+				
+				$("#realtime_datetime").text(detail.realTimeMonitoring.dateTime);
+				$("#realtime_pressure").text(detail.realTimeMonitoring.pressure);
+				$("#realtime_flow").text(detail.realTimeMonitoring.flow);
+				
+				$("#sum_flow").text(detail.sumFlow);
+				
+				$("#min_pressure").text(detail.minPressure);
+				$("#max_pressure").text(detail.maxPressure);
+				$("#avg_pressure").text(detail.avgPressure);
+				
+				$("#min_flow").text(detail.minFlow);
+				$("#max_flow").text(detail.maxFlow);
+				$("#avg_flow").text(detail.avgFlow);
+				
+				var highChart = makeMeasurementDualHighChart("dualChartdiv", detail.highChartInfo);
+				if (detail.highChartInfo.categories.length == 0) {
+					highChart.destroy();
+				}
+				
+				makeMeasurementDualAmChart("detailChartdiv", detail.amChartInfo);
+			}
+		});
+	} 
+	
+	setHistoryInfo("${blockInfo.flctcFm}", "${blockInfo.dateTime}");
+
+	$("#measurementSearch").click(function() {
+		var blockId= $("#blockSelect option:selected").val();
+		setHistoryInfo(blockId, $("#startDatePicker").val(), $("#endDatePicker").val());
+	});
 });
 </script>

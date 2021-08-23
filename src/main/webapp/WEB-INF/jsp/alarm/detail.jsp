@@ -270,118 +270,119 @@
 </div>
 
 <script>
-$("#startDatePicker").daterangepicker({
-	startDate: moment(),
-	singleDatePicker: true,
-	showDropdowns: true,
-	locale: {
-		format: 'YYYY-MM-DD',
-		daysOfWeek: [
-			"일","월","화","수","목","금","토"
-      	]
-	}
-}); 
-
-$("#endDatePicker").daterangepicker({
-	startDate: moment(),
-	singleDatePicker: true,
-	showDropdowns: true,
-	locale: {
-	  	format: 'YYYY-MM-DD',
-	  	daysOfWeek: [
-			"일","월","화","수","목","금","토"
-      	]
-	}
-}); 
-
-var table = {
-	data: {
-		type: "remote",
-		source: {
-			read : {
-				url: contextPath + "/alarm/searchResult",
-			}
-		}
-	},
-	layout: {
-		theme: "default",
-		scroll: true,
-		height: 400,
-		footer: false
-	},
-	sortable: false,
-	pagination: false,
-	columns: [{
-		field: "startTime",
-		title: "시작시간",
-		textAlign: "center"
-	},{
-		field: "endTime",
-		title: "종료시간",
-		textAlign: "center"
-	},{
-		field: "alarmType",
-		title: "알람타입",
-		textAlign: "center"
-	},{
-		field: "step",
-		title: "단계",
-		textAlign: "center"
-	},{
-		field: "durationTime",
-		title: "지속시간",
-		textAlign: "center"
-	}]
-}
-
-function setAlarmHistoryInfo(blockId, startDate, endDate) {
-	$("#m_datatable").mDatatable("destroy");
-	
-	var param = new Object();
-	param.blockId = blockId;
-	param.startDate = startDate;
-	param.endDate = endDate;
-	param.pressure = $("#pressureCheck").is(":checked");
-	param.openDoor = $("#openDoorCheck").is(":checked");
-	param.deviceError = $("#deviceErrorCheck").is(":checked");
-	
-	$("#m_datatable").mDatatable(table); 
-	
-	$.ajax({
-		url: contextPath + "/alarm/detail",
-		type: "post",
-		data: JSON.stringify(param),
-		contentType: "application/json",
-		success: function(detail) {
-			$("#select_block").text(detail.blockInfo.bkNm);
-			$("#realtime_block").text(detail.blockInfo.bkNm);
-			
-			$("#realtime_datetime").text(detail.realTimeMonitoring.dateTime);
-			$("#realtime_pressure").text(detail.realTimeMonitoring.pressure);
-			$("#realtime_flow").text(detail.realTimeMonitoring.flow);
-			
-			$("#alarmType").text(detail.alarmType);
-			$("#durationTime").text(detail.durationTime + "분");
-			$("#total").text(detail.total + " 건");
-			$("#highPressureWarning").text(detail.highPressureWarning + " 건");
-			$("#highPressureCaution").text(detail.highPressureCaution + " 건");
-			$("#lowPressureWarning").text(detail.lowPressureWarning + " 건");
-			$("#lowPressureCaution").text(detail.lowPressureCaution + " 건");
-			$("#openDoor").text(detail.openDoor + " 건");
-			$("#deviceError").text(detail.deviceError + " 건");
-			
-			var ganttChart = makeGanttChart("ganttChartdiv");
-			var pieChart = makePieChart("pieChartdiv");
-		}
-	});
-}
-
 $(function() {
-	setAlarmHistoryInfo("${blockInfo.flctcFm}", "${blockInfo.dateTime}");
-});
+	$("#startDatePicker").daterangepicker({
+		startDate: moment(),
+		singleDatePicker: true,
+		showDropdowns: true,
+		locale: {
+			format: 'YYYY-MM-DD',
+			daysOfWeek: [
+				"일","월","화","수","목","금","토"
+	      	]
+		}
+	}); 
 
-$("#alarmHistorySearch").click(function() {
-	var blockId= $("#blockSelect option:selected").val();
-	setAlarmHistoryInfo(blockId, $("#startDatePicker").val(), $("#endDatePicker").val());
+	$("#endDatePicker").daterangepicker({
+		startDate: moment(),
+		singleDatePicker: true,
+		showDropdowns: true,
+		locale: {
+		  	format: 'YYYY-MM-DD',
+		  	daysOfWeek: [
+				"일","월","화","수","목","금","토"
+	      	]
+		}
+	}); 
+
+	var table = {
+		data: {
+			type: "remote",
+			source: {
+				read : {
+					url: contextPath + "/alarm/searchResult",
+				}
+			}
+		},
+		layout: {
+			theme: "default",
+			scroll: true,
+			height: 400,
+			footer: false
+		},
+		sortable: false,
+		pagination: false,
+		columns: [{
+			field: "startTime",
+			title: "시작시간",
+			textAlign: "center"
+		},{
+			field: "endTime",
+			title: "종료시간",
+			textAlign: "center"
+		},{
+			field: "alarmType",
+			title: "알람타입",
+			textAlign: "center"
+		},{
+			field: "step",
+			title: "단계",
+			textAlign: "center"
+		},{
+			field: "durationTime",
+			title: "지속시간",
+			textAlign: "center"
+		}]
+	}
+
+	function setAlarmHistoryInfo(blockId, startDate, endDate) {
+		$("#m_datatable").mDatatable("destroy");
+
+		var param = new Object();
+		param.blockId = blockId;
+		param.startDate = startDate;
+		param.endDate = endDate;
+		param.pressure = $("#pressureCheck").is(":checked");
+		param.openDoor = $("#openDoorCheck").is(":checked");
+		param.deviceError = $("#deviceErrorCheck").is(":checked");
+
+		table.data.source.read.params = param;
+		$("#m_datatable").mDatatable(table); 
+		
+		$.ajax({
+			url: contextPath + "/alarm/detail",
+			type: "post",
+			data: JSON.stringify(param),
+			contentType: "application/json",
+			success: function(detail) {
+				$("#select_block").text(detail.blockInfo.bkNm);
+				$("#realtime_block").text(detail.blockInfo.bkNm);
+				
+				$("#realtime_datetime").text(detail.realTimeMonitoring.dateTime);
+				$("#realtime_pressure").text(detail.realTimeMonitoring.pressure);
+				$("#realtime_flow").text(detail.realTimeMonitoring.flow);
+				
+				$("#alarmType").text(detail.alarmType);
+				$("#durationTime").text(detail.durationTime + "분");
+				$("#total").text(detail.total + " 건");
+				$("#highPressureWarning").text(detail.highPressureWarning + " 건");
+				$("#highPressureCaution").text(detail.highPressureCaution + " 건");
+				$("#lowPressureWarning").text(detail.lowPressureWarning + " 건");
+				$("#lowPressureCaution").text(detail.lowPressureCaution + " 건");
+				$("#openDoor").text(detail.openDoor + " 건");
+				$("#deviceError").text(detail.deviceError + " 건");
+				
+				var ganttChart = makeGanttChart("ganttChartdiv");
+				var pieChart = makePieChart("pieChartdiv");
+			}
+		});
+	}
+	
+	setAlarmHistoryInfo("${blockInfo.flctcFm}", "${blockInfo.dateTime}");
+
+	$("#alarmHistorySearch").click(function() {
+		var blockId= $("#blockSelect option:selected").val();
+		setAlarmHistoryInfo(blockId, $("#startDatePicker").val(), $("#endDatePicker").val());
+	});
 });
 </script>

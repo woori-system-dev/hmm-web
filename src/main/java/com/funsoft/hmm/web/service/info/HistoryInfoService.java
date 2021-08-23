@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.funsoft.hmm.web.common.DateUtil;
 import com.funsoft.hmm.web.domain.AlarmHistory;
 import com.funsoft.hmm.web.domain.AlarmHistoryDetail;
+import com.funsoft.hmm.web.domain.AlarmHistoryTable;
 import com.funsoft.hmm.web.domain.BlockInfo;
 import com.funsoft.hmm.web.domain.MeasuringHistory;
 import com.funsoft.hmm.web.domain.MeasuringHistoryDetail;
@@ -189,8 +190,34 @@ public class HistoryInfoService {
 		return blockInfo;
 	}
 	
+	public List<AlarmHistoryTable> getAlarmHistoryList(AlarmSearchParam param) {
+		List<AlarmHistoryTable> results;
+		if (param.getEndDate() == null) {
+		} else {
+		}
+		
+		List<AlarmHistoryTable> result = new ArrayList<>();
+		result.add(new AlarmHistoryTable("2018년 4월 26일 15:13", "2018년 4월 26일 15:14", "고수압", "주의", "1분"));
+		result.add(new AlarmHistoryTable("2018년 4월 26일 15:12", "2018년 4월 26일 15:13", "고수압", "경고", "1분"));
+		result.add(new AlarmHistoryTable("2018년 4월 26일 15:11", "2018년 4월 26일 15:12", "고수압", "주의", "1분"));
+		result.add(new AlarmHistoryTable("2018년 4월 26일 15:10", "2018년 4월 26일 15:11", "고수압", "경고", "1분"));
+		result.add(new AlarmHistoryTable("2018년 4월 26일 15:09", "2018년 4월 26일 15:10", "고수압", "주의", "1분"));
+		result.add(new AlarmHistoryTable("2018년 4월 26일 15:08", "2018년 4월 26일 15:09", "고수압", "경고", "1분"));
+		result.add(new AlarmHistoryTable("2018년 4월 26일 15:07", "2018년 4월 26일 15:08", "고수압", "주의", "1분"));
+		result.add(new AlarmHistoryTable("2018년 4월 26일 15:06", "2018년 4월 26일 15:07", "고수압", "경고", "1분"));
+		result.add(new AlarmHistoryTable("2018년 4월 26일 15:05", "2018년 4월 26일 15:06", "고수압", "주의", "1분"));
+		return result;
+	}
+	
+	/**
+	 * 알람 이력 상세 정보
+	 * 
+	 * @param param
+	 * @return
+	 */
 	public AlarmHistoryDetail createAlarmHistoryDetail(AlarmSearchParam param) {
 		AlarmHistoryDetail detail = new AlarmHistoryDetail();
+		
 		BlockSmall blockSmall = blockSmallService.get(param.getBlockId());
 		detail.setBlockInfo(new BlockInfo(blockSmall.getBkNm()));
 		detail.setRealTimeMonitoring(new RealTimeMonitoring(detail.getBlockInfo().getBkNm(), 

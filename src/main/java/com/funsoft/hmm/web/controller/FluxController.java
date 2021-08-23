@@ -34,6 +34,13 @@ public class FluxController {
 		model.addAttribute("blockList", blockSmallService.getList());
 	}
 
+	/**
+	 * 총괄수량수지분석
+	 * @param startDate
+	 * @param endDate
+	 * @param checkList
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/colligation/search", method = RequestMethod.GET)
 	public String colligationSearch(String startDate, String endDate,

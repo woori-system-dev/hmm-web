@@ -49,7 +49,7 @@
 						<div class="row">
 							<div class="input-group">
 								<div style="padding:6px 15px 0 0;font-weight:900">시작</div> 
-								<input type='text' class="form-control m-input" name="date" placeholder="months" id="startDatePicker"/>
+								<input type="text" class="form-control m-input" name="date" placeholder="months" id="startDatePicker"/>
 								<div class="input-group-append">
 									<span class="input-group-text">
 										<i class="la la-calendar-check-o"></i>
@@ -86,7 +86,7 @@
 							</div>
 						</div>
 						<div class="text-center mt-30">
-							<button type="button" class="btn btn-success m-btn--wide" onclick="search()">
+							<button type="button" id="searchBtn" class="btn btn-success m-btn--wide">
 								<i class="fa fa-search"></i> 검 색
 							</button>
 						</div>
@@ -415,251 +415,252 @@
 
 
 <script>
+$(function() {
+	$("#startDatePicker").datepicker({
+		minViewMode: "months",
+		autoApply: true,
+		autoclose: true,
+		orientation:"Bottom left",
+		format:"yyyy-mm",
+	});
 
-$('#startDatePicker').datepicker({
-	minViewMode: "months",
-	autoApply: true,
-	autoclose: true,
-	orientation:"Bottom left",
-	format:"yyyy-mm",
-});
-$('#endDatePicker').datepicker({
-	minViewMode: "months",
-	autoApply: true,
-	autoclose: true,
-	orientation:"Bottom left",
-	format:"yyyy-mm",
-});
+	$("#endDatePicker").datepicker({
+		minViewMode: "months",
+		autoApply: true,
+		autoclose: true,
+		orientation:"Bottom left",
+		format:"yyyy-mm",
+	});
 
-function checkBox(){
-	var checkbox = document.getElementsByName('checkbox');
-	var checkboxLength = checkbox.length;
-	if ($('#checkBoxAll').is(":checked")){
-		for(var i=0; i<checkboxLength; i++){
-			checkbox[i].checked = true;
-		}
-	} else{
-		for(var i=0; i<checkboxLength; i++){
-			checkbox[i].checked = false;
-		}
-	}
-} 
+	const d = new Date();
 
-function search(){
-	
-	var startDate = $('#startDatePicker').val();
-	var endDate = $('#endDatePicker').val();
-	if (startDate == '') {
-		alert("시작 날짜를 선택하세요.");
-		return;
-	}
-	if (endDate == '') {
-		alert("종료 날짜를 선택하세요.");
-		return;
-	}
-	if (startDate > endDate) {
-		alert("날짜 범위를 잘못 선택하세요.");
-		return;
-	}
-	var checkbox = document.getElementsByName('checkbox');
-	var checkboxLength = checkbox.length;
-	var checkList = [];
-	for(var i=0; i<checkboxLength; i++){
-		if(checkbox[i].checked){
-			checkList.push(checkbox[i].value);
-		}
-	}
-	
-	setColligation(checkList, $('#startDatePicker').val(), $('#endDatePicker').val() );
-}
+	$("#startDatePicker").datepicker("setDate", new Date(d.getFullYear(), d.getMonth() - 1, d.getDate()));
+	$("#endDatePicker").datepicker("setDate", new Date());
 
-
-var gaugeChart2 = AmCharts.makeChart("gaugeChart2", {
-	"type": "gauge",
- 	"theme": "light",
-  	"axes": [{
-	    "axisAlpha": 0,
-	    "tickAlpha": 0,
-	    "labelsEnabled": false,
-	    "startValue": 0,
-	    "endValue": 100,
-	    "startAngle": 0,
-	    "endAngle": 360,
-	    "bands": [{
-		    "color": "#383838",
-		    "startValue": 0,
-		    "endValue": 100,
-		    "radius": "100%",
-		    "innerRadius": "75%",
-		    "bandAlpha":0
-	    },{
-		    "color": "#FF0000",
-		    "startValue": 0,
-		    "endValue": 100,
-		    "radius": "100%",
-		    "innerRadius": "75%"
-	    }
-	  	]}
-  	],
-	"allLabels": [{
-		"text": "100",
-	  	"x": "45.5%",
-	  	"y": "41%",
-	  	"size": 15,
-	  	"bold": true,
-	  	"color": "#383838"
-	}],
-	"creditsPosition" : "bottom-left"
-});
-
-var gaugeChart3 = AmCharts.makeChart("gaugeChart3", {
-	"type": "gauge",
- 	"theme": "light",
-  	"axes": [{
-	    "axisAlpha": 0,
-	    "tickAlpha": 0,
-	    "labelsEnabled": false,
-	    "startValue": 0,
-	    "endValue": 100,
-	    "startAngle": 0,
-	    "endAngle": 360,
-	    "bands": [{
-		    "color": "#383838",
-		    "startValue": 0,
-		    "endValue": 100,
-		    "radius": "100%",
-		    "innerRadius": "75%",
-		    "bandAlpha":0
-	    },{
-		    "color": "#FFFFFF",
-		    "startValue": 0,
-		    "endValue": 0,
-		    "radius": "100%",
-		    "innerRadius": "75%"
-	    }
-	  	]}
-  	],
-	"allLabels": [{
-		"text": "0",
-	  	"x": "48%",
-	  	"y": "41%",
-	  	"size": 15,
-	  	"bold": true,
-	  	"color": "#383838"
-	}],
-	"creditsPosition" : "bottom-left"
-});
-
-var table = {
-	data: {
-		type: "remote",
-		source: {
-			read : {
-				url: contextPath + "/alarm/searchResult",
+	function checkBox() {
+		var checkbox = document.getElementsByName('checkbox');
+		var checkboxLength = checkbox.length;
+		if ($('#checkBoxAll').is(":checked")){
+			for(var i = 0; i < checkboxLength; i++){
+				checkbox[i].checked = true;
+			}
+		} else{
+			for(var i=0; i<checkboxLength; i++){
+				checkbox[i].checked = false;
 			}
 		}
-	},
-	layout: {
-		theme: "default",
-		scroll: true,
-		height: 310,
-		footer: false
-	},
-	sortable: false,
-	pagination: false,
-	columns: [{
-		field: "startTime",
-		title: "블록명",
-		textAlign: "center"
-	},{
-		field: "endTime",
-		title: "기간",
-		textAlign: "center"
+	}
 
-	},{
-		field: "alarmType",
-		title: "총공급량",
-		textAlign: "center"
-	},{
-		field: "step",
-		title: "유수수량",
-		textAlign: "center"
-	},{
-		field: "durationTime",
-		title: "무수수량",
-		textAlign: "center"
-	},{
-		field: "durationTime",
-		title: "누수량",
-		textAlign: "center"
-	},{
-		field: "durationTime",
-		title: "유수율",
-		textAlign: "center"
-	}]
-}
-
-function setColligation(checkList, startDate, endDate) {
-	$("#m_datatable").mDatatable("destroy");
-	
-	$("#m_datatable").mDatatable(table); 
-	
-	var data = {"startDate":startDate, "endDate":endDate, "checkList":checkList};
-	
-	$.ajax({
-		url: "/hmm-web/flux/colligation/search",
-		type: "get",
-		dataType: "json",
-		data: data,
-		success: function(data) {
-			console.log("ajax : "+data);
+	$("#searchBtn").click(function() {
+		var startDate = $('#startDatePicker').val();
+		var endDate = $('#endDatePicker').val();
+		
+		if (startDate == '') {
+			alert("시작 날짜를 선택하세요.");
+			return;
 		}
+		if (endDate == '') {
+			alert("종료 날짜를 선택하세요.");
+			return;
+		}
+		if (startDate > endDate) {
+			alert("날짜 범위를 잘못 선택하세요.");
+			return;
+		}
+		
+		var checkbox = document.getElementsByName('checkbox');
+		var checkboxLength = checkbox.length;
+		var checkList = [];
+		
+		for (var i = 0; i < checkboxLength; i++){
+			if (checkbox[i].checked) {
+				checkList.push(checkbox[i].value);
+			}
+		}
+		
+		setColligation(checkList, $('#startDatePicker').val(), $('#endDatePicker').val() );
 	});
-	/* $.ajax({
-		url: contextPath + "/alarm/detail",
-		type: "post",
-		data: JSON.stringify(param),
-		contentType: "application/json",
-		success: function(detail) {
-			$("#select_block").text(detail.blockInfo.bkNm);
-			$("#realtime_block").text(detail.blockInfo.bkNm);
-			
-			$("#realtime_datetime").text(detail.realTimeMonitoring.dateTime);
-			$("#realtime_pressure").text(detail.realTimeMonitoring.pressure);
-			$("#realtime_flow").text(detail.realTimeMonitoring.flow);
-			
-			$("#alarmType").text(detail.alarmType);
-			$("#durationTime").text(detail.durationTime + "분");
-			$("#total").text(detail.total + " 건");
-			$("#highPressureWarning").text(detail.highPressureWarning + " 건");
-			$("#highPressureCaution").text(detail.highPressureCaution + " 건");
-			$("#lowPressureWarning").text(detail.lowPressureWarning + " 건");
-			$("#lowPressureCaution").text(detail.lowPressureCaution + " 건");
-			$("#openDoor").text(detail.openDoor + " 건");
-			$("#deviceError").text(detail.deviceError + " 건");
-			
-			var ganttChart = makeGanttChart("ganttChartdiv");
-			var pieChart = makePieChart("pieChartdiv");
-		}
-	}); */
-}
 
- 
-//  시작 할때 테이블 호출 부분
-$(function() {
+	var gaugeChart2 = AmCharts.makeChart("gaugeChart2", {
+		"type": "gauge",
+	 	"theme": "light",
+	  	"axes": [{
+		    "axisAlpha": 0,
+		    "tickAlpha": 0,
+		    "labelsEnabled": false,
+		    "startValue": 0,
+		    "endValue": 100,
+		    "startAngle": 0,
+		    "endAngle": 360,
+		    "bands": [{
+			    "color": "#383838",
+			    "startValue": 0,
+			    "endValue": 100,
+			    "radius": "100%",
+			    "innerRadius": "75%",
+			    "bandAlpha":0
+		    },{
+			    "color": "#FF0000",
+			    "startValue": 0,
+			    "endValue": 100,
+			    "radius": "100%",
+			    "innerRadius": "75%"
+		    }
+		  	]}
+	  	],
+		"allLabels": [{
+			"text": "50",
+		  	"x": "45.5%",
+		  	"y": "41%",
+		  	"size": 15,
+		  	"bold": true,
+		  	"color": "#383838"
+		}],
+		"creditsPosition" : "bottom-left"
+	});
+
+	var gaugeChart3 = AmCharts.makeChart("gaugeChart3", {
+		"type": "gauge",
+	 	"theme": "light",
+	  	"axes": [{
+		    "axisAlpha": 0,
+		    "tickAlpha": 0,
+		    "labelsEnabled": false,
+		    "startValue": 0,
+		    "endValue": 100,
+		    "startAngle": 0,
+		    "endAngle": 360,
+		    "bands": [{
+			    "color": "#383838",
+			    "startValue": 0,
+			    "endValue": 100,
+			    "radius": "100%",
+			    "innerRadius": "75%",
+			    "bandAlpha":0
+		    },{
+			    "color": "#FFFFFF",
+			    "startValue": 0,
+			    "endValue": 0,
+			    "radius": "100%",
+			    "innerRadius": "75%"
+		    }
+		  	]}
+	  	],
+		"allLabels": [{
+			"text": "0",
+		  	"x": "48%",
+		  	"y": "41%",
+		  	"size": 15,
+		  	"bold": true,
+		  	"color": "#383838"
+		}],
+		"creditsPosition" : "bottom-left"
+	});
+
+	var table = {
+		data: {
+			type: "remote",
+			source: {
+				read : {
+					url: contextPath + "/alarm/searchResult",
+				}
+			}
+		},
+		layout: {
+			theme: "default",
+			scroll: true,
+			height: 310,
+			footer: false
+		},
+		sortable: false,
+		pagination: false,
+		columns: [{
+			field: "startTime",
+			title: "블록명",
+			textAlign: "center"
+		},{
+			field: "endTime",
+			title: "기간",
+			textAlign: "center"
+
+		},{
+			field: "alarmType",
+			title: "총공급량",
+			textAlign: "center"
+		},{
+			field: "step",
+			title: "유수수량",
+			textAlign: "center"
+		},{
+			field: "durationTime",
+			title: "무수수량",
+			textAlign: "center"
+		},{
+			field: "durationTime",
+			title: "누수량",
+			textAlign: "center"
+		},{
+			field: "durationTime",
+			title: "유수율",
+			textAlign: "center"
+		}]
+	}
+
+	function setColligation(checkList, startDate, endDate) {
+		$("#m_datatable").mDatatable("destroy");
+		$("#m_datatable").mDatatable(table); 
+		
+		var data = {"startDate":startDate, "endDate":endDate, "checkList":checkList};
+
+		$.ajax({
+			url: contextPath + "/flux/colligation/search",
+			type: "get",
+			dataType: "json",
+			data: data,
+			success: function(data) {
+				console.log("ajax : " + data);
+			}
+		});
+		/* $.ajax({
+			url: contextPath + "/alarm/detail",
+			type: "post",
+			data: JSON.stringify(param),
+			contentType: "application/json",
+			success: function(detail) {
+				$("#select_block").text(detail.blockInfo.bkNm);
+				$("#realtime_block").text(detail.blockInfo.bkNm);
+				
+				$("#realtime_datetime").text(detail.realTimeMonitoring.dateTime);
+				$("#realtime_pressure").text(detail.realTimeMonitoring.pressure);
+				$("#realtime_flow").text(detail.realTimeMonitoring.flow);
+				
+				$("#alarmType").text(detail.alarmType);
+				$("#durationTime").text(detail.durationTime + "분");
+				$("#total").text(detail.total + " 건");
+				$("#highPressureWarning").text(detail.highPressureWarning + " 건");
+				$("#highPressureCaution").text(detail.highPressureCaution + " 건");
+				$("#lowPressureWarning").text(detail.lowPressureWarning + " 건");
+				$("#lowPressureCaution").text(detail.lowPressureCaution + " 건");
+				$("#openDoor").text(detail.openDoor + " 건");
+				$("#deviceError").text(detail.deviceError + " 건");
+				
+				var ganttChart = makeGanttChart("ganttChartdiv");
+				var pieChart = makePieChart("pieChartdiv");
+			}
+		}); */
+	}
 	
 	var checkbox = document.getElementsByName('checkbox');
 	var checkboxLength = checkbox.length;
 	var checkList = [];
-	for(var i=0; i<checkboxLength; i++){
-		if(checkbox[i].checked){
+	for (var i = 0; i < checkboxLength; i++){
+		if (checkbox[i].checked){
 			checkList.push(checkbox[i].value);
 		}
 	}
 	
 	setColligation(checkList, $('#startDatePicker').val(), $('#endDatePicker').val() );
 });
-
 
 /* var e = JSON.parse('[{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"},{ "RecordID": "소블록A","OrderID": "2015년 4월","ShipCountry": "227,487","ShipCity": "0","ShipName": "0","ShipAddress": "0","CompanyEmail": "0","CompanyAgent": "0"}]');
 

@@ -17,7 +17,6 @@ import com.funsoft.hmm.web.domain.AlarmHistoryTable;
 import com.funsoft.hmm.web.domain.BlockInfo;
 import com.funsoft.hmm.web.domain.param.AlarmSearchParam;
 import com.funsoft.hmm.web.service.BlockSmallService;
-import com.funsoft.hmm.web.service.info.DummyTestService;
 import com.funsoft.hmm.web.service.info.HistoryInfoService;
 
 /**
@@ -36,9 +35,6 @@ public class AlarmHistoryController {
 	@Autowired
 	private HistoryInfoService historyInfoService;
 
-	@Autowired
-	private DummyTestService dummyTestService;
-
 	/**
 	 * 알람 이력 화면
 	 * 
@@ -49,17 +45,15 @@ public class AlarmHistoryController {
 	}
 
 	/**
-	 * 알람 이력 조회 화면
+	 * 알람 이력 상세 정보 화면
 	 * 
 	 * @param model
 	 * @param blockInfo
-	 * @return
 	 */
-	@PostMapping(value = "/list")
-	public String listWithPost(Model model, BlockInfo blockInfo) {
+	@GetMapping(value = "/detail")
+	public void detail(Model model, BlockInfo blockInfo) {
 		model.addAttribute("blockInfo", blockInfo);
 		model.addAttribute("blockList", blockSmallService.getList());
-		return "alarm/detail";
 	}
 
 	/**
@@ -68,9 +62,9 @@ public class AlarmHistoryController {
 	 * @param date
 	 * @return
 	 */
-	@PostMapping(value = "/history")
+	@PostMapping(value = "/search")
 	@ResponseBody
-	public List<AlarmHistory> history(String date) {
+	public List<AlarmHistory> search(String date) {
 		return historyInfoService.createAlarmHistory(date);
 	}
 
@@ -86,10 +80,15 @@ public class AlarmHistoryController {
 		return historyInfoService.getBlockInfo(history);
 	}
 
+	/**
+	 * 알람 이력 정보 조회
+	 * 
+	 * @return
+	 */
 	@PostMapping(value = "/searchResult")
 	@ResponseBody
-	public List<AlarmHistoryTable> searchResult() {
-		return dummyTestService.createAlarmHistoryInfoList();
+	public List<AlarmHistoryTable> searchResult(AlarmSearchParam param) {
+		return historyInfoService.getAlarmHistoryList(param);
 	}
 
 	/**
