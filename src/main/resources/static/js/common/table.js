@@ -42,6 +42,16 @@ var Datatables = {
 	    
 	    return table;
 	},
+	scroll: function(id, tableOption, info) {
+		var table = $(id).DataTable({
+			columns: tableOption.columns,
+		    scrollY: "300px",
+	        scrollCollapse: true,
+	        paging: false
+		});
+		
+		return table;
+	},
 	rowsAdd: function(table, url, param) {
 		table.clear().draw();
 		

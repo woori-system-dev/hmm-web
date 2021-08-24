@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.funsoft.hmm.web.domain.RealTimeAnalysis;
 import com.funsoft.hmm.web.domain.db.CompositePK;
@@ -30,6 +31,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
  *
  */
 @Service
+@Transactional
 public class RealTimeMeasurementServiceImpl implements RealTimeMeasurementService {
 	
 	@Autowired
@@ -76,36 +78,43 @@ public class RealTimeMeasurementServiceImpl implements RealTimeMeasurementServic
 		return !realTimeMeasurementRepository.existsById(new CompositePK(domain.getDatetime(), domain.getBkFlctcFm()));
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public RealTimeMeasurement getRecentData(long blockId) {
 		return realTimeMeasurementRepository.getRecentData(blockId);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public RealTimeMeasurement getRecentData(long blockId, String dateTime) {
 		return realTimeMeasurementRepository.getRecentData(blockId, dateTime);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<RealTimeMeasurement> getList(long blockId, String dateTime) {
 		return realTimeMeasurementRepository.findByBkFlctcFmAndDateAndRownum(blockId, dateTime, 10);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<RealTimeMeasurement> getList(long blockId, String startDate, String endDate) {
 		return realTimeMeasurementRepository.findByBkFlctcFmAndBetween(blockId, startDate, endDate);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public RealTimeMeasurement get(long blockId, Date date) {
 		return realTimeMeasurementRepository.findByBkFlctcFmAndDatetime(blockId, date);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<RealTimeMeasurement> findByBkFlctcFmAndDate(long blockId, String date) {
 		return realTimeMeasurementRepository.findByBkFlctcFmAndDate(blockId, date);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<RealTimeAnalysis> findByGroupBy(long blockId, String startDate, String endDate) {
 		JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);

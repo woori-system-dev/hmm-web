@@ -1,10 +1,13 @@
 package com.funsoft.hmm.web.domain.db;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.funsoft.hmm.web.domain.Domain;
 import com.funsoft.hmm.web.domain.db.WaterFlowAnalysis.AnalysisCompositePK;
@@ -29,12 +32,17 @@ public class WaterFlowAnalysis implements Domain {
 
 	/** 블록번호 */
 	@Id
-	private long flctcFm;
+	@Column(length = 10)
+	private String flctcFm;
 	
 	/** 분석년월 */
 	@Id
 	@Column(length = 6)
 	private String anaYm;
+	
+	/** 블록명칭 */
+	@Transient
+	private String bkNm;
 	
 	/** 총공급량(유효수량 + 무효수량) */
 	private float totSpy;
@@ -84,12 +92,45 @@ public class WaterFlowAnalysis implements Domain {
 	/** 유수율((유수수량/총급수량)*100) */
 	private float wtrFlowRate;
 	
+	@Transient
+	private float reduceAmt;
+	
+	@Transient
+	private float lossAmt;
+	
+	@Transient
+	private float mchkAmt;
+	
+	@Transient
+	private float sudoAmt;
+	
+	@Transient
+	private float commAmt;
+	
+	@Transient
+	private float illegalAmt;
+	
+	@Transient
+	private float chkAmt;
+	
+	@Transient
+	private float uchkAmt;
+	
+	@Transient
+	private float lendAmt;
+	
+	@Transient
+	private float etcAmt;
+	
+	@Transient
+	private List<WaterFlowAnalysis> waterFlowAnalysis;
+	
 	@Data
 	@AllArgsConstructor
 	@NoArgsConstructor
 	public static class AnalysisCompositePK implements Domain {
 		
-		private long flctcFm;
+		private String flctcFm;
 		
 		private String anaYm;
 	}

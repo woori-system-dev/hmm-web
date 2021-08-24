@@ -33,7 +33,7 @@
 								관리번호(수용가)
 							</label>
 							<div class="col-8 p-0">
-								<input class="form-control m-input" type="text" id="example-text-input">
+								<input class="form-control m-input" type="text" id="suyNoInput">
 							</div>
 						</div>
 						<div class="form-group m-form__group row">
@@ -41,10 +41,9 @@
 								상수업종
 							</label>
 							<div class="col-8 p-0">
-								<select class="form-control m-input m-input--square" id="exampleSelect1">
-									<option>전체</option>
-									<option>1</option>
-									<option>2</option>
+								<select name="sangBiz" class="form-control m-input m-input--square">
+									<option value="전체">전체</option>
+									<option value="08:일반용">08:일반용</option>
 								</select>
 							</div>
 						</div>
@@ -53,7 +52,7 @@
 								계기번호
 							</label>
 							<div class="col-8 p-0">
-								<input class="form-control m-input" type="text" id="example-text-input">
+								<input class="form-control m-input" type="text" id="metaNumInput">
 							</div>
 						</div>
 						<div class="row">
@@ -79,7 +78,7 @@
 							</div>
 						</div>
 						<div class="mt-30 text-center">
-							<button type="button" class="btn btn-success m-btn--wide">
+							<button type="button" class="btn btn-success m-btn--wide" id="searchBtn">
 								<i class="fa fa-search"></i> 검 색
 							</button>
 						</div>
@@ -97,8 +96,8 @@
 				</div>
 			</div>
 			<div class="col-md-10">
-				<div class="m-portlet" style="height:800px">
-					<div class="m-portlet__body">
+				<div class="m-portlet mb-0" style="height:800px">
+					<div class="m-portlet__body pb-0">
 						<div id="m_datatable">
 						</div>
 					</div>
@@ -265,77 +264,96 @@
 </div>
 
 <script>
-$('#startDatePicker').datepicker({
-	autoApply: true,
-	autoclose: true,
-	orientation:"Bottom left",
-	format:"yyyy-mm-dd",
-});
-$('#endDatePicker').datepicker({
-	autoApply: true,
-	autoclose: true,
-	orientation:"Bottom left",
-	format:"yyyy-mm-dd",
-});
+$(function() {
+	$('#startDatePicker').datepicker({
+		autoApply: true,
+		autoclose: true,
+		orientation: "Bottom left",
+		format: "yyyy-mm-dd",
+	});
 
+	$('#endDatePicker').datepicker({
+		autoApply: true,
+		autoclose: true,
+		orientation: "Bottom left",
+		format: "yyyy-mm-dd",
+	});
 
-var e = JSON.parse('[{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"},{ "RecordID": "07312100005000","OrderID": "201402","ShipCountry": "","ShipCity": "08:일반용","ShipName":"02:20MM","ShipAddress": "","CompanyEmail": "1","CompanyAgent": "20140215","CompanyName": "5048","Currency": "","Notes": "81","Department": "62"}]');
-	var table = $("#m_datatable").mDatatable({
-    data: {
-        type: "local",
-        source:e,
-        pageSize: 10,
-       
-    },
-    layout: {
-        scroll: !0,  // 스크롤  y축 
-        height: 700, // min-height: 300px; 스크롤 x 축
-        footer: !1  //아래 레이어 컬럼 생성 유무
-    },
-    sortable: !0, //컬럼 선택을 통한 순서 선택 유무
-    pagination: !1, //패이지네이션 생성 유무
-    columns: [{
-        field: "RecordID",
-        title: "관리번호",
-        width: 150,
-    }, {
-        field: "OrderID",
-        title: "납기",
-        filterable: !1,
-    }, {
-        field: "ShipCountry",
-        title: "주소",
-    }, {
-        field: "ShipCity",
-        title: "상수업종"
-    }, {
-        field: "ShipName",
-        title: "구경",
-    }, {
-        field: "ShipAddress",
-        title: "계기번호",
-        type: "date",
-        format: "MM/DD/YYYY"
-    }, {
-        field: "CompanyAgent",
-        title: "세대수",
-        type: "number"
-    }, {
-        field: "CompanyAgent",
-        title: "검침일자",
-        type: "number"
-    }, {
-        field: "CompanyName",
-        title: "상수지침",
-        type: "number"
-    }, {
-        field: "Currency",
-        title: "상수인정",
-        type: "number"
-    }, {
-        field: "Notes",
-        title: "상수사용량",
-        type: "number"
-    }]
+	const d = new Date();
+	$("#startDatePicker").datepicker("setDate", new Date(d.getFullYear(), d.getMonth() - 1, d.getDate()));
+	$("#endDatePicker").datepicker("setDate", new Date());
+
+	var table = {
+	    data: {
+			type: "remote",
+			source: {
+				read : {
+					url: contextPath + "/flux/administration/search",
+				}
+			}
+		},
+	    layout: {
+	        scroll: !0,  // 스크롤  y축 
+	        height: 740, // min-height: 300px; 스크롤 x 축
+	        footer: !1  //아래 레이어 컬럼 생성 유무
+	    },
+	    sortable: !0, //컬럼 선택을 통한 순서 선택 유무
+	    pagination: !1, //패이지네이션 생성 유무
+	    columns: [{
+	        field: "suyNo",
+	        title: "관리번호",
+	        width: 150,
+	    }, {
+	        field: "payYm",
+	        title: "납기",
+	        filterable: !1,
+	    }, {
+	        field: "suyAddr",
+	        title: "주소",
+	    }, {
+	        field: "sangBiz",
+	        title: "상수업종"
+	    }, {
+	        field: "sangDip",
+	        title: "구경",
+	    }, {
+	        field: "metaNum",
+	        title: "계기번호",
+	    }, {
+	        field: "homCnt",
+	        title: "세대수",
+	        type: "number"
+	    }, {
+	        field: "gumchimYmd",
+	        title: "검침일자",
+	        type: "date",
+	        format: "YYYY-MM-DD"
+	    }, {
+	        field: "gumchim",
+	        title: "상수지침",
+	        type: "number"
+	    }, {
+	        field: "sangRec",
+	        title: "상수인정",
+	    }, {
+	        field: "sangAmt",
+	        title: "상수사용량",
+	        type: "number"
+	    }]
+	};
+
+	$('#searchBtn').click(function() {
+		$("#m_datatable").mDatatable("destroy");
+		
+		var param = new Object();
+		param.suyNo = $("#suyNoInput").val();
+		param.sangBiz = $("select[name=sangBiz]").val();
+		param.metaNum = $("#metaNumInput").val();
+		param.startDate = $("#startDatePicker").val();
+		param.endDate = $("#endDatePicker").val();
+
+		table.data.source.read.params = param;
+		$("#m_datatable").mDatatable(table);
+	});
 });
 </script>
