@@ -104,7 +104,7 @@
 													급수전수
 												</td>
 												<td style="text-align:right;">
-													${block.bkWspPopCo} 전
+													${summaryInfo.bkWspPopCo} 전
 												</td>
 											</tr>
 											<tr>
@@ -112,7 +112,7 @@
 													관로연장
 												</td>
 												<td class="text-right">
-													${block.bkPipeEx} km
+													${summaryInfo.bkPipeEx} km
 												</td>
 											</tr>
 											<tr>
@@ -120,7 +120,7 @@
 													1시간적산유량
 												</td>
 												<td class="text-right">
-													24 m²
+													${summaryInfo.hourSumFlow} m²
 												</td>
 											</tr>
 											<tr>
@@ -128,7 +128,7 @@
 													금일적산유량
 												</td>
 												<td class="text-right">
-													307 m²
+													${summaryInfo.todaySumFlow} m²
 												</td>
 											</tr>
 										</table>
@@ -516,9 +516,9 @@
 <script>
 $(document).ready(function() {
 	baseMap('${block.coords}');
+	var blockId = '${block.flctcFm}';
 
-	$("#time").text(moment().format('YYYY-MM-DD HH:mm'));  
-	GaugeCharts.grayAndGreen("chartdiv0", 0);
+	$("#time").text(moment().format('YYYY-MM-DD HH:mm'));
 
 	var pressureData = [
 	     {
@@ -626,13 +626,29 @@ $(document).ready(function() {
 	         "testVlaue": 20
 	     }
 	 ];
+	
+	$.ajax({
+		url: contextPath + "/summary/block/info",
+		type: "get",
+		data: {"blockId": blockId},
+		dataType: "json",
+		success: function(response) {
+			GaugeCharts.grayAndGreen("chartdiv0", response.wtrFlowRate);
 
-	Charts.measurement("measurementChart", generateChartData());
-	Charts.pressure("pressureChart", pressureData);
-	Charts.pressurePie("pressurePieChart");
-	Charts.leakage("leakageChart", leakageData);
-	Charts.demand("demandChart", demandData);
-	Charts.minFlow("minFlowChart", minFlowData);
+			Charts.measurement("measurementChart", generateChartData());
+			Charts.pressure("pressureChart", pressureData);
+			Charts.pressurePie("pressurePieChart");
+			Charts.leakage("leakageChart", leakageData);
+			Charts.demand("demandChart", demandData);
+			Charts.minFlow("minFlowChart", minFlowData);
+		},
+		beforeSend:function(){
+	        $('.loading-container').removeClass('display-none');
+	    },
+	    complete:function(){
+	        $('.loading-container').addClass('display-none');
+	    }
+	});
 
  	// generate some random data, quite different range
 	function generateChartData() {

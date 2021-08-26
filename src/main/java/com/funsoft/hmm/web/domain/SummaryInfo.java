@@ -31,9 +31,15 @@ public class SummaryInfo {
 	/** 금일적산유량 */
 	private String todaySumFlow;
 	
+	/** 유수율 */
+	private double wtrFlowRate;
+	
+	/** 수압이상알람 블록 리스트 */
 	private List<String> pressureAlarm;
 	
+	/** 기기이상알람 블록 리스트 */
 	private List<String> deviceAlarm;
 	
+	/** 누수이상알람 블록 리스트 */
 	private List<String> leakageAlarm;
 }

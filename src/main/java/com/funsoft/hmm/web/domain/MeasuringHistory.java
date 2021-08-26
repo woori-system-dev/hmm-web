@@ -37,6 +37,12 @@ public class MeasuringHistory implements Domain, Comparable<MeasuringHistory> {
 	
 	private float sumFlow;
 	
+	private int alarmPressure;
+	
+	private int alarmDevice;
+	
+	private int alarmLeakage;
+	
 	public MeasuringHistory(String blockName, RealTimeMeasurement measurement) {
 		this.date = measurement.getDatetime();
 		this.dateTime = DateUtil.toDateTimeString(measurement.getDatetime());

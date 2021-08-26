@@ -191,22 +191,22 @@ public class HistoryInfoService {
 	}
 	
 	public List<AlarmHistoryTable> getAlarmHistoryList(AlarmSearchParam param) {
-		List<AlarmHistoryTable> results;
+		List<AlarmHistoryTable> results = new ArrayList<>();
+
 		if (param.getEndDate() == null) {
 		} else {
 		}
-		
-		List<AlarmHistoryTable> result = new ArrayList<>();
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:13", "2018년 4월 26일 15:14", "고수압", "주의", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:12", "2018년 4월 26일 15:13", "고수압", "경고", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:11", "2018년 4월 26일 15:12", "고수압", "주의", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:10", "2018년 4월 26일 15:11", "고수압", "경고", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:09", "2018년 4월 26일 15:10", "고수압", "주의", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:08", "2018년 4월 26일 15:09", "고수압", "경고", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:07", "2018년 4월 26일 15:08", "고수압", "주의", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:06", "2018년 4월 26일 15:07", "고수압", "경고", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:05", "2018년 4월 26일 15:06", "고수압", "주의", "1분"));
-		return result;
+
+		results.add(new AlarmHistoryTable("2018년 4월 26일 15:13", "2018년 4월 26일 15:14", "고수압", "주의", "1분"));
+		results.add(new AlarmHistoryTable("2018년 4월 26일 15:12", "2018년 4월 26일 15:13", "고수압", "경고", "1분"));
+		results.add(new AlarmHistoryTable("2018년 4월 26일 15:11", "2018년 4월 26일 15:12", "고수압", "주의", "1분"));
+		results.add(new AlarmHistoryTable("2018년 4월 26일 15:10", "2018년 4월 26일 15:11", "고수압", "경고", "1분"));
+		results.add(new AlarmHistoryTable("2018년 4월 26일 15:09", "2018년 4월 26일 15:10", "고수압", "주의", "1분"));
+		results.add(new AlarmHistoryTable("2018년 4월 26일 15:08", "2018년 4월 26일 15:09", "고수압", "경고", "1분"));
+		results.add(new AlarmHistoryTable("2018년 4월 26일 15:07", "2018년 4월 26일 15:08", "고수압", "주의", "1분"));
+		results.add(new AlarmHistoryTable("2018년 4월 26일 15:06", "2018년 4월 26일 15:07", "고수압", "경고", "1분"));
+		results.add(new AlarmHistoryTable("2018년 4월 26일 15:05", "2018년 4월 26일 15:06", "고수압", "주의", "1분"));
+		return results;
 	}
 	
 	/**

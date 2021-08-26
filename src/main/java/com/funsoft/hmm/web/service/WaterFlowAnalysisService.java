@@ -9,4 +9,6 @@ public interface WaterFlowAnalysisService extends CRUDService<WaterFlowAnalysis,
 
 	WaterFlowAnalysis search(String startDate, String endDate, List<String> checkList);
 
+	List<WaterFlowAnalysis> getList(long flctcFm, String format);
+
 }
