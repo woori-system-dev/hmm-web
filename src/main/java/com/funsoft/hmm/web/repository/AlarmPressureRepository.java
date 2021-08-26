@@ -11,4 +11,7 @@ public interface AlarmPressureRepository extends DefaultRepository<AlarmPressure
 	
 	@Query(value = "SELECT * FROM ALM_PRESSURE WHERE BK_FLCTC_FM = ?1 and to_char(DATETIME, 'yyyy-MM-dd') = ?2", nativeQuery = true)
 	List<AlarmPressure> findByBkFlctcFmAndDate(long blockId, String date);
+
+	@Query(value = "SELECT * FROM ALM_PRESSURE WHERE DATETIME BETWEEN to_date(?1, 'yyyy-MM-dd hh24:mi:ss') and to_date(?2, 'yyyy-MM-dd hh24:mi:ss')", nativeQuery = true)
+	List<AlarmPressure> findByBetween(String startDate, String endDate);
 }

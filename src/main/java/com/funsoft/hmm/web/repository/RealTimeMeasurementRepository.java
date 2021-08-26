@@ -39,4 +39,7 @@ public interface RealTimeMeasurementRepository extends DefaultRepository<RealTim
 	
 	@Query(value = "SELECT * FROM FEP_REAL WHERE BK_FLCTC_FM = ?1 and to_char(DATETIME, 'yyyy-MM-dd') = ?2", nativeQuery = true)
 	List<RealTimeMeasurement> findByBkFlctcFmAndDate(long blockId, String date);
+
+	@Query(value = "SELECT * FROM " + form + " WHERE DATETIME BETWEEN to_date(?1, 'yyyy-MM-dd hh24:mi:ss') and to_date(?2, 'yyyy-MM-dd hh24:mi:ss')", nativeQuery = true)
+	List<RealTimeMeasurement> findByBetween(String startDate, String endDate);
 }

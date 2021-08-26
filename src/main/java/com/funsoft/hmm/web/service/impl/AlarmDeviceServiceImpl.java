@@ -63,4 +63,9 @@ public class AlarmDeviceServiceImpl implements AlarmDeviceService {
 		return alarmDeviceRepository.findByBkFlctcFmAndDate(blockId, date);
 	}
 
+	@Override
+	public List<AlarmDevice> getList(String startDate, String endDate) {
+		return alarmDeviceRepository.findByBetween(startDate, endDate);
+	}
+
 }

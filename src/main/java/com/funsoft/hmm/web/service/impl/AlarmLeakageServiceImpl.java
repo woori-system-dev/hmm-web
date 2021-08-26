@@ -73,4 +73,9 @@ public class AlarmLeakageServiceImpl implements AlarmLeakageService {
 		return alarmLeakageRepository.findByBlockAndDate(blockId, date);
 	}
 
+	@Override
+	public List<AlarmLeakage> getList(String startDate, String endDate) {
+		return alarmLeakageRepository.findByBetween(startDate, endDate);
+	}
+
 }

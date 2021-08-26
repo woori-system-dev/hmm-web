@@ -546,9 +546,8 @@ $(function() {
 				if (gaugeChart2 != undefined)
 					gaugeChart2.clear();
 				
-
-				gaugeChart1 = makeBgReadGaugeChart("gaugeChart1", lossRate);
-				gaugeChart2 = makeBgGrayGaugeChart("gaugeChart2", data.wtrFlowRate);
+				gaugeChart1 = GaugeCharts.grayAndRed("gaugeChart1", lossRate == 0 ? 0 : lossRate.toFixed(2));
+				gaugeChart2 = GaugeCharts.grayAndGreen("gaugeChart2", data.wtrFlowRate == 0 ? 0 : data.wtrFlowRate.toFixed(2));
 			},
 			beforeSend:function(){
 		        $('.loading-container').removeClass('display-none');

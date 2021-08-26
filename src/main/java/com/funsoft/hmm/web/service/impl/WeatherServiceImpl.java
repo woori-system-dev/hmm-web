@@ -196,7 +196,7 @@ public class WeatherServiceImpl implements WeatherService {
 	
 	@Override
 	public String getImage(Weather weather) {
-		String image = "";
+		String image = WeatherType.맑음.getImage();
 		if (weather != null) {
 			if (weather.getPercipitationform().equals("없음")) {
 				if (weather.getSky() != null)

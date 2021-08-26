@@ -53,6 +53,7 @@ public class AlarmPressure implements Domain {
 	
 	@Getter
 	public enum AlarmPreesureType {
+		NONE("0"),
 		고수압주의("1"),
 		고수압경보("2"),
 		저수압주의("3"),

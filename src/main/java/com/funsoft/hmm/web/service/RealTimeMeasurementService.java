@@ -21,5 +21,7 @@ public interface RealTimeMeasurementService extends CRUDService<RealTimeMeasurem
 	
 	List<RealTimeMeasurement> getList(long blockId, String startDate, String endDate);
 	
+	List<RealTimeMeasurement> getList(String startDate, String endDate);
+	
 	List<RealTimeAnalysis> findByGroupBy(long blockId, String startDate, String endDate);
 }

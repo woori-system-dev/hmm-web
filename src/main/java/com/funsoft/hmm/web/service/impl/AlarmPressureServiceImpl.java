@@ -61,4 +61,9 @@ public class AlarmPressureServiceImpl implements AlarmPressureService {
 		return alarmPressureRepository.findByBkFlctcFmAndDate(blockId, date);
 	}
 
+	@Override
+	public List<AlarmPressure> getList(String startDate, String endDate) {
+		return alarmPressureRepository.findByBetween(startDate, endDate);
+	}
+
 }

@@ -1,20 +1,21 @@
 package com.funsoft.hmm.web.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.funsoft.hmm.web.domain.SummaryInfo;
 import com.funsoft.hmm.web.domain.db.BlockSmall;
-import com.funsoft.hmm.web.domain.db.RealTimeMeasurement;
+import com.funsoft.hmm.web.domain.db.Weather;
 import com.funsoft.hmm.web.service.BlockSmallService;
 import com.funsoft.hmm.web.service.FlowDeviceService;
 import com.funsoft.hmm.web.service.PressureDeviceService;
 import com.funsoft.hmm.web.service.RealTimeMeasurementService;
 import com.funsoft.hmm.web.service.WeatherService;
+import com.funsoft.hmm.web.service.info.SummaryInfoService;
 
 /**
  * 종합 요약 컨트롤 구현 클래스
@@ -40,6 +41,9 @@ public class SummaryController {
 
 	@Autowired
 	private PressureDeviceService pressureDeviceService;
+	
+	@Autowired
+	private SummaryInfoService summaryInfoService;
 
 	/**
 	 * 종합 요약 화면(전체)
@@ -47,12 +51,24 @@ public class SummaryController {
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public void list(Model model) {
-		model.addAttribute("weather", weatherService.getLastWeather());
-
 		/* 블록 리스트 ABCD.. */
 		model.addAttribute("blockList", blockSmallService.getList());
+		model.addAttribute("summaryInfo", summaryInfoService.getSummaryInfo());
+		
+		Weather weather = weatherService.getLastWeather();
+		model.addAttribute("weather", weather);
+		model.addAttribute("weatherImage", weatherService.getImage(weather));
 	}
-
+	
+	/**
+	 * 알람 정보 조회
+	 */
+	@RequestMapping(value = "/all/alarm", method = RequestMethod.GET)
+	@ResponseBody
+	public SummaryInfo alarmInfo() {
+		return summaryInfoService.getAlarmInfo();
+	}
+	
 	/**
 	 * 블록 선택 시 화면
 	 * @param model
@@ -63,8 +79,6 @@ public class SummaryController {
 
 		BlockSmall blockSmall = blockSmallService.getBkNM(block);
 		
-		List<RealTimeMeasurement> realTimeMeasurementList = realTimeMeasurementService.getList(blockSmall.getFlctcFm(), "2018-06-07 00:00:00", "2018-06-07 15:00:00");
-
 		/* 블록 정보 */
 		model.addAttribute("block", blockSmall);
 		/* 블록 리스트 ABCD.. */

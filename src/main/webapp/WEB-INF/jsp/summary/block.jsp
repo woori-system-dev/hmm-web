@@ -518,7 +518,7 @@ $(document).ready(function() {
 	baseMap('${block.coords}');
 
 	$("#time").text(moment().format('YYYY-MM-DD HH:mm'));  
-	makeBgGrayGaugeChart("chartdiv0", 0, '40%');
+	GaugeCharts.grayAndGreen("chartdiv0", 0);
 
 	var pressureData = [
 	     {

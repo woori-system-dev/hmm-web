@@ -56,10 +56,10 @@
 	<div class="m-content">
 		<div class="row">
 			<div class="col-md-1">
-				<div class="m-stack m-stack--hor m-stack--general m-stack--demo" style="text-align: center;height:25px">
+				<div class="m-stack m-stack--hor m-stack--general m-stack--demo text-center" style="height:25px">
 					<div class="m-stack__item">
 						<div class="m-stack__demo-item">
-							<a href="${pageContext.request.contextPath}/summary/all" style="color:#000000">
+							<a href="${pageContext.request.contextPath}/summary/all" class="color-black">
 								전체
 							</a>
 						</div>
@@ -67,7 +67,7 @@
 					<c:forEach var="list" items="${blockList}" varStatus="domain">
 						<div class="m-stack__item">
 							<div class="m-stack__demo-item">
-								<a href="${pageContext.request.contextPath}/summary/block?block=${list.bkNm}" style="color:#000000">
+								<a href="${pageContext.request.contextPath}/summary/block?block=${list.bkNm}" class="color-black">
 									${list.bkNm}
 								</a>	
 							</div>
@@ -93,7 +93,7 @@
 							</div>
 							<div class="m-portlet__body">
 								<div class="row">
-									<div class = "col-md-12" style="padding:20px 0px 0px 25px;">
+									<div class = "col-md-12" style="padding:20px 0 0 25px;">
 										<table style="font-size:16px;">
 											<colgroup>
 												<col style="width:25%;">
@@ -103,23 +103,23 @@
 											</colgroup>
 											<tr>
 												<td>급수전수</td>
-												<td class="table-text">1012 전</td>
-												<td style="text-align:right">소블록갯수</td>
-												<td class="table-text">15 개</td>
+												<td class="table-text">${summaryInfo.bkWspPopCo} 전</td>
+												<td class="text-right">소블록갯수</td>
+												<td class="table-text">${summaryInfo.smallBlockNum} 개</td>
 											</tr>
 											<tr>
 												<td>관로연장</td>
-												<td class="table-text">km</td>
-												<td style="text-align:right">관리블록갯수</td>
-												<td class="table-text">2 개</td>
+												<td class="table-text">${summaryInfo.bkPipeEx} km</td>
+												<td class="text-right">관리블록갯수</td>
+												<td class="table-text">${summaryInfo.manageBlockNum} 개</td>
 											</tr>
 											<tr>
 												<td>1시간적산유량</td>
-												<td class="table-text">2706 m²</td>
+												<td class="table-text" colspan="2">${summaryInfo.hourSumFlow} ㎥/s</td>
 											</tr>
 											<tr>
 												<td>금일적산유량</td>
-												<td class="table-text">38177 m²</td>
+												<td class="table-text" colspan="2">${summaryInfo.todaySumFlow} ㎥/s</td>
 											</tr>
 										</table>
 									</div>
@@ -181,14 +181,14 @@
 							</div>
 							<div class="m-portlet__body">
 								<div class="row">
-									<div class="col-md-3" style="padding-left:15px;text-align:center;font-weight:700;">
-										<img src="../images/weather/weather_cloud_sun.png" style="width: 100px">
-										&nbsp&nbsp날씨 좋음
+									<div class="col-md-3 text-center pl-15 font-black pt-10">
+										<img src="../images/weather/${weatherImage}" style="width: 90px">
+										${weather.sky}
 									</div>
 									<div class="col-md-5" style="text-align: center;">
 										<div class="row" style="margin-top:14px">
 											<div class="col-md-6" style="padding:0px">
-												<img src="../images/weather/temperature.png">&nbsp기온
+												<img src="../images/weather/temperature.png">&nbsp;기온
 											</div>
 											<div class="col-md-6">
 												 ${weather.temperature} ℃
@@ -196,7 +196,7 @@
 										</div>
 										<div class="row" style="margin-top:14px">
 											<div class="col-md-6" style="padding:0px">
-												<img src="../images/weather/humidity.png"> &nbsp습도
+												<img src="../images/weather/humidity.png">&nbsp;습도
 											</div>
 											<div class="col-md-6">
 												${weather.humidity} %
@@ -204,7 +204,7 @@
 										</div>
 										<div class="row" style="margin-top:14px">
 											<div class="col-md-6" style="padding:0px">
-												<img src="../images/weather/wind.png" > &nbsp풍속
+												<img src="../images/weather/wind.png">&nbsp;풍속
 											</div>
 											<div class="col-md-6">
 												${weather.windspeed} m/s
@@ -222,6 +222,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="row">
 					<div class="col-md-6">
 						<div class="m-portlet m-portlet--full-height ">
@@ -284,57 +285,52 @@
 							</div>
 							<div class="m-portlet__body">
 								<div class="row" style="margin:0px;border-bottom:1px solid;">
-									<div class = "col-md-4" style="padding:0;border-right:1px solid;">
+									<div class="col-md-4" style="padding:0;border-right:1px solid;">
 										<div class="row">
-											<div class="col-md-7" style="text-align:right;">
+											<div class="col-md-7 text-right">
 												<h3 style="margin-top:30px;font-weight:700;">수압이상</h3>
 											</div>
-											<div class="col-md-5" style="padding:0;">
-												<div id="gaugeChart4" style="height:90px;"></div>
+											<div class="col-md-5 p-0">
+												<div id="pressureChart" style="height:90px;"></div>
 											</div>
 										</div>
 									</div>
-									<div class = "col-md-4" style="padding:0;text-align:center;border-right:1px solid;">
+									<div class="col-md-4" style="padding:0;text-align:center;border-right:1px solid;">
 										<div class="row">
-											<div class="col-md-7" style="text-align:right;">
+											<div class="col-md-7 text-right">
 												<h3 style="margin-top:30px;font-weight:700;">기기이상</h3>
 											</div>
-											<div class="col-md-5" style="padding:0;">
-												<div id="gaugeChart5" style="height:90px;">
+											<div class="col-md-5 p-0">
+												<div id="deviceChart" style="height:90px;">
 												</div>
 											</div>
 										</div>
 									</div>
-									<div class = "col-md-4" style="padding:0;text-align:center;">
+									<div class="col-md-4" style="padding:0;text-align:center;">
 										<div class="row">
-											<div class="col-md-7" style="text-align:right;">
+											<div class="col-md-7 text-right">
 												<h3 style="margin-top:30px;font-weight:700;">누수추정</h3>
 											</div>
-											<div class = "col-md-5" style="padding:0;">
-												<div id="gaugeChart6" style="height:90px;">
+											<div class="col-md-5 p-0">
+												<div id="leakageChart" style="height:90px;">
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="row" style="margin:0px;height:150px">
-									<div class="col-md-4" style="padding:0;text-align:center;border-right:1px solid #000000;color:#db1a48">
-										소블럭A &nbsp&nbsp소블럭B
-									</div>
-									<div class="col-md-4" style="padding:0;text-align:center;border-right:1px solid #000000;color:#0085bf">
-										소블럭C
-									</div>
-									<div class="col-md-4" style="padding:0;text-align:center;color:#eef430">
-										소블럭D &nbsp&nbsp소블럭E
-									</div>
+									<div id="pressureAlarm" class="col-md-4 p-10 text-center" style="border-right:1px solid #000000;color:#db1a48"></div>
+									<div id="deviceAlarm" class="col-md-4 p-10 text-center" style="border-right:1px solid #000000;color:#0085bf"></div>
+									<div id="leakageAlarm" class="col-md-4 p-10 text-center" style="color:#eef430"></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				
 				<div class="row">
 					<div class="col-md-6">
-						<div class="m-portlet m-portlet--full-height ">
+						<div class="m-portlet m-portlet--full-height">
 							<div class="m-portlet__head">
 								<div class="m-portlet__head-caption">
 									<div class="m-portlet__head-title">
@@ -378,239 +374,54 @@
 </div>
 
 <script>
-var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
-var time = new Date();
-document.getElementById("time_year").textContent = time.getFullYear() + " " +(time.getMonth()+1);  
-document.getElementById("time_day").textContent = week[time.getDay()];  
-document.getElementById("time_date").textContent = time.getDate();  
-document.getElementById("time_hours").textContent =  time.getHours()+":"+time.getMinutes()+":"+ time.getSeconds();  
+$(document).ready(function() {
+	var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
+	var time = new Date();
+	$("#time_year").text(time.getFullYear() + " " +(time.getMonth() + 1));  
+	$("#time_day").text(week[time.getDay()]);  
+	$("#time_date").text(time.getDate());  
+	$("#time_hours").text(time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());  
 
-var gaugeChart = AmCharts.makeChart("gaugeChart", {
-	"type": "gauge",
- 	"theme": "light",
-  	"axes": [{
-	    "axisAlpha": 0,
-	    "tickAlpha": 0,
-	    "labelsEnabled": false,
-	    "startValue": 0,
-	    "endValue": 100,
-	    "startAngle": 0,
-	    "endAngle": 360,
-	    "bands": [{
-		    "color": "#383838",
-		    "startValue": 0,
-		    "endValue": 100,
-		    "radius": "100%",
-		    "innerRadius": "75%",
-		    "bandAlpha":0
-	    },{
-		    "color": "#FFFFFF",
-		    "startValue": 0,
-		    "endValue": 0,
-		    "radius": "100%",
-		    "innerRadius": "75%"
-	    }
-	  	]}
-  	],
-	"allLabels": [{
-		"text": "0",
-	  	"x": "47%",
-	  	"y": "41%",
-	  	"size": 15,
-	  	"bold": true,
-	  	"color": "#383838"
-	}],
-	"creditsPosition" : "bottom-left"
-});
+	GaugeCharts.grayAndGreen("gaugeChart", 0);
+	GaugeCharts.grayAndGreen("gaugeChart2", 0);
+	GaugeCharts.grayAndGreen("gaugeChart3", 0);
 
-var gaugeChart2 = AmCharts.makeChart("gaugeChart2", {
-	"type": "gauge",
- 	"theme": "light",
-  	"axes": [{
-	    "axisAlpha": 0,
-	    "tickAlpha": 0,
-	    "labelsEnabled": false,
-	    "startValue": 0,
-	    "endValue": 100,
-	    "startAngle": 0,
-	    "endAngle": 360,
-	    "bands": [{
-		    "color": "#383838",
-		    "startValue": 0,
-		    "endValue": 100,
-		    "radius": "100%",
-		    "innerRadius": "75%",
-		    "bandAlpha":0
-	    },{
-		    "color": "#FFFFFF",
-		    "startValue": 0,
-		    "endValue": 0,
-		    "radius": "100%",
-		    "innerRadius": "75%"
-	    }
-	  	]}
-  	],
-	"allLabels": [{
-		"text": "0",
-	  	"x": "47%",
-	  	"y": "41%",
-	  	"size": 15,
-	  	"bold": true,
-	  	"color": "#383838"
-	}],
-	"creditsPosition" : "bottom-left"
-});
+	$.ajax({
+		url: contextPath + "/summary/all/alarm",
+		type: "get",
+		dataType: "json",
+		success: function(response) {
+			var pressureAlarmText = "";
+			var deviceAlarmText = "";
+			var leakageAlarmText = "";
+			
+			$.each(response.pressureAlarm, function(idx, value) { 
+				pressureAlarmText += value + " ";
+			});
 
-var gaugeChart3 = AmCharts.makeChart("gaugeChart3", {
-	"type": "gauge",
- 	"theme": "light",
-  	"axes": [{
-	    "axisAlpha": 0,
-	    "tickAlpha": 0,
-	    "labelsEnabled": false,
-	    "startValue": 0,
-	    "endValue": 100,
-	    "startAngle": 0,
-	    "endAngle": 360,
-	    "bands": [{
-		    "color": "#383838",
-		    "startValue": 0,
-		    "endValue": 100,
-		    "radius": "100%",
-		    "innerRadius": "75%",
-		    "bandAlpha":0
-	    },{
-		    "color": "#FFFFFF",
-		    "startValue": 0,
-		    "endValue": 0,
-		    "radius": "100%",
-		    "innerRadius": "75%"
-	    }
-	  	]}
-  	],
-	"allLabels": [{
-		"text": "0",
-	  	"x": "47%",
-	  	"y": "41%",
-	  	"size": 15,
-	  	"bold": true,
-	  	"color": "#383838"
-	}],
-	"creditsPosition" : "bottom-left"
-});
+			$.each(response.deviceAlarm, function(idx, value) { 
+				deviceAlarmText += value + " ";
+			});
 
-var gaugeChart4 = AmCharts.makeChart("gaugeChart4", {
-	"type": "gauge",
- 	"theme": "light",
-  	"axes": [{
-	    "axisAlpha": 0,
-	    "tickAlpha": 0,
-	    "labelsEnabled": false,
-	    "startValue": 0,
-	    "endValue": 100,
-	    "startAngle": 0,
-	    "endAngle": 360,
-	    "bands": [{
-		    "color": "#383838",
-		    "startValue": 0,
-		    "endValue": 100,
-		    "radius": "100%",
-		    "innerRadius": "75%",
-		    "bandAlpha":0
-	    },{
-		    "color": "#db1a48",
-		    "startValue": 0,
-		    "endValue": 20,
-		    "radius": "100%",
-		    "innerRadius": "75%"
-	    }
-	  	]}
-  	],
-	"allLabels": [{
-		"text": "2",
-	  	"x": "47%",
-	  	"y": "41%",
-	  	"size": 15,
-	  	"bold": true,
-	  	"color": "#383838"
-	}],
-	"creditsPosition" : "bottom-left"
-});
+			$.each(response.leakageAlarm, function(idx, value) { 
+				leakageAlarmText += value + " ";
+			});
 
-var gaugeChart5 = AmCharts.makeChart("gaugeChart5", {
-	"type": "gauge",
- 	"theme": "light",
-  	"axes": [{
-	    "axisAlpha": 0,
-	    "tickAlpha": 0,
-	    "labelsEnabled": false,
-	    "startValue": 0,
-	    "endValue": 100,
-	    "startAngle": 0,
-	    "endAngle": 360,
-	    "bands": [{
-		    "color": "#383838",
-		    "startValue": 0,
-		    "endValue": 100,
-		    "radius": "100%",
-		    "innerRadius": "75%",
-		    "bandAlpha":0
-	    },{
-		    "color": "#0085bf", 
-		    "startValue": 0,
-		    "endValue": 10,
-		    "radius": "100%",
-		    "innerRadius": "75%"
+			$("#pressureAlarm").text(pressureAlarmText);
+			$("#deviceAlarm").text(deviceAlarmText);
+			$("#leakageAlarm").text(leakageAlarmText);
+			
+			GaugeCharts.pressure("pressureChart", response.pressureAlarm.length);
+			GaugeCharts.device("deviceChart", response.deviceAlarm.length);
+			GaugeCharts.leakage("leakageChart", response.leakageAlarm.length);
+		},
+		beforeSend:function(){
+	        $('.loading-container').removeClass('display-none');
+	    },
+	    complete:function(){
+	        $('.loading-container').addClass('display-none');
 	    }
-	  	]}
-  	],
-	"allLabels": [{
-		"text": "1",
-	  	"x": "47%",
-	  	"y": "41%",
-	  	"size": 15,
-	  	"bold": true,
-	  	"color": "#383838"
-	}],
-	"creditsPosition" : "bottom-left"
-});
-
-var gaugeChart6 = AmCharts.makeChart("gaugeChart6", {
-	"type": "gauge",
- 	"theme": "light",
-  	"axes": [{
-	    "axisAlpha": 0,
-	    "tickAlpha": 0,
-	    "labelsEnabled": false,
-	    "startValue": 0,
-	    "endValue": 100,
-	    "startAngle": 0,
-	    "endAngle": 360,
-	    "bands": [{
-		    "color": "#383838",
-		    "startValue": 0,
-		    "endValue": 100,
-		    "radius": "100%",
-		    "innerRadius": "75%",
-		    "bandAlpha":0
-	    },{
-		    "color": "#eef430",
-		    "startValue": 0,
-		    "endValue": 20,
-		    "radius": "100%",
-		    "innerRadius": "75%"
-	    }
-	  	]}
-  	],
-	"allLabels": [{
-		"text": "2",
-	  	"x": "47%",
-	  	"y": "41%",
-	  	"size": 15,
-	  	"bold": true,
-	  	"color": "#383838"
-	}],
-	"creditsPosition" : "bottom-left"
+	});
 });
 
 var chart;

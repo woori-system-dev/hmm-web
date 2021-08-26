@@ -477,11 +477,11 @@ $("#pressureButton").click(function() {
 			
 			createPressureAnalysisTable(response.highChartInfo);
 			
-			makeRedGaugeChart("weekday_gaugeChart", 0.4);
-			makeRedGaugeChart("hoilday_gaugeChart", 1);
-			makeGreenGaugeChart("weekday_night_gaugeChart", 0.6);
-			makeRedGaugeChart("hoilday_night_gaugeChart", 0.2);
-			makeGreenGaugeChart("sumFlow_gaugeChart", 2.4);
+			GaugeCharts.red("weekday_gaugeChart", 0.4);
+			GaugeCharts.red("hoilday_gaugeChart", 1);
+			GaugeCharts.green("weekday_night_gaugeChart", 0.6);
+			GaugeCharts.red("hoilday_night_gaugeChart", 0.2);
+			GaugeCharts.green("sumFlow_gaugeChart", 2.4);
 		},
 		beforeSend:function(){
 	        $('.loading-container').removeClass('display-none');

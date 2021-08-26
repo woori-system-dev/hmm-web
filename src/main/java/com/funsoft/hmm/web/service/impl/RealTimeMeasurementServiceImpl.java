@@ -101,6 +101,12 @@ public class RealTimeMeasurementServiceImpl implements RealTimeMeasurementServic
 	public List<RealTimeMeasurement> getList(long blockId, String startDate, String endDate) {
 		return realTimeMeasurementRepository.findByBkFlctcFmAndBetween(blockId, startDate, endDate);
 	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public List<RealTimeMeasurement> getList(String startDate, String endDate) {
+		return realTimeMeasurementRepository.findByBetween(startDate, endDate);
+	}
 
 	@Transactional(readOnly = true)
 	@Override
