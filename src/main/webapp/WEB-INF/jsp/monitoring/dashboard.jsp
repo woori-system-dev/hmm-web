@@ -131,7 +131,6 @@ $(document).ready(function() {
 				data: {"blockId": blockSmall.flctcFm},
 				dataType: "json",
 				success: function(response) {
-					console.log(response);
 					$("#pressure_" + blockSmall.flctcFm).text(response.pressure);
 					$("#flow_" + blockSmall.flctcFm).text(response.flow);
 			   	}

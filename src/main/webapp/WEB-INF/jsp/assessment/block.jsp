@@ -127,23 +127,23 @@ var table = $("#dataTable").DataTable({
     }, {
         data: "bkNm"
     }, {
-        data: "total"
+        data: "scoreSum"
     }, {
-        data: "pipeAge1"
+        data: "a1Score"
     }, {
-        data: "pipeAge2",
+        data: "a2Score",
     }, {
-        data: "oldPipe1",
+        data: "b1Score",
     }, {
-        data: "oldPipe2",
+        data: "b2Score",
     }, {
-        data: "corrosionResistancePipe1",
+        data: "c1Score",
     }, {
-        data: "corrosionResistancePipe2",
+        data: "c2Score",
     }, {
-        data: "waterLeakNum1",
+        data: "d1Score",
     }, {
-        data: "waterLeakNum2",
+        data: "d2Score",
     }],
     columnDefs: [{
     	targets : 0,
@@ -186,11 +186,19 @@ table.on('select', function (e, dt, type, indexes) {
 			success: function(info) {
 				$("#assessment_portlet").removeClass("display-none");
 				
-				$("#level").text(info.level);
+				$("#level").text(info.risk);
 				$("#level_string").text(info.assessmentLevel);
 				$("#block_name").text("블록명 : " + data.bkNm);
-				$("#total_score").text("총점수 : " + info.totalScore + "점");
-				$("#content").text(info.content);
+				$("#total_score").text("총점수 : " + info.scoreSum + "점");
+				$("#content").text(info.ageContent);
+
+				$.each(vectorLayers, function(idx, val) {
+    				var fillColor = "#ffffff00";
+    				if (info.flctcFm == val.block.flctcFm) {
+    					fillColor = "rgba(0, 0, 255, 0.1)";
+    				}
+    				val.vectorLayer.setStyle([makeStyle(fillColor), makeLabelStyle(val.block.bkNm)]);
+    			});
 			}
 		});
 	}

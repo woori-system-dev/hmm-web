@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.funsoft.hmm.web.domain.BlockAssessmentInfo;
-import com.funsoft.hmm.web.domain.BlockAssessmentInfo.BlockAssessment;
-import com.funsoft.hmm.web.service.info.AssessmentInfoService;
+import com.funsoft.hmm.web.domain.db.AgemngBlock;
+import com.funsoft.hmm.web.service.AgemngBlockService;
 
 /**
  * 건전도 평가 컨트롤 구현 클래스
@@ -24,22 +23,22 @@ import com.funsoft.hmm.web.service.info.AssessmentInfoService;
 public class AssessmentController {
 
 	@Autowired
-	private AssessmentInfoService assessmentInfoService;
-
+	private AgemngBlockService agemngBlockService;
+	
 	@RequestMapping(value = "/block", method = RequestMethod.GET)
 	public void analysis(Model model) {
 	}
 
 	@RequestMapping(value = "/block/getList", method = RequestMethod.GET)
 	@ResponseBody
-	public List<BlockAssessment> getList() {
-		return assessmentInfoService.getBlockAssessmentList();
+	public List<AgemngBlock> getList() {
+		return agemngBlockService.getList();
 	}
 
 	@RequestMapping(value = "/block/detail", method = RequestMethod.POST)
 	@ResponseBody
-	public BlockAssessmentInfo blockDetail(long blockId) {
-		return assessmentInfoService.createBlockAssessmentInfo(blockId);
+	public AgemngBlock blockDetail(long blockId) {
+		return agemngBlockService.get(blockId);
 	}
 
 }

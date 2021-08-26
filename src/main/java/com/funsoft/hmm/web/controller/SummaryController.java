@@ -42,7 +42,7 @@ public class SummaryController {
 	private PressureDeviceService pressureDeviceService;
 
 	/**
-	 * 종합 요약 화면
+	 * 종합 요약 화면(전체)
 	 * @param model
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -62,18 +62,20 @@ public class SummaryController {
 	public void list(Model model, String block) {
 
 		BlockSmall blockSmall = blockSmallService.getBkNM(block);
-		List<RealTimeMeasurement> realTimeMeasurementList = realTimeMeasurementService.getList(101004001, "2018-06-07 00:00:00", "2018-06-07 15:00:00");
-		System.err.println(realTimeMeasurementList);
+		
+		List<RealTimeMeasurement> realTimeMeasurementList = realTimeMeasurementService.getList(blockSmall.getFlctcFm(), "2018-06-07 00:00:00", "2018-06-07 15:00:00");
 
+		/* 블록 정보 */
+		model.addAttribute("block", blockSmall);
+		/* 블록 리스트 ABCD.. */
+		model.addAttribute("blockList", blockSmallService.getList());
 		/* 유압계 서비스 */
 		model.addAttribute("flowDevice", flowDeviceService.get((long) blockSmall.getFmtIdn()));
 		/* 수압계 서비스 */
 		model.addAttribute("pressureDevice", pressureDeviceService.get((long) blockSmall.getPmtIdn()));
 		/* 날씨 서비스 */
 		model.addAttribute("weather", weatherService.getLastWeather());
-		/* 블록 정보 */
-		model.addAttribute("block", blockSmall);
-		/* 블록 리스트 ABCD.. */
-		model.addAttribute("blockList", blockSmallService.getList());
+		/* 실시간모니터링 */
+		model.addAttribute("realTimeMeasurement", realTimeMeasurementService.getRecentData(blockSmall.getFlctcFm()));
 	}
 }

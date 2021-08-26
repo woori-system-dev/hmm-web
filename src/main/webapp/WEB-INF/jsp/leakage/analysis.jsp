@@ -147,94 +147,100 @@
 </div>
 
 <script>
-$("#analysisDatePicker").daterangepicker({
-	startDate: moment(),
-	singleDatePicker: true,
-	showDropdowns: true,
-	locale: {
-		format: 'YYYY-MM-DD',
-	  	daysOfWeek: [
-			"일","월","화","수","목","금","토"
-      	]
-	}
-}); 
-
-function dateSelect() {
-	for (var i = 1; i <= 6; i++) {
-		$("#datePicker" + i).datetimepicker({
-			format: "yyyy-mm-dd",
-			todayHighlight: true,
-			clearBtn: true,
-			autoclose: true,
-			startView: 2,
-			minView: 2,
-			forceParse: 0,
-			pickerPosition: "bottom-left",
-			locale: moment.locale("ko")
-		}); 
-	}
-}
-
-dateSelect();
-
-function periodTypeSelect(radio) {
-	if (radio.value == 1) {
-		$("#date_select").addClass("display-none");
-	} else {
-		$("#date_select").removeClass("display-none");
-	}
-}
-
-$("#analysisButton").click(function() {
-	var param = new Object();
-	param.blockId = $("#blockSelect option:selected").val();
-	param.selectDate = $("#analysisDatePicker").val();
-	
-	if ($("#peroid_1").is(":checked")) {
-		param.week = true;
-	} else {
-		param.week = false;
-		var selectDates = param.selectDate;
-		for (var i = 1; i < 7; i++) {
-			$("#datePicker" + i).val() != "" ? selectDates = selectDates + "_" + $("#datePicker" + i).val() : "";
+$(document).ready(function() {
+	$("#analysisDatePicker").daterangepicker({
+		startDate: moment(),
+		singleDatePicker: true,
+		showDropdowns: true,
+		locale: {
+			format: 'YYYY-MM-DD',
+		  	daysOfWeek: [
+				"일","월","화","수","목","금","토"
+	      	]
 		}
-		
-		param.selectDates = selectDates;
+	}); 
+
+	function dateSelect() {
+		for (var i = 1; i <= 6; i++) {
+			$("#datePicker" + i).datetimepicker({
+				format: "yyyy-mm-dd",
+				todayHighlight: true,
+				clearBtn: true,
+				autoclose: true,
+				startView: 2,
+				minView: 2,
+				forceParse: 0,
+				pickerPosition: "bottom-left",
+				locale: moment.locale("ko")
+			}); 
+		}
 	}
-	
-	$("#leakageTable tbody").empty();
-	
-	$.ajax({
-		url: contextPath + "/leakage/analysis",
-		type: "post",
-		data: JSON.stringify(param),
-		contentType: "application/json",
-		success: function(response) {
-			if (response.leakageAnalysis.length > 0) {
-				$("#leakageTable").removeClass('display-none');
-				response.leakageAnalysis.forEach(function(data, index) {
-					$("#leakageTable tbody").append("<tr>" + 
-							"<td>" + data.date + "</td>" + 
-							"<td>" + data.flow + "</td>" + 
-							"<td>" + data.flowTime + "</td>" + 
-							"<td>" + data.pressure + "</td>" + 
-							"<td>" + data.flowMaxRatio + "</td>" + 
-							"<td>" + data.flowMaxTime + "</td>" + 
-							"<td>" + data.pressureRatio + "</td>" + 
-							"<td>" + data.pressureTime + "</td>" + 
-							"<td>" + data.judgment + "</td>" + 
-							"</tr>")
-				});
+
+	dateSelect();
+
+	function periodTypeSelect(radio) {
+		if (radio.value == 1) {
+			$("#date_select").addClass("display-none");
+		} else {
+			$("#date_select").removeClass("display-none");
+		}
+	}
+
+	var chart;
+
+	$("#analysisButton").click(function() {
+		var param = new Object();
+		param.blockId = $("#blockSelect option:selected").val();
+		param.selectDate = $("#analysisDatePicker").val();
+		
+		if ($("#peroid_1").is(":checked")) {
+			param.week = true;
+		} else {
+			param.week = false;
+			var selectDates = param.selectDate;
+			for (var i = 1; i < 7; i++) {
+				$("#datePicker" + i).val() != "" ? selectDates = selectDates + "_" + $("#datePicker" + i).val() : "";
 			}
 			
-			makeLeakageAnalysisChart("lineChartdiv", response.highChartInfo);
-		},
-		beforeSend:function(){
-	        $('.loading-container').removeClass('display-none');
-	    },
-	    complete:function(){
-	        $('.loading-container').addClass('display-none');
-	    }
+			param.selectDates = selectDates;
+		}
+
+		if (chart != undefined)
+			chart.destroy();
+		$("#leakageTable tbody").empty();
+
+		$.ajax({
+			url: contextPath + "/leakage/analysis",
+			type: "post",
+			data: JSON.stringify(param),
+			contentType: "application/json",
+			success: function(response) {
+				if (response.leakageAnalysis.length > 0) {
+					$("#leakageTable").removeClass('display-none');
+					response.leakageAnalysis.forEach(function(data, index) {
+						$("#leakageTable tbody").append("<tr>" + 
+								"<td>" + data.date + "</td>" + 
+								"<td>" + data.flow + "</td>" + 
+								"<td>" + data.flowTime + "</td>" + 
+								"<td>" + data.pressure + "</td>" + 
+								"<td>" + data.flowMaxRatio + "</td>" + 
+								"<td>" + data.flowMaxTime + "</td>" + 
+								"<td>" + data.pressureRatio + "</td>" + 
+								"<td>" + data.pressureTime + "</td>" + 
+								"<td>" + data.judgment + "</td>" + 
+								"</tr>")
+					});
+				}
+				
+				chart = makeLeakageAnalysisChart("lineChartdiv", response.highChartInfo);
+			},
+			beforeSend:function(){
+		        $('.loading-container').removeClass('display-none');
+		    },
+		    complete:function(){
+		        $('.loading-container').addClass('display-none');
+		    }
+		});
 	});
 });
 

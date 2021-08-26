@@ -67,7 +67,9 @@ public class LeakageAnalysisInfoService {
 	 * @return
 	 */
 	public LeakageAnalysisInfo createLeakageAnalysisInfo(LeakageAnalysisSearchParam param) {
-		String selectDate = "2014-11-05";
+		String selectDate = param.getSelectDate();
+		selectDate = "2014-11-05";
+		
 		List<String> selectDates = new ArrayList<>();
 		if (param.isWeek()) {
 			selectDates.add(selectDate);
@@ -85,6 +87,7 @@ public class LeakageAnalysisInfoService {
 		
 		List<LeakageAnalysis> leakageAnalysisList = new ArrayList<>();
 		HighChartInfo highChartInfo = highChartService.createHourSeriesChart();
+		
 		for (String date : selectDates.stream().sorted().collect(Collectors.toList())) {
 			NightMinFlow nightMinFlow = nightMinFlowService.get(param.getBlockId(), date);
 			if (nightMinFlow != null) {
@@ -177,8 +180,10 @@ public class LeakageAnalysisInfoService {
 	public NightMinFlowAnalysisInfo createNightMinFlowAnalysisInfo(LeakageAnalysisSearchParam param) {
 		String startDate = DateUtil.getWeekAgeDate(param.getSelectDate(), param.getAnalysisPeroid().getValue());
 		String endDate = param.getSelectDate();
+		startDate = "2014-05-08";
+		endDate = "2014-05-15";
 		
-		List<NightMinFlowAnalysis> analysisList = nightMinFlowService.getList(param.getBlockId(), "2014-05-08", "2014-05-15")
+		List<NightMinFlowAnalysis> analysisList = nightMinFlowService.getList(param.getBlockId(), startDate, endDate)
 				.stream().map(data -> {
 					NightMinFlowAnalysis analysis = new NightMinFlowAnalysis(data);
 					Holiday holiday = holidayService.get(DateUtil.toSmallDateString(analysis.getDatetime()));

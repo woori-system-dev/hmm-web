@@ -122,7 +122,7 @@ function makeBgReadGaugeChart(divId, value) {
 	return gaugeChart;
 }
 
-function makeBgGrayGaugeChart(divId, value) {
+function makeBgGrayGaugeChart(divId, value, x) {
 	console.log((value.toFixed(2) + '').length);
 	var gaugeChart = AmCharts.makeChart(divId, {
 		"type": "gauge",
@@ -153,7 +153,7 @@ function makeBgGrayGaugeChart(divId, value) {
 	  	],
 		"allLabels": [{
 			"text": value.toFixed(2),
-		  	"x": (value.toFixed(2) + '').length == 4 ? "44%" : "42%",
+		  	"x": x == undefined ? (value.toFixed(2) + '').length == 4 ? "44%" : "42%" : x,
 		  	"y": "41%",
 		  	"size": 15,
 		  	"bold": true,
