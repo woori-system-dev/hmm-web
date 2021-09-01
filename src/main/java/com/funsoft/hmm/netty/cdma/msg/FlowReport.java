@@ -36,11 +36,12 @@ public class FlowReport extends AbstractCdmaMessage implements CdmaIncomingMessa
 	}
 	
 	/**
-	 * 부산 연산동 버전의 전등 라우터로 인하여 구분 코드 발생 permitJoin
+	 * Date, flow, pressur, Accum flow, reserved 확인
 	 */
 	@Override
 	public void decode(ByteBuf buffer) {
 		String date = "";
+	
 		for (int i = 0; i < 22; i++) {
 			date += Character.toString(
 					(char) (Integer.parseInt(makeHexInteger(Character.toString((char) buffer.readUnsignedByte()))) * 16
@@ -79,7 +80,7 @@ public class FlowReport extends AbstractCdmaMessage implements CdmaIncomingMessa
 		reserve += Integer.parseInt(makeHexInteger(Character.toString((char) buffer.readUnsignedByte()))) * 16 + Integer.parseInt(makeHexInteger(Character.toString((char) buffer.readUnsignedByte())));
 		System.err.println("Reserved : " + reserve);
 		
-//		String etx = Character.toString((char) buffer.readUnsignedByte()); //ETX(0x03)
+		String etx = Character.toString((char) buffer.readUnsignedByte()); //ETX(0x03)
 		
 		System.err.println("HERE TEST :");
 	}
