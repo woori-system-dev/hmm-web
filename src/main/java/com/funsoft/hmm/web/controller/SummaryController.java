@@ -63,10 +63,10 @@ public class SummaryController {
 	/**
 	 * 알람 정보 조회
 	 */
-	@RequestMapping(value = "/all/alarm", method = RequestMethod.GET)
+	@RequestMapping(value = "/all/data", method = RequestMethod.GET)
 	@ResponseBody
 	public SummaryInfo alarmInfo() {
-		return summaryInfoService.getAlarmInfo();
+		return summaryInfoService.getAllSummaryInfo();
 	}
 	
 	/**

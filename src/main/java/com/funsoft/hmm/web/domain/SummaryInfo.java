@@ -2,6 +2,9 @@ package com.funsoft.hmm.web.domain;
 
 import java.util.List;
 
+import com.funsoft.hmm.web.domain.chart.AmChartInfo;
+import com.funsoft.hmm.web.domain.db.FlowSummaryMonth;
+
 import lombok.Data;
 
 /**
@@ -42,4 +45,10 @@ public class SummaryInfo {
 	
 	/** 누수이상알람 블록 리스트 */
 	private List<String> leakageAlarm;
+	
+	/** 계측이력정보 */
+	private AmChartInfo measurementChart;
+	
+	/** 월별 수요량 */
+	private List<FlowSummaryMonth> flowSummaryMonths;
 }

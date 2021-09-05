@@ -63,6 +63,12 @@ public class MeasuringHistory implements Domain, Comparable<MeasuringHistory> {
 		this.sumFlowString = format.format(measurement.getSumFlow());
 		this.sumFlow = measurement.getSumFlow();
 	}
+	
+	public MeasuringHistory(RealTimeAnalysis realTimeAnalysis) {
+		this.dateTime = realTimeAnalysis.getHour();
+		this.pressure = realTimeAnalysis.getPressure();
+		this.flow = realTimeAnalysis.getFlow();
+	}
 
 	@Override
 	public int compareTo(MeasuringHistory o) {

@@ -11,19 +11,26 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.funsoft.hmm.web.domain.MeasuringHistory;
+import com.funsoft.hmm.web.domain.RealTimeAnalysis;
 import com.funsoft.hmm.web.domain.SummaryInfo;
+import com.funsoft.hmm.web.domain.chart.HighChartInfo;
 import com.funsoft.hmm.web.domain.db.AlarmDevice;
 import com.funsoft.hmm.web.domain.db.AlarmLeakage;
 import com.funsoft.hmm.web.domain.db.AlarmPressure;
 import com.funsoft.hmm.web.domain.db.BlockSmall;
+import com.funsoft.hmm.web.domain.db.FlowSummaryMonth;
 import com.funsoft.hmm.web.domain.db.RealTimeMeasurement;
 import com.funsoft.hmm.web.domain.db.WaterFlowAnalysis;
 import com.funsoft.hmm.web.service.AlarmDeviceService;
 import com.funsoft.hmm.web.service.AlarmLeakageService;
 import com.funsoft.hmm.web.service.AlarmPressureService;
 import com.funsoft.hmm.web.service.BlockSmallService;
+import com.funsoft.hmm.web.service.FlowSummaryMonthService;
 import com.funsoft.hmm.web.service.RealTimeMeasurementService;
 import com.funsoft.hmm.web.service.WaterFlowAnalysisService;
+import com.funsoft.hmm.web.service.chart.AmChartService;
+import com.funsoft.hmm.web.service.chart.HighChartService;
 
 /**
  * 종합 요약 정보 서비스
@@ -51,6 +58,15 @@ public class SummaryInfoService {
 	
 	@Autowired
 	private WaterFlowAnalysisService waterFlowAnalysisService;
+	
+	@Autowired
+	private HighChartService highChartService;
+	
+	@Autowired
+	private AmChartService amChartService;
+	
+	@Autowired
+	private FlowSummaryMonthService flowSummaryMonthService;
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -91,17 +107,45 @@ public class SummaryInfoService {
 	}
 	
 	/**
-	 * 전체 알람 정보
+	 * 전체 요약정보 조회
 	 * @return
 	 */
-	public SummaryInfo getAlarmInfo() {
+	public SummaryInfo getAllSummaryInfo() {
+		SummaryInfo summaryInfo = new SummaryInfo();
+		
+		getMeasurementInfo(summaryInfo);
+		getAlarmInfo(summaryInfo);
+		
+		summaryInfo.setFlowSummaryMonths(flowSummaryMonthService.getList());
+		
+		return summaryInfo;
+	}
+	
+	/**
+	 * 전체 계측이력 정보 조회
+	 * @return
+	 */
+	private void getMeasurementInfo(SummaryInfo summaryInfo) {
 		
 		String startDate = dateFormat.format(new Date()) + " 00:00:00";
 		String endDate = dateTimeFormat.format(new Date());
-		startDate = "2015-03-06 00:00:00";
-		endDate = "2015-03-06 23:00:00";
+		startDate = "2014-05-08 00:00:00";
+		endDate = "2014-05-08 23:00:00";
 		
-		SummaryInfo summaryInfo = new SummaryInfo(); 
+		List<MeasuringHistory> measuringHistories = getMeasuringHistoryList(0, startDate, endDate);
+		summaryInfo.setMeasurementChart(amChartService.createMeasurementChart(measuringHistories));
+	}
+	
+	/**
+	 * 전체 알람 정보
+	 * @return
+	 */
+	private void getAlarmInfo(SummaryInfo summaryInfo) {
+		
+		String startDate = dateFormat.format(new Date()) + " 00:00:00";
+		String endDate = dateTimeFormat.format(new Date());
+//		startDate = "2015-03-06 00:00:00";
+//		endDate = "2015-03-06 23:00:00";
 		
 		List<AlarmPressure> alarmPressures = alarmPressureService.getList(startDate, endDate);
 		Map<Long, List<AlarmPressure>> alarmPressureMap = alarmPressures.stream().collect(Collectors.groupingBy(AlarmPressure::getBkFlctcFm));
@@ -115,8 +159,6 @@ public class SummaryInfoService {
 		summaryInfo.setPressureAlarm(alarmPressureMap.keySet().stream().map(data -> blockSmallService.get(data).getBkNm()).collect(Collectors.toList()));
 		summaryInfo.setDeviceAlarm(alarmDeviceMap.keySet().stream().map(data -> blockSmallService.get(data).getBkNm()).collect(Collectors.toList()));
 		summaryInfo.setLeakageAlarm(alarmLeakageMap.keySet().stream().map(data -> blockSmallService.get(data).getBkNm()).collect(Collectors.toList()));
-		
-		return summaryInfo;
 	}
 	
 	/**
@@ -163,4 +205,21 @@ public class SummaryInfoService {
 		
 		return summaryInfo;
 	}
+	
+	/**
+	 * 계측 이력 검색 조건 결과
+	 * @param param
+	 * @return
+	 */
+	public List<MeasuringHistory> getMeasuringHistoryList(long blockId, String startDate, String endDate) {
+		List<RealTimeAnalysis> results = null;
+		if (blockId == 0) {
+			results = realTimeMeasurementService.findByAvgBetween(startDate, endDate);
+		} else {
+			results = realTimeMeasurementService.findByAvgBkFlctcFmBetween(blockId, startDate, endDate);
+		}
+		
+		return results.stream().map(data -> {return new MeasuringHistory(data);}).collect(Collectors.toList());
+	}
+
 }

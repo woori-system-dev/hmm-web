@@ -140,5 +140,17 @@ public class RealTimeMeasurementServiceImpl implements RealTimeMeasurementServic
 		QRealTimeMeasurement qRealTimeMeasurement = QRealTimeMeasurement.realTimeMeasurement;
 		return Expressions.stringTemplate("to_char({0},'{1s}')", qRealTimeMeasurement.datetime, ConstantImpl.create(path));
 	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public List<RealTimeAnalysis> findByAvgBetween(String startDate, String endDate) {
+		return realTimeMeasurementRepository.findByAvgBetween(startDate, endDate);
+	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public List<RealTimeAnalysis> findByAvgBkFlctcFmBetween(long blockId, String startDate, String endDate) {
+		return realTimeMeasurementRepository.findByAvgBkFlctcFmBetween(blockId, startDate, endDate);
+	}
 
 }
