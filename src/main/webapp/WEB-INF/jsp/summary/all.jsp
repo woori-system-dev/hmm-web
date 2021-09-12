@@ -374,81 +374,6 @@
 </div>
 
 <script>
-var chartData2 = [
-    {
-        "year": 1995,
-        "cars": 1567,
-    },
-    {
-        "year": 1996,
-        "cars": 1617,
-    },
-    {
-        "year": 1997,
-        "cars": 1630,
-    },
-    {
-        "year": 1998,
-        "cars": 1660,
-    },
-    {
-        "year": 1999,
-        "cars": 1683,
-    },
-    {
-        "year": 2000,
-        "cars": 1691,
-    },
-    {
-        "year": 2001,
-        "cars": 1298,
-    },
-    {
-        "year": 2002,
-        "cars": 1275,
-    },
-    {
-        "year": 2003,
-        "cars": 1246,
-    },
-    {
-        "year": 2004,
-        "cars": 1218,
-    },
-    {
-        "year": 2005,
-        "cars": 1213,
-    },
-    {
-        "year": 2006,
-        "cars": 1199,
-    },
-    {
-        "year": 2007,
-        "cars": 1110,
-    },
-    {
-        "year": 2008,
-        "cars": 1165,
-    },
-    {
-        "year": 2009,
-        "cars": 1145,
-    },
-    {
-        "year": 2010,
-        "cars": 1163,
-    },
-    {
-        "year": 2011,
-        "cars": 1180,
-    },
-    {
-        "year": 2012,
-        "cars": 1159,
-    }
-];
-
 $(document).ready(function() {
 	var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
 	var time = new Date();
@@ -466,8 +391,7 @@ $(document).ready(function() {
 		type: "get",
 		dataType: "json",
 		success: function(response) {
-			console.log(response.flowSummaryMonths);
-			makeMeasurementHourAmChart("measurementChart", response.measurementChart);
+			makeMeasurementHourAmChart("measurementChart", response.measurementChartInfo);
 			//Charts.flowMonth("flowMonthChart", response.flowSummaryMonths);
 			makeLineChart("flowMonthChart", response.flowSummaryMonths);
 			

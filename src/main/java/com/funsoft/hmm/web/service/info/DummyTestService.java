@@ -1,6 +1,5 @@
 package com.funsoft.hmm.web.service.info;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.funsoft.hmm.web.common.DateUtil;
-import com.funsoft.hmm.web.domain.AlarmHistoryTable;
 import com.funsoft.hmm.web.domain.RealTimeAnalysis;
 import com.funsoft.hmm.web.domain.db.Holiday;
 import com.funsoft.hmm.web.domain.db.NightMinFlow;
@@ -83,19 +81,5 @@ public class DummyTestService {
 				hightMinFlowService.update(domain);
 			}
 		});
-	}
-	
-	public List<AlarmHistoryTable> createAlarmHistoryInfoList() {
-		List<AlarmHistoryTable> result = new ArrayList<>();
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:13", "2018년 4월 26일 15:14", "고수압", "주의", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:12", "2018년 4월 26일 15:13", "고수압", "경고", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:11", "2018년 4월 26일 15:12", "고수압", "주의", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:10", "2018년 4월 26일 15:11", "고수압", "경고", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:09", "2018년 4월 26일 15:10", "고수압", "주의", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:08", "2018년 4월 26일 15:09", "고수압", "경고", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:07", "2018년 4월 26일 15:08", "고수압", "주의", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:06", "2018년 4월 26일 15:07", "고수압", "경고", "1분"));
-		result.add(new AlarmHistoryTable("2018년 4월 26일 15:05", "2018년 4월 26일 15:06", "고수압", "주의", "1분"));
-		return result;
 	}
 }

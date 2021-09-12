@@ -2,6 +2,7 @@ package com.funsoft.hmm.web.service.info;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.funsoft.hmm.web.domain.MeasuringHistory;
 import com.funsoft.hmm.web.domain.MeasuringHistoryDetail;
 import com.funsoft.hmm.web.domain.RealTimeMonitoring;
 import com.funsoft.hmm.web.domain.db.AlarmDevice;
+import com.funsoft.hmm.web.domain.db.AlarmLeakage;
 import com.funsoft.hmm.web.domain.db.AlarmPressure;
 import com.funsoft.hmm.web.domain.db.AlarmPressure.AlarmPreesureType;
 import com.funsoft.hmm.web.domain.db.BlockSmall;
@@ -23,6 +25,7 @@ import com.funsoft.hmm.web.domain.db.RealTimeMeasurement;
 import com.funsoft.hmm.web.domain.param.AlarmSearchParam;
 import com.funsoft.hmm.web.domain.param.MeasurementSearchParam;
 import com.funsoft.hmm.web.service.AlarmDeviceService;
+import com.funsoft.hmm.web.service.AlarmLeakageService;
 import com.funsoft.hmm.web.service.AlarmPressureService;
 import com.funsoft.hmm.web.service.BlockSmallService;
 import com.funsoft.hmm.web.service.FlowDeviceService;
@@ -63,6 +66,9 @@ public class HistoryInfoService {
 	
 	@Autowired
 	private AlarmDeviceService alarmDeviceService;
+	
+	@Autowired
+	private AlarmLeakageService alarmLeakageService;
 
 	/**
 	 * 계측 이력 정보 불러오기
@@ -190,22 +196,43 @@ public class HistoryInfoService {
 		return blockInfo;
 	}
 	
+	/**
+	 * 블록별 알람 이력 조회
+	 * 
+	 * @param param
+	 * @return
+	 */
 	public List<AlarmHistoryTable> getAlarmHistoryList(AlarmSearchParam param) {
+		
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
 		List<AlarmHistoryTable> results = new ArrayList<>();
 
 		if (param.getEndDate() == null) {
+			
 		} else {
+			
 		}
+		
+		List<AlarmPressure> alarmPressures = alarmPressureService.getList(param.getBlockId(), startDate, endDate);
+		Map<Long, List<AlarmPressure>> alarmPressureMap = alarmPressures.stream().collect(Collectors.groupingBy(AlarmPressure::getBkFlctcFm));
+		
+		List<AlarmDevice> alarmDevices = alarmDeviceService.getList(param.getBlockId(), startDate, endDate);
+		Map<Long, List<AlarmDevice>> alarmDeviceMap = alarmDevices.stream().collect(Collectors.groupingBy(AlarmDevice::getBkFlctcFm));
+		
+		List<AlarmLeakage> alarmLeakages = alarmLeakageService.getList(param.getBlockId(), startDate, endDate);
+		Map<Long, List<AlarmLeakage>> alarmLeakageMap = alarmLeakages.stream().collect(Collectors.groupingBy(AlarmLeakage::getBkFlctcFm));
 
-		results.add(new AlarmHistoryTable("2018년 4월 26일 15:13", "2018년 4월 26일 15:14", "고수압", "주의", "1분"));
-		results.add(new AlarmHistoryTable("2018년 4월 26일 15:12", "2018년 4월 26일 15:13", "고수압", "경고", "1분"));
-		results.add(new AlarmHistoryTable("2018년 4월 26일 15:11", "2018년 4월 26일 15:12", "고수압", "주의", "1분"));
-		results.add(new AlarmHistoryTable("2018년 4월 26일 15:10", "2018년 4월 26일 15:11", "고수압", "경고", "1분"));
-		results.add(new AlarmHistoryTable("2018년 4월 26일 15:09", "2018년 4월 26일 15:10", "고수압", "주의", "1분"));
-		results.add(new AlarmHistoryTable("2018년 4월 26일 15:08", "2018년 4월 26일 15:09", "고수압", "경고", "1분"));
-		results.add(new AlarmHistoryTable("2018년 4월 26일 15:07", "2018년 4월 26일 15:08", "고수압", "주의", "1분"));
-		results.add(new AlarmHistoryTable("2018년 4월 26일 15:06", "2018년 4월 26일 15:07", "고수압", "경고", "1분"));
-		results.add(new AlarmHistoryTable("2018년 4월 26일 15:05", "2018년 4월 26일 15:06", "고수압", "주의", "1분"));
+//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:13", "2018년 4월 26일 15:14", "고수압", "주의", "1분"));
+//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:12", "2018년 4월 26일 15:13", "고수압", "경고", "1분"));
+//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:11", "2018년 4월 26일 15:12", "고수압", "주의", "1분"));
+//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:10", "2018년 4월 26일 15:11", "고수압", "경고", "1분"));
+//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:09", "2018년 4월 26일 15:10", "고수압", "주의", "1분"));
+//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:08", "2018년 4월 26일 15:09", "고수압", "경고", "1분"));
+//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:07", "2018년 4월 26일 15:08", "고수압", "주의", "1분"));
+//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:06", "2018년 4월 26일 15:07", "고수압", "경고", "1분"));
+//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:05", "2018년 4월 26일 15:06", "고수압", "주의", "1분"));
 		return results;
 	}
 	

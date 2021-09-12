@@ -27,6 +27,12 @@ public class RealTimeAnalysis implements Domain, Comparable<RealTimeAnalysis> {
 		this.pressure = (float) pressure;
 	}
 	
+	public RealTimeAnalysis(String datetime, float flow, long count) {
+		this.hour = datetime;
+		this.flow = flow;
+		this.count = count;
+	}
+	
 	public RealTimeAnalysis(float flow, long count) {
 		this.flow = flow;
 		this.count = count;

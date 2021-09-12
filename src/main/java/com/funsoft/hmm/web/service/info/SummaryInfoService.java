@@ -14,12 +14,10 @@ import org.springframework.stereotype.Service;
 import com.funsoft.hmm.web.domain.MeasuringHistory;
 import com.funsoft.hmm.web.domain.RealTimeAnalysis;
 import com.funsoft.hmm.web.domain.SummaryInfo;
-import com.funsoft.hmm.web.domain.chart.HighChartInfo;
 import com.funsoft.hmm.web.domain.db.AlarmDevice;
 import com.funsoft.hmm.web.domain.db.AlarmLeakage;
 import com.funsoft.hmm.web.domain.db.AlarmPressure;
 import com.funsoft.hmm.web.domain.db.BlockSmall;
-import com.funsoft.hmm.web.domain.db.FlowSummaryMonth;
 import com.funsoft.hmm.web.domain.db.RealTimeMeasurement;
 import com.funsoft.hmm.web.domain.db.WaterFlowAnalysis;
 import com.funsoft.hmm.web.service.AlarmDeviceService;
@@ -84,9 +82,9 @@ public class SummaryInfoService {
 		String startDate = dateFormat.format(new Date()) + " 00:00:00";
 		String hour1PreDate = dateTimeFormat.format(calendar.getTime());
 		String endDate = dateTimeFormat.format(new Date());
-		startDate = "2018-06-07 00:00:00";
-		endDate = "2018-06-07 15:00:00";
-		hour1PreDate = "2018-06-07 14:00:00";
+//		startDate = "2018-06-07 00:00:00";
+//		endDate = "2018-06-07 15:00:00";
+//		hour1PreDate = "2018-06-07 14:00:00";
 		
 		List<BlockSmall> blockSmalls = blockSmallService.getList();
 		
@@ -111,33 +109,33 @@ public class SummaryInfoService {
 	 * @return
 	 */
 	public SummaryInfo getAllSummaryInfo() {
+		
 		SummaryInfo summaryInfo = new SummaryInfo();
 		
-		getMeasurementInfo(summaryInfo);
+		getMeasurementInfo(summaryInfo, 0);
 		getAlarmInfo(summaryInfo);
-		
 		summaryInfo.setFlowSummaryMonths(flowSummaryMonthService.getList());
 		
 		return summaryInfo;
 	}
 	
 	/**
-	 * 전체 계측이력 정보 조회
+	 * 계측이력 정보 조회
 	 * @return
 	 */
-	private void getMeasurementInfo(SummaryInfo summaryInfo) {
+	private void getMeasurementInfo(SummaryInfo summaryInfo, long blockId) {
 		
 		String startDate = dateFormat.format(new Date()) + " 00:00:00";
 		String endDate = dateTimeFormat.format(new Date());
-		startDate = "2014-05-08 00:00:00";
-		endDate = "2014-05-08 23:00:00";
+//		startDate = "2014-05-08 00:00:00";
+//		endDate = "2014-05-08 23:00:00";
 		
-		List<MeasuringHistory> measuringHistories = getMeasuringHistoryList(0, startDate, endDate);
-		summaryInfo.setMeasurementChart(amChartService.createMeasurementChart(measuringHistories));
+		List<MeasuringHistory> measuringHistories = getMeasuringHistoryList(blockId, startDate, endDate);
+		summaryInfo.setMeasurementChartInfo(amChartService.createMeasurementChart(measuringHistories));
 	}
 	
 	/**
-	 * 전체 알람 정보
+	 * 전체 블록의 알람 모니터링 정보 조회
 	 * @return
 	 */
 	private void getAlarmInfo(SummaryInfo summaryInfo) {
@@ -173,9 +171,9 @@ public class SummaryInfoService {
 		String startDate = dateFormat.format(new Date()) + " 00:00:00";
 		String hour1PreDate = dateTimeFormat.format(calendar.getTime());
 		String endDate = dateTimeFormat.format(new Date());
-		startDate = "2018-06-07 00:00:00";
-		endDate = "2018-06-07 23:00:00";
-		hour1PreDate = "2018-06-07 14:00:00";
+//		startDate = "2018-06-07 00:00:00";
+//		endDate = "2018-06-07 23:00:00";
+//		hour1PreDate = "2018-06-07 14:00:00";
 		
 		SummaryInfo summaryInfo = new SummaryInfo();
 		summaryInfo.setBkWspPopCo(blockSmall.getBkWspPopCo());
@@ -188,6 +186,8 @@ public class SummaryInfoService {
 		summaryInfo.setTodaySumFlow(numberFormat.format(todayDatas.stream().mapToDouble(data -> data.getSumFlow()).sum()));
 		summaryInfo.setHourSumFlow(numberFormat.format(hourDatas.stream().mapToDouble(data -> data.getSumFlow()).sum()));
 		
+		getMeasurementInfo(summaryInfo, blockSmall.getFlctcFm());
+		
 		return summaryInfo;
 	}
 
@@ -198,10 +198,16 @@ public class SummaryInfoService {
 	 */
 	public SummaryInfo getSummaryInfo(long blockId) {
 		
+		String startDate = dateFormat.format(new Date()) + " 00:00:00";
+		String endDate = dateTimeFormat.format(new Date());
+		
 		SummaryInfo summaryInfo = new SummaryInfo();
 		
 		List<WaterFlowAnalysis> waterFlowAnalysis = waterFlowAnalysisService.getList(blockId, afterFormat.format(new Date()));
 		summaryInfo.setWtrFlowRate((float)waterFlowAnalysis.stream().mapToDouble(data -> data.getWtrFlowRate()).average().orElse(0));
+		
+		getMeasurementInfo(summaryInfo, blockId);
+		//summaryInfo.setPressureChartInfo(highChartService.createPressureAnalysisChartSeries(blockId, startDate, endDate));
 		
 		return summaryInfo;
 	}
@@ -221,5 +227,6 @@ public class SummaryInfoService {
 		
 		return results.stream().map(data -> {return new MeasuringHistory(data);}).collect(Collectors.toList());
 	}
+	
 
 }

@@ -17,4 +17,7 @@ public interface AlarmLeakageRepository extends DefaultRepository<AlarmLeakage, 
 
 	@Query(value = "SELECT * FROM ALM_LEAKAGE WHERE DATETIME BETWEEN to_date(?1, 'yyyy-MM-dd hh24:mi:ss') and to_date(?2, 'yyyy-MM-dd hh24:mi:ss')", nativeQuery = true)
 	List<AlarmLeakage> findByBetween(String startDate, String endDate);
+
+	@Query(value = "SELECT * FROM ALM_LEAKAGE WHERE BK_FLCTC_FM = ?1 and DATETIME BETWEEN to_date(?2, 'yyyy-MM-dd hh24:mi:ss') and to_date(?3, 'yyyy-MM-dd hh24:mi:ss')", nativeQuery = true)
+	List<AlarmLeakage> findByBlockAndDate(long blockId, String startDate, String endDate);
 }

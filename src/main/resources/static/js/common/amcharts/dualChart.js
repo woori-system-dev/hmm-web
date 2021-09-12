@@ -66,7 +66,7 @@ function makeMeasurementDualAmChart(divId, chartInfo) {
 	     }
 	});
 	
-	return chart
+	return chart;
 }
 
 function makeMeasurementHourAmChart(divId, chartInfo) {
@@ -124,5 +124,5 @@ function makeMeasurementHourAmChart(divId, chartInfo) {
 	     }
 	});
 	
-	return chart
+	return chart;
 }

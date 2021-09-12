@@ -514,119 +514,119 @@
 </div>
 
 <script>
+var pressureData = [
+    {
+        "date": "2012-03-01",
+        "price": 20
+    },
+    {
+        "date": "2012-03-02",
+        "price": 75
+    },
+    {
+        "date": "2012-03-03",
+        "price": 15
+    },
+    {
+        "date": "2012-03-04",
+        "price": 75
+    },
+    {
+        "date": "2012-03-05",
+        "price": 158
+    }
+];
+
+var leakageData = [
+    {
+        "date": "2012-03-01",
+        "price": 20,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-02",
+        "price": 75,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-03",
+        "price": 15,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-04",
+        "price": 75,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-05",
+        "price": 158,
+        "testVlaue": 20
+    }
+];
+
+var demandData = [
+    {
+        "date": "2012-03-01",
+        "price": 20,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-02",
+        "price": 75,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-03",
+        "price": 15,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-04",
+        "price": 75,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-05",
+        "price": 158,
+        "testVlaue": 20
+    }
+];
+
+var minFlowData = [
+    {
+        "date": "2012-03-01",
+        "price": 1,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-02",
+        "price": 1,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-03",
+        "price": 1,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-04",
+        "price": 1,
+        "testVlaue": 20
+    },
+    {
+        "date": "2012-03-05",
+        "price": 1,
+        "testVlaue": 20
+    }
+];
+
 $(document).ready(function() {
 	baseMap('${block.coords}');
 	var blockId = '${block.flctcFm}';
 
 	$("#time").text(moment().format('YYYY-MM-DD HH:mm'));
 
-	var pressureData = [
-	     {
-	         "date": "2012-03-01",
-	         "price": 20
-	     },
-	     {
-	         "date": "2012-03-02",
-	         "price": 75
-	     },
-	     {
-	         "date": "2012-03-03",
-	         "price": 15
-	     },
-	     {
-	         "date": "2012-03-04",
-	         "price": 75
-	     },
-	     {
-	         "date": "2012-03-05",
-	         "price": 158
-	     }
-	 ];
-
-	var leakageData = [
-	     {
-	         "date": "2012-03-01",
-	         "price": 20,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-02",
-	         "price": 75,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-03",
-	         "price": 15,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-04",
-	         "price": 75,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-05",
-	         "price": 158,
-	         "testVlaue": 20
-	     }
-	 ];
-
-	var demandData = [
-	     {
-	         "date": "2012-03-01",
-	         "price": 20,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-02",
-	         "price": 75,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-03",
-	         "price": 15,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-04",
-	         "price": 75,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-05",
-	         "price": 158,
-	         "testVlaue": 20
-	     }
-	 ];
-
-	var minFlowData = [
-	     {
-	         "date": "2012-03-01",
-	         "price": 1,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-02",
-	         "price": 1,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-03",
-	         "price": 1,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-04",
-	         "price": 1,
-	         "testVlaue": 20
-	     },
-	     {
-	         "date": "2012-03-05",
-	         "price": 1,
-	         "testVlaue": 20
-	     }
-	 ];
-	
 	$.ajax({
 		url: contextPath + "/summary/block/info",
 		type: "get",
@@ -634,8 +634,11 @@ $(document).ready(function() {
 		dataType: "json",
 		success: function(response) {
 			GaugeCharts.grayAndGreen("chartdiv0", response.wtrFlowRate);
-
-			Charts.measurement("measurementChart", generateChartData());
+			
+			makeMeasurementHourAmChart("measurementChart", response.measurementChartInfo); 
+			//makeDistributionLineChart("pressureChart", response.pressureChartInfo);
+			
+			//measurementChart("pressureChart", pressureData);
 			Charts.pressure("pressureChart", pressureData);
 			Charts.pressurePie("pressurePieChart");
 			Charts.leakage("leakageChart", leakageData);
@@ -649,33 +652,6 @@ $(document).ready(function() {
 	        $('.loading-container').addClass('display-none');
 	    }
 	});
-
- 	// generate some random data, quite different range
-	function generateChartData() {
-	     var firstDate = new Date();
-	     firstDate.setDate(firstDate.getDate() - 50);
-
-	     var chartData = [];
-
-	     for (var i = 0; i < 50; i++) {
-	         // we create date objects here. In your data, you can have date strings
-	         // and then set format of your dates using chart.dataDateFormat property,
-	         // however when possible, use date objects, as this will speed up chart rendering.
-	         var newDate = new Date(firstDate);
-	         newDate.setDate(newDate.getDate() + i);
-
-	         var visits = Math.round(Math.random() * 40) + 100;
-	         var hits = Math.round(Math.random() * 80) + 500;
-
-	         chartData.push({
-	             date: newDate,
-	             visits: visits,
-	             hits: hits,
-	         });
-	     }
-
-	     return chartData;
-	 }
 
  	var e = JSON.parse('[{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"},{ "RecordID": "00:00 - 06:35","OrderID": "고수압","ShipCountry": "경고","ShipCity": "15","ShipName": "5분"}]');
 	var table = $("#m_datatable").mDatatable({
@@ -715,4 +691,3 @@ $(document).ready(function() {
 });
 </script>
 
-<script src="${pageContext.request.contextPath}/js/common/summary.js" type="text/javascript"></script>

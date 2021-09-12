@@ -28,4 +28,6 @@ public interface RealTimeMeasurementService extends CRUDService<RealTimeMeasurem
 	List<RealTimeAnalysis> findByAvgBetween(String startDate, String endDate);
 	
 	List<RealTimeAnalysis> findByAvgBkFlctcFmBetween(long blockId, String startDate, String endDate);
+	
+	List<RealTimeAnalysis> findByPressure(long blockId, String startDate, String endDate);
 }

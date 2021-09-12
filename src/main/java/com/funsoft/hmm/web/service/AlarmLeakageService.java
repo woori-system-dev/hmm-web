@@ -13,4 +13,6 @@ public interface AlarmLeakageService extends CRUDService<AlarmLeakage, Composite
 	List<AlarmLeakage> getList(long blockId, String date);
 
 	List<AlarmLeakage> getList(String startDate, String endDate);
+
+	List<AlarmLeakage> getList(long blockId, String startDate, String endDate);
 }
