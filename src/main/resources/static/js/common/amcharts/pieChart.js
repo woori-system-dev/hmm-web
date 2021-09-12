@@ -1,13 +1,13 @@
-function makePieChart(divId) {
+function makePieChart(divId, warning, caution) {
 	var chart = AmCharts.makeChart(divId, {
 		"type" : "pie",
 		"theme" : "light",
 		"dataProvider" : [ {
 			"country" : "경보",
-			"litres" : 441
+			"litres" : warning
 		}, {
 			"country" : "주의",
-			"litres" : 334
+			"litres" : caution
 		} ],
 		"valueField" : "litres",
 		"titleField" : "country",

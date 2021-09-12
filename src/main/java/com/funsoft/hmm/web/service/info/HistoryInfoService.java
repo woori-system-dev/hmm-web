@@ -67,9 +67,6 @@ public class HistoryInfoService {
 	@Autowired
 	private AlarmDeviceService alarmDeviceService;
 	
-	@Autowired
-	private AlarmLeakageService alarmLeakageService;
-
 	/**
 	 * 계측 이력 정보 불러오기
 	 * @param dateTime
@@ -207,24 +204,30 @@ public class HistoryInfoService {
 		String startDate = param.getStartDate();
 		String endDate = param.getEndDate();
 		
-		List<AlarmHistoryTable> results = new ArrayList<>();
-
-		if (param.getEndDate() == null) {
-			
-		} else {
-			
+		if (endDate == null) {
+			endDate = startDate;
 		}
 		
-		List<AlarmPressure> alarmPressures = alarmPressureService.getList(param.getBlockId(), startDate, endDate);
-		Map<Long, List<AlarmPressure>> alarmPressureMap = alarmPressures.stream().collect(Collectors.groupingBy(AlarmPressure::getBkFlctcFm));
+//		startDate = "2014-10-17";
+//		endDate = "2014-10-17";
+		
+		List<AlarmHistoryTable> results = new ArrayList<>();
+		
+		if (param.isPressure()) {
+			alarmPressureService.getList(param.getBlockId(), startDate, endDate).forEach(data -> {
+				results.add(new AlarmHistoryTable(data));
+			});
+		}
 		
 		List<AlarmDevice> alarmDevices = alarmDeviceService.getList(param.getBlockId(), startDate, endDate);
-		Map<Long, List<AlarmDevice>> alarmDeviceMap = alarmDevices.stream().collect(Collectors.groupingBy(AlarmDevice::getBkFlctcFm));
+		alarmDevices.stream().filter(data -> param.isOpenDoor() == data.isOpnDr()).forEach(data -> {
+			results.add(new AlarmHistoryTable(data, "문열림"));
+		});
 		
-		List<AlarmLeakage> alarmLeakages = alarmLeakageService.getList(param.getBlockId(), startDate, endDate);
-		Map<Long, List<AlarmLeakage>> alarmLeakageMap = alarmLeakages.stream().collect(Collectors.groupingBy(AlarmLeakage::getBkFlctcFm));
-
-//		results.add(new AlarmHistoryTable("2018년 4월 26일 15:13", "2018년 4월 26일 15:14", "고수압", "주의", "1분"));
+		alarmDevices.stream().filter(data -> param.isDeviceError() == data.isDeviceErr()).forEach(data -> {
+			results.add(new AlarmHistoryTable(data, "통신이상"));
+		});
+		
 //		results.add(new AlarmHistoryTable("2018년 4월 26일 15:12", "2018년 4월 26일 15:13", "고수압", "경고", "1분"));
 //		results.add(new AlarmHistoryTable("2018년 4월 26일 15:11", "2018년 4월 26일 15:12", "고수압", "주의", "1분"));
 //		results.add(new AlarmHistoryTable("2018년 4월 26일 15:10", "2018년 4월 26일 15:11", "고수압", "경고", "1분"));
@@ -243,6 +246,14 @@ public class HistoryInfoService {
 	 * @return
 	 */
 	public AlarmHistoryDetail createAlarmHistoryDetail(AlarmSearchParam param) {
+		
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
+		if (endDate == null) {
+			endDate = startDate;
+		}
+		
 		AlarmHistoryDetail detail = new AlarmHistoryDetail();
 		
 		BlockSmall blockSmall = blockSmallService.get(param.getBlockId());
@@ -250,24 +261,36 @@ public class HistoryInfoService {
 		detail.setRealTimeMonitoring(new RealTimeMonitoring(detail.getBlockInfo().getBkNm(), 
 				realTimeMeasurementService.getRecentData(param.getBlockId())));
 		
+		List<AlarmPressure> alarmPressures = new ArrayList<>();
+		
 		if (param.isPressure()) {
-			detail.setHighPressureWarning(19);
-			detail.setHighPressureCaution(35);
-			detail.setLowPressureWarning(0);
-			detail.setLowPressureCaution(0);
+			alarmPressures = alarmPressureService.getList(param.getBlockId(), startDate, endDate);
+		}
+		
+		List<AlarmDevice> alarmDevices = alarmDeviceService.getList(param.getBlockId(), startDate, endDate);
+		List<AlarmDevice> alarmOpenDoors = alarmDevices.stream().filter(data -> param.isOpenDoor() == data.isOpnDr()).collect(Collectors.toList());
+		List<AlarmDevice> alarmDeviceErrors = alarmDevices.stream().filter(data -> param.isDeviceError() == data.isDeviceErr()).collect(Collectors.toList());
+		
+		if (param.isPressure()) {
+			detail.setHighPressureWarning((int)alarmPressures.stream().filter(data -> data.getPrsAbnm() == AlarmPreesureType.고수압경보).count());
+			detail.setHighPressureCaution((int)alarmPressures.stream().filter(data -> data.getPrsAbnm() == AlarmPreesureType.고수압주의).count());
+			detail.setLowPressureWarning((int)alarmPressures.stream().filter(data -> data.getPrsAbnm() == AlarmPreesureType.저수압경보).count());
+			detail.setLowPressureCaution((int)alarmPressures.stream().filter(data -> data.getPrsAbnm() == AlarmPreesureType.저수압주의).count());
 		}
 		
 		if (param.isOpenDoor()) {
-			detail.setOpenDoor(0);
+			detail.setOpenDoor(alarmOpenDoors == null ? 0 : alarmOpenDoors.size());
 		}
 		
 		if (param.isDeviceError()) {
-			detail.setDeviceError(0);
+			detail.setDeviceError(alarmDeviceErrors == null ? 0 : alarmDeviceErrors.size());
 		}
 		
 		detail.setAlarmType("고수압(경고)");
 		detail.setDurationTime(395);
-		detail.setTotal(54);
+		detail.setTotal(detail.getHighPressureWarning() + detail.getHighPressureCaution() 
+					+ detail.getLowPressureWarning() + detail.getLowPressureCaution()
+					+ detail.getOpenDoor() + detail.getDeviceError());
 		
 		return detail;
 	}

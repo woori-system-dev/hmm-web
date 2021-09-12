@@ -1,6 +1,10 @@
 package com.funsoft.hmm.web.domain;
 
-import lombok.AllArgsConstructor;
+import java.text.SimpleDateFormat;
+
+import com.funsoft.hmm.web.domain.db.AlarmDevice;
+import com.funsoft.hmm.web.domain.db.AlarmPressure;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +15,6 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class AlarmHistoryTable {
 	
@@ -35,4 +38,17 @@ public class AlarmHistoryTable {
 	
 	/** 건수 */
 	private int count;
+	
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+	
+	public AlarmHistoryTable(AlarmDevice data, String alarmType) {
+		this.startTime = dateFormat.format(data.getDatetime());
+		this.alarmType = alarmType;
+	}
+
+	public AlarmHistoryTable(AlarmPressure data) {
+		this.startTime = dateFormat.format(data.getDatetime());
+		this.alarmType = "수압이상";
+		this.step = data.getPrsAbnm().toString();
+	}
 }
