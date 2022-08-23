@@ -29,6 +29,7 @@ public class MeasuringHistory implements Domain, Comparable<MeasuringHistory> {
 	
 	private String blockName;
 	
+	/** 수압 */
 	private float pressure;
 	
 	private float flow;
@@ -37,10 +38,13 @@ public class MeasuringHistory implements Domain, Comparable<MeasuringHistory> {
 	
 	private float sumFlow;
 	
+	/** 수압알람 */
 	private int alarmPressure;
 	
+	/** 기기이상 */
 	private int alarmDevice;
 	
+	/** 누수추정 */
 	private int alarmLeakage;
 	
 	public MeasuringHistory(String blockName, RealTimeMeasurement measurement) {

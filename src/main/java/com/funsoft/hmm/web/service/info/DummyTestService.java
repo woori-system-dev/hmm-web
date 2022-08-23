@@ -70,7 +70,7 @@ public class DummyTestService {
 			List<RealTimeMeasurement> measurements = realTimeMeasurementService.findByBkFlctcFmAndDate(data.getFlctcFm(), "2014-05-10");
 			for (RealTimeMeasurement domain : measurements) {
 				Holiday holiday = holidayService.get(DateUtil.toSmallDateString(domain.getDatetime()));
-				domain.setHoliday(holiday.isHoliday());
+//				domain.setHoliday(holiday.isHoliday());
 				realTimeMeasurementService.update(domain);
 			}
 			
