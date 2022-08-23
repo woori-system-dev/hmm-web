@@ -11,12 +11,6 @@ import com.funsoft.hmm.web.domain.db.CompositePK;
 import com.funsoft.hmm.web.repository.AlarmPressureRepository;
 import com.funsoft.hmm.web.service.AlarmPressureService;
 
-/**
- * 압력 이상 알람 서비스
- * 
- * @author hgko
- *
- */
 @Service
 @Transactional
 public class AlarmPressureServiceImpl implements AlarmPressureService {

@@ -11,12 +11,6 @@ import com.funsoft.hmm.web.domain.db.CompositePK;
 import com.funsoft.hmm.web.repository.AlarmDeviceRepository;
 import com.funsoft.hmm.web.service.AlarmDeviceService;
 
-/**
- * 통신(장비) 이상 알람 서비스
- * 
- * @author hgko
- *
- */
 @Service
 @Transactional
 public class AlarmDeviceServiceImpl implements AlarmDeviceService {
