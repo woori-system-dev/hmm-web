@@ -85,7 +85,7 @@ public class HistoryInfoService {
 	}
 	
 	/**
-	 * 계측 이력 선택되었을 때 블록 정보 가져오기
+	 * 계측 이력 선택되었을 때 블록 정보 가져오기 
 	 * @param history
 	 * @return
 	 */
