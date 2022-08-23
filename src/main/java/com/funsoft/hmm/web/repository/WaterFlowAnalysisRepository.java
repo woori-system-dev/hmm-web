@@ -11,5 +11,8 @@ public interface WaterFlowAnalysisRepository extends DefaultRepository<WaterFlow
 
 	@Query(value = "SELECT * FROM WATER_FLOW_ANALYSIS WHERE FLCTC_FM = ?1 AND ANA_YM BETWEEN ?2 AND ?3", nativeQuery = true)
 	List<WaterFlowAnalysis> findByStartDateAndEndDate(String flctcFm, String startDate, String endDate);
+	
+	@Query(value = "SELECT * FROM WATER_FLOW_ANALYSIS WHERE FLCTC_FM = ?1 AND ANA_YM = ?2", nativeQuery = true)
+	List<WaterFlowAnalysis> findByDate(String flctcFm, String date);
 
 }

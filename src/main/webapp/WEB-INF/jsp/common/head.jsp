@@ -78,4 +78,5 @@
 	<script src="${contextName}/js/common/map.js" type="text/javascript"></script>
 	<script src="${contextName}/js/common/table.js" type="text/javascript"></script>
 	<script src="${contextName}/js/common/ko.js" type="text/javascript"></script>
+	<script src="${contextName}/js/common/summary.js" type="text/javascript"></script>
 </head>

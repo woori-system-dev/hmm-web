@@ -63,7 +63,7 @@ public class CdmaMessageProcessor implements MessageListener<CdmaIncomingMessage
 
 		RealTimeMeasurement measurement = report.getMeasurement();
 		Holiday holiday = holidayService.get(DateUtil.toSmallDateString(measurement.getDatetime()));
-		measurement.setHoliday(holiday.isHoliday());
+//		measurement.setHoliday(holiday.isHoliday());
 		realTimeMeasurementService.regist(measurement);
 
 		int hour = Integer.parseInt(DateUtil.toHourString(measurement.getDatetime()));

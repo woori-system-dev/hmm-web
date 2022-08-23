@@ -173,7 +173,7 @@ public class HighChartService {
 		String startDate = DateUtil.getWeekAgeDate(param.getFixedDate(), param.getAnalysisPeroid().getValue());
 		String endDate = param.getSelectDate();
 		
-		LineChartSeries chartSeries = new LineChartSeries("소블록A");
+		LineChartSeries chartSeries = new LineChartSeries("수압");
 		
 		List<RealTimeAnalysis> list = realTimeMeasurementService.findByGroupBy(101006000, "2014-05-08", "2014-05-15");
 		long countSum = list.stream().mapToLong(data -> data.getCount()).sum();
@@ -185,5 +185,33 @@ public class HighChartService {
 		});
 		
 		return chartSeries;
+	}
+	
+	/**
+	 * 수압분포분석 차트 정보 생성
+	 * @param blockId
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public HighChartInfo createPressureAnalysisChartSeries(long blockId, String startDate, String endDate) {
+		
+		startDate = "2014-05-08";
+		endDate = "2014-05-15";
+		
+		HighChartInfo highChartInfo = new HighChartInfo("비율(%)");
+		
+		LineChartSeries chartSeries = new LineChartSeries("수압");
+		
+		List<RealTimeAnalysis> list = realTimeMeasurementService.findByPressure(blockId, startDate, endDate);
+		list.stream().forEach(data -> {
+			int[] odds = {(int) data.getFlow(), (int) data.getCount()};
+			chartSeries.addDataItem(odds);
+			highChartInfo.addCategoty(data.getHour());
+		});
+		
+		highChartInfo.addSeries(chartSeries);
+		
+		return highChartInfo;
 	}
 }

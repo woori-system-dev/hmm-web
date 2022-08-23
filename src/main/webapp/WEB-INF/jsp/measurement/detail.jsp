@@ -327,15 +327,15 @@ $(function() {
 			title: "적산유량",
 			textAlign: "center"
 		},{
-			field: "",
+			field: "alarmPressure",
 			title: "수압알람",
 			textAlign: "center"
 		},{
-			field: "",
+			field: "alarmDevice",
 			title: "기기이상",
 			textAlign: "center"
 		},{
-			field: "",
+			field: "alarmLeakage",
 			title: "누수추정",
 			textAlign: "center"
 		}]
