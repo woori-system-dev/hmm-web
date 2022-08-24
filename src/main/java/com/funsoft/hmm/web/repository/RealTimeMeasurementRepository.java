@@ -12,6 +12,7 @@ import com.funsoft.hmm.web.domain.db.RealTimeMeasurement;
 public interface RealTimeMeasurementRepository extends DefaultRepository<RealTimeMeasurement, CompositePK> {
 	
 	String select = "SELECT new com.funsoft.hmm.web.domain.RealTimeAnalysis(to_char(datetime, 'hh24'), ROUND(avg(flow), 2))";
+	String select2 = "SELECT new com.funsoft.hmm.web.domain.RealTimeAnalysis(to_char(datetime, 'hh24'), ROUND(avg(flow), 2), ROUND(avg(pressure), 2))";
 	String form = "(SELECT * FROM FEP_REAL ORDER BY DATETIME desc)";
 	
 	RealTimeMeasurement findByBkFlctcFmAndDatetime(long bkFlctcFm, Date date);
@@ -42,4 +43,10 @@ public interface RealTimeMeasurementRepository extends DefaultRepository<RealTim
 
 	@Query(value = "SELECT * FROM " + form + " WHERE DATETIME BETWEEN to_date(?1, 'yyyy-MM-dd hh24:mi:ss') and to_date(?2, 'yyyy-MM-dd hh24:mi:ss')", nativeQuery = true)
 	List<RealTimeMeasurement> findByBetween(String startDate, String endDate);
+	
+	@Query(select2 + " FROM RealTimeMeasurement WHERE DATETIME BETWEEN to_date(?1, 'yyyy-MM-dd hh24:mi:ss') and to_date(?2, 'yyyy-MM-dd hh24:mi:ss') GROUP BY to_char(datetime, 'hh24')")
+	List<RealTimeAnalysis> findByAvgBetween(String startDate, String endDate);
+	
+	@Query(select2 + " FROM RealTimeMeasurement WHERE BK_FLCTC_FM = ?1 and DATETIME BETWEEN to_date(?2, 'yyyy-MM-dd hh24:mi:ss') and to_date(?3, 'yyyy-MM-dd hh24:mi:ss') GROUP BY to_char(datetime, 'hh24')")
+	List<RealTimeAnalysis> findByAvgBkFlctcFmBetween(long blockId, String startDate, String endDate);
 }

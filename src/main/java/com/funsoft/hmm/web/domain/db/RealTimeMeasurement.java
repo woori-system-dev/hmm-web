@@ -57,7 +57,7 @@ public class RealTimeMeasurement implements Domain {
 	private float sumFlow;
 	
 	/** 공휴일 유무 */
-	private boolean holiday;
+//	private boolean holiday;
 	
 	public RealTimeMeasurement(Date datetime, long bkFlctcFm, float flow) {
 		this.datetime = datetime;

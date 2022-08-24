@@ -373,7 +373,8 @@ $(function() {
 				$("#deviceError").text(detail.deviceError + " 건");
 				
 				var ganttChart = makeGanttChart("ganttChartdiv");
-				var pieChart = makePieChart("pieChartdiv");
+				var pieChart = makePieChart("pieChartdiv", detail.highPressureWarning + detail.lowPressureWarning,
+						detail.highPressureCaution + detail.lowPressureCaution);
 			}
 		});
 	}
