@@ -641,38 +641,7 @@ function makeLineChart(divId) {
 	    }]
 	});
 	
-	return chart;
+	return chart
 }
 
-function makeLineChart(divId, data) {
-	var chart = AmCharts.makeChart(divId, {
-	    "type": "serial",
-	    "theme": "light",
-	    "dataProvider": data,
-	    "categoryField": "summaryYm",
-	    "categoryAxis": {
-	        "gridAlpha": 0.07,
-	        "axisColor": "#245a76",
-	        "startOnAxis": true
-	    },
-	    "valueAxes": [{
-	        "stackType": "regular",
-	        "gridAlpha": 0.07,
-	        "title": "수요량"
-	    }],
-	    "graphs": [{
-	        "type": "line",
-	        "title": "수요량",
-	        "valueField": "summaryAmt",
-	        "lineColor": "#245a76",
-	        "lineAlpha": 1,
-	        "fillAlphas": 0.6,
-	        "balloonText": "<span style='font-size:14px;color:#000000;'><b>[[value]]</b></span>"
-	    }],
-	    "chartCursor": {
-	        "cursorAlpha":0,
-	    },
-	});
-	
-	return chart;
-}
+

@@ -24,10 +24,4 @@ public interface RealTimeMeasurementService extends CRUDService<RealTimeMeasurem
 	List<RealTimeMeasurement> getList(String startDate, String endDate);
 	
 	List<RealTimeAnalysis> findByGroupBy(long blockId, String startDate, String endDate);
-	
-	List<RealTimeAnalysis> findByAvgBetween(String startDate, String endDate);
-	
-	List<RealTimeAnalysis> findByAvgBkFlctcFmBetween(long blockId, String startDate, String endDate);
-	
-	List<RealTimeAnalysis> findByPressure(long blockId, String startDate, String endDate);
 }

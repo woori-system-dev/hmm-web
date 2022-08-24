@@ -29,7 +29,6 @@ public class MeasuringHistory implements Domain, Comparable<MeasuringHistory> {
 	
 	private String blockName;
 	
-	/** 수압 */
 	private float pressure;
 	
 	private float flow;
@@ -37,15 +36,6 @@ public class MeasuringHistory implements Domain, Comparable<MeasuringHistory> {
 	private String sumFlowString;
 	
 	private float sumFlow;
-	
-	/** 수압알람 */
-	private int alarmPressure;
-	
-	/** 기기이상 */
-	private int alarmDevice;
-	
-	/** 누수추정 */
-	private int alarmLeakage;
 	
 	public MeasuringHistory(String blockName, RealTimeMeasurement measurement) {
 		this.date = measurement.getDatetime();
@@ -66,12 +56,6 @@ public class MeasuringHistory implements Domain, Comparable<MeasuringHistory> {
 		this.flow = measurement.getFlow();
 		this.sumFlowString = format.format(measurement.getSumFlow());
 		this.sumFlow = measurement.getSumFlow();
-	}
-	
-	public MeasuringHistory(RealTimeAnalysis realTimeAnalysis) {
-		this.dateTime = realTimeAnalysis.getHour();
-		this.pressure = realTimeAnalysis.getPressure();
-		this.flow = realTimeAnalysis.getFlow();
 	}
 
 	@Override

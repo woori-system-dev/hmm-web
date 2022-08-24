@@ -127,8 +127,7 @@ public class RealTimeMeasurementServiceImpl implements RealTimeMeasurementServic
 		QRealTimeMeasurement qRealTimeMeasurement = QRealTimeMeasurement.realTimeMeasurement;
 		
 		List<RealTimeAnalysis> measurements = queryFactory
-				.select(Projections.bean(RealTimeAnalysis.class, qRealTimeMeasurement.datetime.as("datetime"),
-						qRealTimeMeasurement.flow.round().as("flow"), 
+				.select(Projections.bean(RealTimeAnalysis.class, qRealTimeMeasurement.flow.round().as("flow"), 
 						qRealTimeMeasurement.flow.count().as("count"))).distinct()
 				.from(qRealTimeMeasurement)
 				.where(qRealTimeMeasurement.bkFlctcFm.eq(blockId).and(dateTemplate("yyyy-MM-dd").between(startDate, endDate)))
@@ -137,38 +136,9 @@ public class RealTimeMeasurementServiceImpl implements RealTimeMeasurementServic
 		return measurements;
 	}
 	
-	@Transactional(readOnly = true)
-	@Override
-	public List<RealTimeAnalysis> findByPressure(long blockId, String startDate, String endDate) {
-		JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
-		QRealTimeMeasurement qRealTimeMeasurement = QRealTimeMeasurement.realTimeMeasurement;
-		
-		List<RealTimeAnalysis> measurements = queryFactory
-				.select(Projections.bean(RealTimeAnalysis.class, dateTemplate("yyyy-MM-dd HH").as("datetime"),
-						qRealTimeMeasurement.flow.round().as("flow"), 
-						qRealTimeMeasurement.flow.count().as("count"))).distinct()
-				.from(qRealTimeMeasurement)
-				.where(qRealTimeMeasurement.bkFlctcFm.eq(blockId).and(dateTemplate("yyyy-MM-dd").between(startDate, endDate)))
-				.groupBy(dateTemplate("yyyy-MM-dd HH"))
-				.fetch().stream().sorted(Comparator.comparing(RealTimeAnalysis::getHour)).collect(Collectors.toList());
-		return measurements;
-	}
-	
 	private StringTemplate dateTemplate(String path) {
 		QRealTimeMeasurement qRealTimeMeasurement = QRealTimeMeasurement.realTimeMeasurement;
 		return Expressions.stringTemplate("to_char({0},'{1s}')", qRealTimeMeasurement.datetime, ConstantImpl.create(path));
-	}
-	
-	@Transactional(readOnly = true)
-	@Override
-	public List<RealTimeAnalysis> findByAvgBetween(String startDate, String endDate) {
-		return realTimeMeasurementRepository.findByAvgBetween(startDate, endDate);
-	}
-	
-	@Transactional(readOnly = true)
-	@Override
-	public List<RealTimeAnalysis> findByAvgBkFlctcFmBetween(long blockId, String startDate, String endDate) {
-		return realTimeMeasurementRepository.findByAvgBkFlctcFmBetween(blockId, startDate, endDate);
 	}
 
 }

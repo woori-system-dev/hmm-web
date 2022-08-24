@@ -10,6 +10,4 @@ public interface AlarmPressureService extends CRUDService<AlarmPressure, Composi
 	List<AlarmPressure> getList(long blockId, String date);
 
 	List<AlarmPressure> getList(String startDate, String endDate);
-	
-	List<AlarmPressure> getList(long blockId, String startDate, String endDate);
 }

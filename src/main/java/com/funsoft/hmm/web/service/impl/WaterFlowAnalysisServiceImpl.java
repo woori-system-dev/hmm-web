@@ -135,9 +135,4 @@ public class WaterFlowAnalysisServiceImpl implements WaterFlowAnalysisService {
 		
 		return "";
 	}
-
-	@Override
-	public List<WaterFlowAnalysis> getList(long flctcFm, String date) {
-		return waterFlowAnalysisRepository.findByDate(String.valueOf(flctcFm), date);
-	}
 }

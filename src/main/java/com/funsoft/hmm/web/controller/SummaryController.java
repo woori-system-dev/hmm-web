@@ -63,10 +63,10 @@ public class SummaryController {
 	/**
 	 * 알람 정보 조회
 	 */
-	@RequestMapping(value = "/all/data", method = RequestMethod.GET)
+	@RequestMapping(value = "/all/alarm", method = RequestMethod.GET)
 	@ResponseBody
 	public SummaryInfo alarmInfo() {
-		return summaryInfoService.getAllSummaryInfo();
+		return summaryInfoService.getAlarmInfo();
 	}
 	
 	/**
@@ -91,16 +91,5 @@ public class SummaryController {
 		model.addAttribute("weather", weatherService.getLastWeather());
 		/* 실시간모니터링 */
 		model.addAttribute("realTimeMeasurement", realTimeMeasurementService.getRecentData(blockSmall.getFlctcFm()));
-		
-		model.addAttribute("summaryInfo", summaryInfoService.getBlockBySummaryInfo(blockSmall));
-	}
-	
-	/**
-	 * 블록별 요약 정보 조회
-	 */
-	@RequestMapping(value = "/block/info", method = RequestMethod.GET)
-	@ResponseBody
-	public SummaryInfo getSummaryInfo(long blockId) {
-		return summaryInfoService.getSummaryInfo(blockId);
 	}
 }

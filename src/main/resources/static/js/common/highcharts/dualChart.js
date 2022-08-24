@@ -1,4 +1,4 @@
-function makeMeasurementDualHighChart(divId, chartInfo, format) {
+function makeMeasurementDualHighChart(divId, chartInfo) {
 	
 	var tickInterval = parseInt(chartInfo.categories.length / 10);
 	
@@ -20,7 +20,7 @@ function makeMeasurementDualHighChart(divId, chartInfo, format) {
 	    	tickInterval: tickInterval,
 	        categories: chartInfo.categories,
 	        crosshair: true,
-	        labels: format ? {} : {
+	        labels: {
 				formatter: function() {
 					return moment(this.value).format("M/D HH:mm");
 				}
@@ -67,9 +67,9 @@ function makeMeasurementDualHighChart(divId, chartInfo, format) {
 	    legend: {
 	        layout: 'vertical',
 	        align: 'left',
-	        x: 60,
+	        x: 120,
 	        verticalAlign: 'top',
-	        y: 0,
+	        y: 20,
 	        floating: true,
 	        backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
 	    },
